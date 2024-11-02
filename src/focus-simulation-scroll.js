@@ -4,23 +4,41 @@ const ctx = canvas.getContext('2d');
 // Configuration
 let focusDistance = 300;
 const blurIntensity = 10;
-const text = "Scroll to change the focus";
 
-// Draw function to render text with varying blur
+// Load the image
+const image = new Image();
+image.src = '../assets/DSC_1970.jpg'; // Replace this with the path to your image
+image.onload = draw;
+
+// Function to calculate the aspect ratio and scale the image to fit the canvas
+function getScaledDimensions(img, maxWidth, maxHeight) {
+    const widthRatio = maxWidth / img.width;
+    const heightRatio = maxHeight / img.height;
+    const scale = Math.min(widthRatio, heightRatio);
+    return {
+        width: img.width * scale,
+        height: img.height * scale
+    };
+}
+
+// Draw function to render the image with varying blur
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Calculate the blur amount based on the focus distance
-    const textDistance = 300;
-    const distanceDifference = Math.abs(textDistance - focusDistance);
+    const imageDistance = 300;
+    const distanceDifference = Math.abs(imageDistance - focusDistance);
     const blurAmount = Math.min(blurIntensity, (distanceDifference / focusDistance) * blurIntensity);
 
-    // Apply blur and draw text
-    ctx.font = "40px Arial";
-    ctx.textAlign = "center";
+    // Get the scaled dimensions to fit the canvas
+    const { width, height } = getScaledDimensions(image, canvas.width, canvas.height);
+
+    // Apply blur and draw the scaled image centered on the canvas
     ctx.filter = `blur(${blurAmount}px)`;
-    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-    
+    const x = (canvas.width - width) / 2;
+    const y = (canvas.height - height) / 2;
+    ctx.drawImage(image, x, y, width, height);
+
     // Reset filter
     ctx.filter = 'none';
 }
@@ -36,4 +54,4 @@ window.addEventListener('scroll', () => {
 });
 
 // Initial draw
-draw();
+image.onload = draw;
