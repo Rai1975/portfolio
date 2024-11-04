@@ -7,7 +7,7 @@ const blurIntensity = 10;
 
 // Load the image
 const image = new Image();
-image.src = '../assets/DSC_1970.jpg';
+image.src = '../../assets/DSC_1970.jpg';
 image.onload = draw;
 
 // Function to calculate the aspect ratio and scale the image to fit the canvas
