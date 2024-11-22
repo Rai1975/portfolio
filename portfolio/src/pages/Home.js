@@ -1,96 +1,176 @@
-import React, { useEffect } from 'react';
-import { Box } from '@mui/material';  // Import MUI components if needed
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
+  const [text, setText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [done, setDone] = useState(false);
 
-  // Effect to handle the canvas drawing and scroll effect
+  const fullText = `Raihan Rafeek\nComputer Science\nUniversity of Cincinnati\n`;
+
+  const typingSpeed = 25; // Speed of typing in milliseconds
+
   useEffect(() => {
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-
-    // Configuration
-    let focusDistance = 300;
-    const blurIntensity = 10;
-
-    // Load the image
-    const image = new Image();
-    image.src = '/assets/home_page.jpg';  // Ensure this path is correct
-    image.onload = () => {
-      // Set canvas dimensions to match window size
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      draw();
+    // Typing animation function
+    const type = () => {
+      if (currentIndex < fullText.length) {
+        setText((prev) => prev + fullText[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
+      } else {
+        setDone(true); // Typing complete
+      }
     };
 
-    // Function to calculate the aspect ratio and scale the image to fit the canvas
-    function getScaledDimensions(img, maxWidth, maxHeight) {
-      const widthRatio = maxWidth / img.width;
-      const heightRatio = maxHeight / img.height;
-      const scale = Math.min(widthRatio, heightRatio);
-      return {
-        width: img.width * scale,
-        height: img.height * scale
-      };
+    if (!done) {
+      const timeout = setTimeout(type, typingSpeed);
+      return () => clearTimeout(timeout); // Cleanup timeout on unmount or re-run
     }
-
-    // Draw function to render the image with varying blur
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Calculate the blur amount based on the focus distance
-      const imageDistance = 300;
-      const distanceDifference = Math.abs(imageDistance - focusDistance);
-      const blurAmount = Math.min(blurIntensity, (distanceDifference / focusDistance) * blurIntensity);
-
-      // Get the scaled dimensions to fit the canvas
-      const { width, height } = getScaledDimensions(image, canvas.width, canvas.height);
-
-      // Apply blur and draw the scaled image centered on the canvas
-      ctx.filter = `blur(${blurAmount}px)`;
-      const x = (canvas.width - width) / 2;
-      const y = (canvas.height - height) / 2;
-      ctx.drawImage(image, x, y, width, height);
-
-      // Reset filter
-      ctx.filter = 'none';
-    }
-
-    // Update focus distance based on scroll position
-    window.addEventListener('scroll', () => {
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      const scrollRatio = window.scrollY / maxScroll;
-
-      // Map scroll position to focus distance range (e.g., 100 to 500)
-      focusDistance = 100 + scrollRatio * 900;
-      draw(); // Redraw the canvas with the updated focus distance
-    });
-
-    // Cleanup the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', () => {});
-    };
-
-  }, []);
+  }, [currentIndex, done, fullText]);
 
   return (
-    <Box>
-      {/* The Canvas that will hold the background image */}
-      <canvas id="canvas"></canvas>
-
-      {/* Static content like your name, etc. */}
-      <div style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        height: '100vh',
+        backgroundColor: '#1e1e1e',
         color: 'white',
-        textAlign: 'center'
-      }}>
-        <h1>Raihan Rafeek</h1>
-        <h2>Computer Science</h2>
-        <h3>University of Cincinnati</h3>
+        fontFamily: 'Consolas, monospace',
+        padding: '20px',
+        boxSizing: 'border-box',
+      }}
+    >
+      {/* Terminal Header */}
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          backgroundColor: '#2e2e2e',
+          borderRadius: '10px 10px 0 0',
+          padding: '5px 10px',
+          boxSizing: 'border-box',
+        }}
+      >
+        <div
+          style={{
+            width: '12px',
+            height: '12px',
+            borderRadius: '50%',
+            backgroundColor: '#ff5f56', // Red
+            marginRight: '8px',
+          }}
+        ></div>
+        <div
+          style={{
+            width: '12px',
+            height: '12px',
+            borderRadius: '50%',
+            backgroundColor: '#ffbd2e', // Yellow
+            marginRight: '8px',
+          }}
+        ></div>
+        <div
+          style={{
+            width: '12px',
+            height: '12px',
+            borderRadius: '50%',
+            backgroundColor: '#27c93f', // Green
+          }}
+        ></div>
       </div>
-    </Box>
+
+      {/* Terminal Content */}
+      <div
+        style={{
+          width: '100%',
+          flexGrow: 1,
+          backgroundColor: '#1e1e1e',
+          borderRadius: '0 0 10px 10px',
+          padding: '15px',
+          boxSizing: 'border-box',
+          overflow: 'hidden',
+          whiteSpace: 'pre-wrap',
+          color: '#00ff00', // Green text
+          fontSize: '32px',
+        }}
+      >
+        {text}
+        {done && (
+          <>
+            <br />
+            <Link
+              to="/about"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              &gt; About Me
+            </Link>
+            <br />
+            <Link
+              to="/projects"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              &gt; Projects
+            </Link>
+            <br />
+            <Link
+              to="/photography"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                cursor: 'pointer',
+              }}>
+                &gt; Photography
+            </Link>
+            <br />
+            <Link
+            to="/experience"
+            style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                cursor: 'pointer',
+              }}>
+                &gt; Experience
+            </Link>
+          </>
+        )}
+        {!done && (
+          <span
+            style={{
+              backgroundColor: '#00ff00',
+              color: '#1e1e1e',
+              padding: '0 2px',
+              display: 'inline-block',
+              animation: 'blink 1s step-start infinite',
+            }}
+          >
+            |
+          </span>
+        )}
+      </div>
+
+      {/* Keyframes for the blinking cursor */}
+      <style>
+        {`
+          @keyframes blink {
+            50% {
+              opacity: 0;
+            }
+          }
+        `}
+      </style>
+    </div>
   );
 };
 
