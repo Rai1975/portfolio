@@ -13,6 +13,12 @@
   }
 }
 
+img.pixelated {
+  filter: contrast(200%) saturate(200%) brightness(150%) grayscale(100%) pixelate(10px);
+  image-rendering: pixelated;
+  width: 150px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
