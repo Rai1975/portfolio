@@ -152,7 +152,6 @@ const Home = () => {
               color: '#1e1e1e',
               padding: '0 2px',
               display: 'inline-block',
-              animation: 'blink 1s step-start infinite',
             }}
           >
             |

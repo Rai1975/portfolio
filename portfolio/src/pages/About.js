@@ -5,7 +5,9 @@ const About = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
 
-  const fullText = `About me!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati. More yappage to add here incoming!`;
+  const fullText = `Hello!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati.
+  \nI am interested in data science, machine learning and artificial intelligence. I enjoy building things and prefer to learn new things by making.
+  \nOutside the software realm, I also love climbing, motorsports, photography and music!`;
 
   const typingSpeed = 25; // Speed of typing in milliseconds
 
@@ -102,7 +104,7 @@ const About = () => {
       >
         {/* Image with 8-bit effect */}
         <img
-          src="/assets/me.jpg" // Replace with the actual image URL
+          src="/assets/me.jpg"
           alt="8-bit image"
           style={{
             filter: 'contrast(200%) saturate(200%) brightness(150%) grayscale(100%) pixelate(50%)',
