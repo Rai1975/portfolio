@@ -9,7 +9,7 @@ const About = () => {
   \nI am interested in data science, machine learning and artificial intelligence. I enjoy building things and prefer to learn new things by making.
   \nOutside the software realm, I also love climbing, motorsports, photography and music!`;
 
-  const typingSpeed = 25; // Speed of typing in milliseconds
+  const typingSpeed = 5; // Speed of typing in milliseconds
 
   useEffect(() => {
     // Typing animation function
