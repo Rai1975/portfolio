@@ -185,55 +185,71 @@ const Experience = () => {
                 </tr>
               </thead>
               <tbody>
-                {experiences.map((exp, index) => (
-                  <React.Fragment key={index}>
-                    {/* Main Row */}
+              {experiences.map((exp, index) => (
+                <React.Fragment key={index}>
+                  {/* Main Row */}
+                  <tr>
+                    <td style={{ padding: '10px', borderBottom: '1px solid #00ff00' }}>
+                      <a href={exp.link} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={exp.logo}
+                          alt={`${exp.title} logo`}
+                          style={{ width: '50px', height: '50px', objectFit: 'contain' }}
+                        />
+                      </a>
+                    </td>
+                    <td
+                      style={{
+                        padding: '10px',
+                        borderBottom: '1px solid #00ff00',
+                        cursor: 'pointer',
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                      }}
+                      onClick={() => toggleDescription(index)}
+                    >
+                      {exp.title}
+                    </td>
+                    <td
+                      style={{
+                        padding: '10px',
+                        borderBottom: '1px solid #00ff00',
+                        fontSize: '18px',
+                      }}
+                    >
+                      {exp.organization}
+                    </td>
+                    <td
+                      style={{
+                        padding: '10px',
+                        borderBottom: '1px solid #00ff00',
+                        fontSize: '18px',
+                      }}
+                    >
+                      {exp.date}
+                    </td>
+                  </tr>
+                  {/* Expandable Description Row */}
+                  {expandedIndex === index && (
                     <tr>
-                      <td style={{ padding: '10px', borderBottom: '1px solid #00ff00' }}>
-                        <a href={exp.link} target="_blank" rel="noopener noreferrer">
-                          <img
-                            src={exp.logo}
-                            alt={`${exp.title} logo`}
-                            style={{ width: '50px', height: '50px', objectFit: 'contain' }}
-                          />
-                        </a>
-                      </td>
-                      <td
-                        style={{
-                          padding: '10px',
-                          borderBottom: '1px solid #00ff00',
-                          cursor: 'pointer',
-                        }}
-                        onClick={() => toggleDescription(index)}
-                      >
-                        {exp.title}
-                      </td>
-                      <td style={{ padding: '10px', borderBottom: '1px solid #00ff00' }}>
-                        {exp.organization}
-                      </td>
-                      <td style={{ padding: '10px', borderBottom: '1px solid #00ff00' }}>
-                        {exp.date}
+                      <td colSpan="4" style={{ padding: '10px', backgroundColor: '#2e2e2e' }}>
+                        <div
+                          style={{
+                            animation: 'slideDown 0.3s ease-in-out',
+                            color: '#00ff00',
+                            fontSize: '18px',
+                            lineHeight: '1.5',
+                          }}
+                        >
+                          {exp.description}
+                        </div>
                       </td>
                     </tr>
-                    {/* Expandable Description Row */}
-                    {expandedIndex === index && (
-                      <tr>
-                        <td colSpan="4" style={{ padding: '10px', backgroundColor: '#2e2e2e' }}>
-                          <div
-                            style={{
-                              animation: 'slideDown 0.3s ease-in-out',
-                              color: '#00ff00',
-                              fontSize: '16px',
-                            }}
-                          >
-                            {exp.description}
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))}
-              </tbody>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+
             </table>
           </div>
         )}

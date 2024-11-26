@@ -27,43 +27,61 @@ const Projects = () => {
     }
   }, [currentIndex, done, fullText]);
 
-  const experiences = [
+  const projects = [
     {
       logo: '/assets/uc.png',
       link: 'https://github.com/KaaustaaubShankar/WhiteBox',
-      title: 'python, flask, reactjs, neo4j, llama, openai',
+      title: 'python, flask, reactjs, neo4j, llama, langchain, huggingface, openai',
       organization: 'Whitebox',
       date: 'Aug 2024 - Present',
       description: `Worked on a pipeline that effectively... yappage\nmore yappage`,
-      screenshot: '/assets/whitebox.png', // Add a screenshot for the project
+      screenshot: '/assets/whitebox.png',
     },
     {
       logo: '/assets/leopardsat.png',
-      link: 'https://uccubecats.github.io/',
-      title: 'ADCS Physics Simulation',
-      organization: 'LEOPARDSAT-1, University of Cincinnati',
-      date: 'Aug 2024 - Present',
-      description: `Create simulation software for Passive Attitude Determination and Control Systems (ADCS) for CubeSats, utilizing Pandas, NumPy, and SciPy for data analysis.`,
-      screenshot: '/assets/project2.jpg',
+      link: 'https://github.com/KaaustaaubShankar/Memento',
+      title: 'python, flask, reactjs, postgres, openai',
+      organization: 'Memento',
+      date: 'Feb 2024 - Mar 2024',
+      description: `RAG pipeline.. rah`,
+      screenshot: '/assets/memento.jpg',
     },
     {
       logo: '/assets/inl.png',
-      link: 'https://inl.gov/',
-      title: 'Full Stack Software Engineer Intern',
-      organization: 'Materials and Fuels Complex, Idaho National Laboratory',
+      link: 'https://github.com/Aryagarg23/Terminally-Addicted',
+      title: 'python, go, curses',
+      organization: 'Terminally-Addicted',
       date: 'May 2024 - Aug 2024',
-      description: `Contributed to the development of safety-critical software for nuclear inventory management using Ruby on Rails and PostgreSQL.`,
-      screenshot: '/assets/project3.jpg',
+      description: `only the coolest terminal ever`,
+      screenshot: '/assets/terminal.svg',
     },
     {
       logo: '/assets/inl.png',
-      link: 'https://inl.gov/',
-      title: 'Full Stack Software Engineer Intern',
-      organization: 'Materials and Fuels Complex, Idaho National Laboratory',
-      date: 'Aug 2023 - Dec 2023',
-      description: `Worked on improving search result filtering speed by optimizing queries and implementing caching for nuclear inventory software.`,
-      screenshot: '/assets/project4.jpg',
+      link: 'https://github.com/Rai1975/SASEHackProject',
+      title: 'python, bert, openai, huggingface, nextjs, neo4j',
+      organization: 'Hi-Five',
+      date: 'Aug 2024',
+      description: `Big cool anon friend mathcing vector based app!`,
+      screenshot: '/assets/hi-five.webp',
     },
+    {
+      logo: '/assets/inl.png',
+      link: 'https://github.com/Rai1975/Canvas2DoIst',
+      title: 'python, rest api',
+      organization: 'Canvas2DoIst',
+      date: 'Aug 2024',
+      description: 'Script that automates filling in todoist with canvas api',
+      screenshot: '/assets/todoist.webp'
+    },
+    {
+      logo:'assets/inl.png',
+      link: 'https://github.com/Rai1975/NeuralNetwork',
+      title: 'python, transformers, numpy, pytorch, tensorflow',
+      organization: 'Neural Networks',
+      date: 'Oct 2024 - Present',
+      description: 'Repository of self-learning tools to understand neural networks, including a transformer network from scratch',
+      screenshot: '/assets/home_page_2.jpg'
+    }
   ];
 
   const toggleDescription = (index) => {
@@ -145,8 +163,8 @@ const Projects = () => {
         {text}
         {done && (
           <div style={{ marginTop: '20px', width: '100%', display: 'grid', gap: '20px' }}>
-            {/* Loop through experiences and display each one */}
-            {experiences.map((exp, index) => (
+            {/* Loop through projects and display each one */}
+            {projects.map((exp, index) => (
               <div
                 key={index}
                 style={{
