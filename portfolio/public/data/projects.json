@@ -18,14 +18,14 @@
     "link": "https://github.com/Aryagarg23/Terminally-Addicted",
     "title": "Terminally-Addicted",
     "stack": "python, go, curses",
-    "description": "only the coolest terminal ever",
+    "description": "> Won 'Most Creative Hack' at HackOH/IO\n> Terminal based productivity app that encompasses all tools necessary for developers like Spotify, ChatGPT, GitHub etc\n> Supported video playback from any social media platform like YouTube, Instagram etc. within the terminal\n> A fun little take on productivity apps, keeping things very simple!",
     "screenshot": "/assets/terminal.svg"
   },
   {
     "link": "https://github.com/Rai1975/SASEHackProject",
     "title": "Hi-Five",
     "stack": "python, bert, openai, huggingface, nextjs, neo4j",
-    "description": "Big cool anon friend matching vector-based app!",
+    "description": "> Anonymous social media platform which supports personality based matchmaking calculated using vector embeddings\n> Encompassed vector embeddings",
     "screenshot": "/assets/hi-five.webp"
   },
   {
