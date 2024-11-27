@@ -4,7 +4,7 @@
     "title": "Whitebox",
     "stack": "python, flask, reactjs, neo4j, llama, langchain, huggingface, docker, openai",
     "description":
-        ">Won Best Hack at the Midwestcon - Future of Data Hackathon with over 70 teams\n>Develop architecture for RAG using GraphDB to store and navigate concept maps of text data\n>Design database with over 70,000 nodes with 140,000 edges to enable conceptual queries beyond raw vector searches\n>Create a pipeline leveraging fine-tuned large language models (LLMs) to visualize relationships between entities\n>Implement advanced querying techniques for efficient data retrieval in the GraphDB framework",
+        "> First place winner ($5,000) of the Future of Data Hackathon at Midwestcon, with over 900 participants and 70+  teams.\n> Whitebox bridges the gap between AI and human reasoning by transforming credible texts, such as medical textbooks, into structured graphs. This transformation not only enhances the AI’s ability to understand and reason through complex material but also provides a level of explainability that traditional AI models often lack. By breaking the content down into interconnected nodes, Whitebox enables users to trace the AI’s thought process step by step, unlocking ethical applications in fields where transparency is critical.",
     "screenshot": "/assets/whitebox.png"
   },
   {
