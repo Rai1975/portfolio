@@ -1,0 +1,45 @@
+[
+  {
+    "link": "https://github.com/KaaustaaubShankar/WhiteBox",
+    "title": "Whitebox",
+    "stack": "python, flask, reactjs, neo4j, llama, langchain, huggingface, docker, openai",
+    "description":
+        ">Won Best Hack at the Midwestcon - Future of Data Hackathon with over 70 teams\n>Develop architecture for RAG using GraphDB to store and navigate concept maps of text data\n>Design database with over 70,000 nodes with 140,000 edges to enable conceptual queries beyond raw vector searches\n>Create a pipeline leveraging fine-tuned large language models (LLMs) to visualize relationships between entities\n>Implement advanced querying techniques for efficient data retrieval in the GraphDB framework",
+    "screenshot": "/assets/whitebox.png"
+  },
+  {
+    "link": "https://github.com/KaaustaaubShankar/Memento",
+    "title": "Memento",
+    "stack": "python, flask, reactjs, postgres, openai",
+    "description": ">Achieved 3rd Place Overall, Best Social Impact Hack, Best Use of Tembo, and MedPace Award at RevolutionUC\n>Contributed to an AI-based journaling app for caregivers and patients with Alzheimer’s and Dementia\n>Implemented Retrieval-Augmented Generation (RAG) techniques using a vectorized Tembo database to minimize AI hallucination\n>Assisted in front-end development with React and creating a RESTful API with Flask",
+    "screenshot": "/assets/memento.jpg"
+  },
+  {
+    "link": "https://github.com/Aryagarg23/Terminally-Addicted",
+    "title": "Terminally-Addicted",
+    "stack": "python, go, curses",
+    "description": "only the coolest terminal ever",
+    "screenshot": "/assets/terminal.svg"
+  },
+  {
+    "link": "https://github.com/Rai1975/SASEHackProject",
+    "title": "Hi-Five",
+    "stack": "python, bert, openai, huggingface, nextjs, neo4j",
+    "description": "Big cool anon friend matching vector-based app!",
+    "screenshot": "/assets/hi-five.webp"
+  },
+  {
+    "link": "https://github.com/Rai1975/Canvas2DoIst",
+    "title": "Canvas2DoIst",
+    "stack": "python, rest api",
+    "description": "Script that automates filling in todoist with canvas api",
+    "screenshot": "/assets/todoist.webp"
+  },
+  {
+    "link": "https://github.com/Rai1975/NeuralNetwork",
+    "title": "Neural Network",
+    "stack": "python, transformers, numpy, pytorch, tensorflow",
+    "description": "Repository of self-learning tools to understand neural networks, including a transformer network from scratch",
+    "screenshot": "/assets/home_page_2.jpg"
+  }
+]
