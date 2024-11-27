@@ -151,7 +151,7 @@ const Projects = () => {
                     style={{
                       width: '100%',
                       height: 'auto',
-                      maxWidth: '600px',
+                      maxWidth: '1000px',
                       borderRadius: '10px',
                     }}
                   />
