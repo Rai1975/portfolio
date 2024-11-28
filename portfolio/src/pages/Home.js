@@ -27,6 +27,33 @@ const Home = () => {
     }
   }, [currentIndex, done, fullText]);
 
+  const githubAsciiArt = `
+   _____ _ _   _    _       _
+  / ____(_) | | |  | |     | |
+ | |  __ _| |_| |__| |_   _| |__
+ | | |_ | | __|  __  | | | | '_ \\
+ | |__| | | |_| |  | | |_| | |_) |
+  \\_____|_|\\__|_|  |_|\\__,_|_.__/
+`;
+
+  const linkedinAsciiArt = `
+  _      _       _            _ _____
+ | |    (_)     | |          | |_   _|
+ | |     _ _ __ | | _____  __| | | |  _ __
+ | |    | | '_ \\| |/ / _ \\/ _' | | | | '_ \\
+ | |____| | | | |   <  __/ (_| |_| |_| | | |
+ |______|_|_| |_|_|\\_\\___|\\__,_|_____|_| |_|
+
+                                            `;
+
+  const emailAsciiArt = `
+  ______                 _ _
+ |  ____|               (_) |
+ | |__   _ __ ___   __ _ _| |
+ |  __| | '_ ' _ \\ / _ | | |
+ | |____| | | | | | (_| | | |
+ |______|_| |_| |_|\\__,_|_|_|
+`;
   return (
     <div
       style={{
@@ -42,46 +69,6 @@ const Home = () => {
         boxSizing: 'border-box',
       }}
     >
-      {/* Terminal Header */}
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundColor: '#2e2e2e',
-          borderRadius: '10px 10px 0 0',
-          padding: '5px 10px',
-          boxSizing: 'border-box',
-        }}
-      >
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#ff5f56', // Red
-            marginRight: '8px',
-          }}
-        ></div>
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#ffbd2e', // Yellow
-            marginRight: '8px',
-          }}
-        ></div>
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#27c93f', // Green
-          }}
-        ></div>
-      </div>
 
       {/* Terminal Content */}
       <div
@@ -125,24 +112,57 @@ const Home = () => {
             </Link>
             <br />
             <Link
-              to="/photography"
+              to="/experiences"
               style={{
                 color: '#00ff00',
                 textDecoration: 'none',
                 cursor: 'pointer',
-              }}>
-                &gt; Photography
+              }}
+            >
+              &gt; Experience
             </Link>
             <br />
-            <Link
-            to="/experience"
-            style={{
-                color: '#00ff00',
-                textDecoration: 'none',
-                cursor: 'pointer',
-              }}>
-                &gt; Experience
-            </Link>
+            <div style={{ marginTop: '20px', color: '#00ff00', fontSize: '25px' }}>
+              <a
+                href="https://github.com/rai1975"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#00ff00',
+                  textDecoration: 'none',
+                  display: 'block',
+                  margin: '5px 0',
+                }}
+              >
+                {githubAsciiArt}
+              </a>
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com/in/raihan-rafeek"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#00ff00',
+                  textDecoration: 'none',
+                  display: 'block',
+                  margin: '5px 0',
+                }}
+              >
+                {linkedinAsciiArt}
+              </a>
+              {/* Email */}
+              <a
+                href="mailto:rafeekrn@mail.uc.edu"
+                style={{
+                  color: '#00ff00',
+                  textDecoration: 'none',
+                  display: 'block',
+                  margin: '5px 0',
+                }}
+              >
+                {emailAsciiArt} rafeekrn@mail.uc.edu
+              </a>
+            </div>
           </>
         )}
         {!done && (

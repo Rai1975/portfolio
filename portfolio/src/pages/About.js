@@ -43,47 +43,6 @@ const About = () => {
         boxSizing: 'border-box',
       }}
     >
-      {/* Terminal Header */}
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundColor: '#2e2e2e',
-          borderRadius: '10px 10px 0 0',
-          padding: '5px 10px',
-          boxSizing: 'border-box',
-        }}
-      >
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#ff5f56', // Red
-            marginRight: '8px',
-          }}
-        ></div>
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#ffbd2e', // Yellow
-            marginRight: '8px',
-          }}
-        ></div>
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#27c93f', // Green
-          }}
-        ></div>
-      </div>
-
       {/* Terminal Content */}
       <div
         style={{
