@@ -30,6 +30,13 @@ img.pixelated {
   color: white;
 }
 
+/* Global Styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .App-link {
   color: #61dafb;
 }

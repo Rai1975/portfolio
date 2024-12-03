@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/NavBar';
-import Home from './pages/Home';
-import About from './pages/About';
+import About from './components/About';
+import LandingPage from './pages/landingPage';
 import Experiences from './pages/Experience';
 import Projects from './pages/Projects';
 
@@ -20,7 +20,7 @@ const Layout = () => {
     <>
       {<Navbar />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/experiences" element={<Experiences />} />
         <Route path="/projects" element={<Projects />} />
