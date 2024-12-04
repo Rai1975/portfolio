@@ -12,7 +12,7 @@ const LandingPage = () => {
         backgroundColor: '#1e1e1e',
         height: '100vh',
         boxSizing: 'border-box',
-        flexWrap: 'wrap', // Allow wrapping on small screens
+        flexWrap: 'wrap',
       }}
     >
       {/* Left Column: Home Component */}

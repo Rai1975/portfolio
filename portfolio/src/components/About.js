@@ -62,7 +62,6 @@ const About = () => {
         style={{
           fontSize: '32px',
           whiteSpace: 'pre-wrap',
-          maxWidth: '800px', // Optional: Limit width of the text for readability
           textAlign: 'center', // Center the text
           flexGrow: 1, // Ensures this part expands to fill the available vertical space
         }}
