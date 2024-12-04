@@ -4,8 +4,9 @@
     "title": "Whitebox",
     "stack": "python, flask, reactjs, neo4j, llama, langchain, huggingface, docker, openai",
     "description":
-        "> First place winner ($5,000) of the Future of Data Hackathon at Midwestcon, with over 900 participants and 70+  teams.\n> Whitebox bridges the gap between AI and human reasoning by transforming credible texts, such as medical textbooks, into structured graphs. This transformation not only enhances the AI’s ability to understand and reason through complex material but also provides a level of explainability that traditional AI models often lack. By breaking the content down into interconnected nodes, Whitebox enables users to trace the AI’s thought process step by step, unlocking ethical applications in fields where transparency is critical.",
-    "screenshot": "/assets/whitebox_ss.png"
+        "> First place winner of the Future of Data Hackathon at Midwestcon, with over 900 participants and 70+  teams.\n> Whitebox bridges the gap between AI and human reasoning by transforming credible texts, such as medical textbooks, into structured graphs. This transformation not only enhances the AI’s ability to understand and reason through complex material but also provides a level of explainability that traditional AI models often lack. By breaking the content down into interconnected nodes, Whitebox enables users to trace the AI’s thought process step by step, unlocking ethical applications in fields where transparency is critical.",
+    "screenshot": "/assets/whitebox_ss.png",
+    "category": "AI/ML"
   },
   {
     "link": "https://github.com/KaaustaaubShankar/Memento",
@@ -13,34 +14,39 @@
     "stack": "python, flask, reactjs, postgres, openai",
     "description": "> Acquired Third Place Overall, Best Social Impact Hack, Best Use of Tembo, and MedPace Award for clinical trial software at RevolutionUC\n> Memento is an app for patients and caretakers of Alzheimer’s Disease and Dementia patients to journal and keep track of their daily lives. The Memento assistant, powered by OpenAI and enhanced with our robust RAG pipeline, is always there to answer their questions based on their journal entries. This means that the chatbot will never hallucinate and will provide appropriate results.",
 
-    "screenshot": "/assets/memento_ss.png"
+    "screenshot": "/assets/memento_ss.png",
+    "category": "AI/ML"
   },
   {
     "link": "https://github.com/Aryagarg23/Terminally-Addicted",
     "title": "Terminally-Addicted",
     "stack": "python, go, curses",
     "description": "> Won 'Most Creative Hack' at HackOH/IO\n> Terminally-Addicted is a take on modern productivity that clutters the screen with too many distractions. Instead, this is a completely CLI based productivity app that has everything you need to get cracking with work in one place.\n> Terminally-Addicted connects with your Spotify, GitHub, ChatGPT and Todoist to provide you with all the tools necessary to be productive, and, as a plus it also supports online video playback within the terminal!\n> All operations are done through CLI commands!",
-    "screenshot": "/assets/term-ss.png"
+    "screenshot": "/assets/term-ss.png",
+    "category": "General"
   },
   {
     "link": "https://github.com/Rai1975/SASEHackProject",
     "title": "Hi-Five",
     "stack": "python, bert, openai, huggingface, nextjs, neo4j",
     "description": "> Hi-Five is a take on modern matchmaking apps that use only tags and metrics based on interests. Hi-Five creates a high-fidelity vector embedding based on a personality analysis test. This vector embedding is based on the OCEAN personality model, creating a 5-dimensional feature vector.\n> Using this personality feature vector and interests from the user, Hi-Five is able to create meaningful connections between people with similar interests and personalities.",
-    "screenshot": "/assets/hi-five.webp"
+    "screenshot": "/assets/hi-five.webp",
+    "category": "AI/ML"
   },
   {
     "link": "https://github.com/Rai1975/NeuralMadness",
     "title": "Neural Madness",
     "stack": "python, transformers, numpy, pytorch, tensorflow",
     "description": "> This is a repository with different types of Neural Networks and with notes that I have taken up as an effort to learn and understand machine learning better.\n> This repository has a hand-made neural network without using pyTorch and TensorFlow, as well as a hand-built transformer network.",
-    "screenshot": "/assets/home_page_2.jpg"
+    "screenshot": "/assets/home_page_2.jpg",
+    "category": "AI/ML"
   },
   {
     "link": "https://github.com/Rai1975/Canvas2DoIst",
     "title": "Canvas2DoIst",
     "stack": "python, rest api",
     "description": "> This is an auxiliary script to collect course assignments from Canvas and insert them into Todoist using Canvas and Todoist API!\n> This project has a bit of a niche audience, but this serves very purposeful in my daily life to automate my to-do lists based on my assignments.",
-    "screenshot": "/assets/todoist.webp"
+    "screenshot": "/assets/todoist.webp",
+    "category": "Web Development"
   }
 ]

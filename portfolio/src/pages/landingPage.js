@@ -21,6 +21,7 @@ const LandingPage = () => {
           flex: 1,
           minWidth: '300px',
           marginRight: '0px',
+          backgroundColor: '#1e1e1e'
         }}
       >
         <Home />
