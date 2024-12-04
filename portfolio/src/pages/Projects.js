@@ -119,7 +119,7 @@ const Projects = () => {
                     {category}
                   </a>
                   {index < categories.length - 1 && (
-                    <span style={{ marginRight: '20px', color: '#00ff00' }}>|</span>
+                    <span style={{ marginRight: '20px', color: '#00ff00', fontSize: '30px' }}>|</span>
                   )}
                 </span>
               ))}
