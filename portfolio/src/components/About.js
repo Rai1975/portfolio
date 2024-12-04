@@ -39,7 +39,7 @@ const About = () => {
         backgroundColor: '#1e1e1e',
         color: '#00ff00',
         fontFamily: 'Consolas, monospace',
-        padding: '20px',
+        padding: '15px',
         boxSizing: 'border-box',
         overflow: 'hidden', // Prevent any extra scrolling or white space
       }}

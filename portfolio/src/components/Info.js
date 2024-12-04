@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Detect initial screen size
 
   // Define the text and links in an array of objects
   const contentChunks = [
@@ -29,7 +29,7 @@ const Home = () => {
 
         // Check if the current chunk is a link and add it after typing the text part
         if (currentChunk.type === 'link') {
-          setText((prev) => prev + `<a href="${currentChunk.value}" target="_blank" rel="noopener noreferrer" style="color: #00ff00; text-decoration: none;">${currentChunk.label}</a>\n`);
+          setText((prev) => prev + `<a href="${currentChunk.value}" rel="noopener noreferrer" style="color: #00ff00; text-decoration: none;">${currentChunk.label}</a>\n`);
         }
 
         setCurrentIndex((prev) => prev + 1);
@@ -44,6 +44,16 @@ const Home = () => {
     }
   }, [currentIndex, done, contentChunks]);
 
+  useEffect(() => {
+    // Dynamically update the `isMobile` state when the window is resized
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize); // Cleanup event listener
+  }, []);
+
   return (
     <div
       style={{
@@ -55,7 +65,7 @@ const Home = () => {
         backgroundColor: '#1e1e1e',
         color: 'white',
         fontFamily: 'Consolas, monospace',
-        padding: '20px',
+        padding: '0px',
         boxSizing: 'border-box',
       }}
     >
@@ -74,7 +84,7 @@ const Home = () => {
           fontSize: '32px',
         }}
         dangerouslySetInnerHTML={{
-          __html: text, // Use innerHTML to render the links with the correct format
+          __html: text + (done && isMobile ? '\n\n>>> Scroll to know more about me <<<\n' : ''),
         }}
       />
 
