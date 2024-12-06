@@ -9,8 +9,8 @@ const Experience = () => {
   const fullText = `Experience`;
   const typingSpeed = 50; // Speed of typing in milliseconds
 
+  // Typing animation
   useEffect(() => {
-    // Typing animation function
     const type = () => {
       if (currentIndex < fullText.length) {
         setText((prev) => prev + fullText[currentIndex]);
@@ -22,11 +22,11 @@ const Experience = () => {
 
     if (!done) {
       const timeout = setTimeout(type, typingSpeed);
-      return () => clearTimeout(timeout); // Cleanup timeout on unmount or re-run
+      return () => clearTimeout(timeout);
     }
   }, [currentIndex, done, fullText]);
 
-  // Fetch experiences data from the JSON file
+  // Fetch experiences from the JSON file
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
@@ -57,7 +57,7 @@ const Experience = () => {
         overflowY: 'auto',
       }}
     >
-      {/* Terminal Content */}
+      {/* Typing Header */}
       <div
         style={{
           width: '100%',
@@ -74,7 +74,7 @@ const Experience = () => {
       >
         {text}
         {done && (
-          <div style={{ marginTop: '20px' }}>
+          <div style={{ marginTop: '20px', width: '100%' }}>
             {experiences.map((exp, index) => (
               <article
                 key={index}
@@ -84,18 +84,27 @@ const Experience = () => {
                   lineHeight: '1.6',
                 }}
               >
-                <a
-                  href={exp.link}
+                <h2
                   style={{
+                    fontSize: '40px',
                     color: '#00ff00',
-                    textDecoration: 'none',
-                    fontSize: '80px',
+                    marginBottom: '15px',
+                    borderBottom: '2px solid #00ff00',
+                    paddingBottom: '5px',
                   }}
-                  onMouseEnter={(e) => (e.target.style.color = '#bbb')}
-                  onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
                 >
-                  {exp.title}
-                </a>
+                  <a
+                    href={exp.link}
+                    style={{
+                      textDecoration: 'none',
+                      color: '#00ff00',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = '#bbb')}
+                    onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
+                  >
+                    {exp.title}
+                  </a>
+                </h2>
                 <div
                   style={{
                     display: 'flex',
@@ -109,20 +118,41 @@ const Experience = () => {
                     src={exp.logo}
                     alt={`${exp.title} logo`}
                     style={{
-                      width: '100%',
-                      height: 'auto',
-                      maxWidth: '600px',
+                      width: 'auto',
+                      height: '300px',
+                      maxWidth: '400px',
                       borderRadius: '10px',
+                      objectFit: 'contain',
                     }}
                   />
                 </div>
-                <p style={{ color: '#00ff00', margin: '0 0', fontSize: '30px' }}>
+                <p
+                  style={{
+                    fontSize: '25px',
+                    margin: '5px 0',
+                    color: '#00ff00',
+                  }}
+                >
                   {exp.organization}
                 </p>
-                <p style={{ color: '#00ff00', margin: '0 0', fontSize: '30px' }}>
+                <p
+                  style={{
+                    fontSize: '20px',
+                    margin: '5px 0',
+                    color: '#aaa',
+                  }}
+                >
                   {exp.date}
                 </p>
-                <p style={{ marginTop: '10px', fontSize: '25px' }}>{exp.description}</p>
+                <p
+                  style={{
+                    fontSize: '22px',
+                    marginTop: '10px',
+                    color: '#ddd',
+                  }}
+                >
+                  {exp.description}
+                </p>
 
                 {/* Add separator */}
                 {index < experiences.length - 1 && (
@@ -139,6 +169,7 @@ const Experience = () => {
           </div>
         )}
 
+        {/* Blinking Cursor */}
         {!done && (
           <span
             style={{

@@ -22,7 +22,7 @@
     "title": "Terminally-Addicted",
     "stack": "python, go, curses",
     "description": "> Won 'Most Creative Hack' at HackOH/IO\n> Terminally-Addicted is a take on modern productivity that clutters the screen with too many distractions. Instead, this is a completely CLI based productivity app that has everything you need to get cracking with work in one place.\n> Terminally-Addicted connects with your Spotify, GitHub, ChatGPT and Todoist to provide you with all the tools necessary to be productive, and, as a plus it also supports online video playback within the terminal!\n> All operations are done through CLI commands!",
-    "screenshot": "/assets/term-ss.png",
+    "screenshot": "/assets/terminally-addicted.png",
     "category": "General"
   },
   {
@@ -30,7 +30,7 @@
     "title": "Hi-Five",
     "stack": "python, bert, openai, huggingface, nextjs, neo4j",
     "description": "> Hi-Five is a take on modern matchmaking apps that use only tags and metrics based on interests. Hi-Five creates a high-fidelity vector embedding based on a personality analysis test. This vector embedding is based on the OCEAN personality model, creating a 5-dimensional feature vector.\n> Using this personality feature vector and interests from the user, Hi-Five is able to create meaningful connections between people with similar interests and personalities.",
-    "screenshot": "/assets/hi-five.webp",
+    "screenshot": "/assets/hifive.png",
     "category": "AI/ML"
   },
   {
@@ -38,7 +38,7 @@
     "title": "Neural Madness",
     "stack": "python, transformers, numpy, pytorch, tensorflow",
     "description": "> This is a repository with different types of Neural Networks and with notes that I have taken up as an effort to learn and understand machine learning better.\n> This repository has a hand-made neural network without using pyTorch and TensorFlow, as well as a hand-built transformer network.",
-    "screenshot": "/assets/home_page_2.jpg",
+    "screenshot": "/assets/neural_madness.png",
     "category": "AI/ML"
   },
   {
@@ -46,7 +46,7 @@
     "title": "Canvas2DoIst",
     "stack": "python, rest api",
     "description": "> This is an auxiliary script to collect course assignments from Canvas and insert them into Todoist using Canvas and Todoist API!\n> This project has a bit of a niche audience, but this serves very purposeful in my daily life to automate my to-do lists based on my assignments.",
-    "screenshot": "/assets/todoist.webp",
+    "screenshot": "/assets/canvas2doist.png",
     "category": "Web Development"
   }
 ]
