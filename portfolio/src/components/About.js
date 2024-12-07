@@ -5,18 +5,31 @@ const About = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
 
-  const fullText = `Hello!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati.
-  \nI am interested in data science, machine learning, and artificial intelligence. I enjoy building things and prefer to learn new things by making.
-  \nOutside the software realm, I also love climbing, motorsports, photography, and music!`;
+  // Define the content chunks with type and value
+  const contentChunks = [
+    { type: 'text', value: '\n\n>>> Contact Me! <<<\n' },
+    { type: 'link', value: 'https://github.com/rai1975', label: '> GitHub' },
+    { type: 'link', value: 'https://linkedin.com/in/raihan-rafeek', label: '> LinkedIn' },
+    { type: 'link', value: 'mailto:rafeekrn@mail.uc.edu', label: '> Email [rafeekrn@mail.uc.edu]' },
+  ];
 
-  const typingSpeed = 5; // Speed of typing in milliseconds
+  const typingSpeed = 50; // Speed of typing in milliseconds
 
   useEffect(() => {
     // Typing animation function
     const type = () => {
-      if (currentIndex < fullText.length) {
-        setText((prev) => prev + fullText[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
+      if (currentIndex < contentChunks.length) {
+        const chunk = contentChunks[currentIndex];
+        let chunkText = '';
+
+        if (chunk.type === 'text') {
+          chunkText = chunk.value;
+        } else if (chunk.type === 'link') {
+          chunkText = `<a href="${chunk.value}" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
+        }
+
+        setText((prev) => prev + chunkText); // Append the text or link
+        setCurrentIndex((prev) => prev + 1); // Move to the next chunk
       } else {
         setDone(true); // Typing complete
       }
@@ -26,7 +39,7 @@ const About = () => {
       const timeout = setTimeout(type, typingSpeed);
       return () => clearTimeout(timeout); // Cleanup timeout on unmount or re-run
     }
-  }, [currentIndex, done, fullText]);
+  }, [currentIndex, done]);
 
   return (
     <div
@@ -64,23 +77,25 @@ const About = () => {
           whiteSpace: 'pre-wrap',
           textAlign: 'center', // Center the text
           flexGrow: 1, // Ensures this part expands to fill the available vertical space
+          wordBreak: 'break-word', // Prevents long words from overflowing
         }}
-      >
-        {text}
-        {done && (
-          <span
-            style={{
-              backgroundColor: '#00ff00',
-              color: '#1e1e1e',
-              padding: '0 2px',
-              display: 'inline-block',
-              animation: 'blink 1s step-start infinite',
-            }}
-          >
-            |
-          </span>
-        )}
-      </div>
+        dangerouslySetInnerHTML={{ __html: text }} // Safely insert HTML (for the links)
+      />
+
+      {/* Display blinking cursor when done */}
+      {done && (
+        <span
+          style={{
+            backgroundColor: '#00ff00',
+            color: '#1e1e1e',
+            padding: '0 2px',
+            display: 'inline-block',
+            animation: 'blink 1s step-start infinite',
+          }}
+        >
+          |
+        </span>
+      )}
 
       {/* Keyframes for the blinking cursor */}
       <style>

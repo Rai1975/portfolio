@@ -8,14 +8,12 @@ const Home = () => {
 
   // Define the text and links in an array of objects
   const contentChunks = [
-    { type: 'text', value: 'Raihan Rafeek\nComputer Science\nUniversity of Cincinnati\n\n' },
+    { type: 'text', value: `Hello!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati.
+  \nI am interested in data science, machine learning, and artificial intelligence. I enjoy building things and prefer to learn new things by making.
+  \nOutside the software realm, I also love climbing, motorsports, photography, and music!\n`},
     { type: 'link', value: '/about', label: '> About Me' },
     { type: 'link', value: '/projects', label: '> Projects' },
     { type: 'link', value: '/experiences', label: '> Experience' },
-    { type: 'text', value: '\n\n>>> Contact Me! <<<\n' },
-    { type: 'link', value: 'https://github.com/rai1975', label: '> GitHub' },
-    { type: 'link', value: 'https://linkedin.com/in/raihan-rafeek', label: '> LinkedIn' },
-    { type: 'link', value: 'mailto:rafeekrn@mail.uc.edu', label: '> Email [rafeekrn@mail.uc.edu]' },
   ];
 
   const typingSpeed = 70; // Speed of typing in milliseconds
