@@ -1,10 +1,7 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
-
   return (
     <nav
       style={{
@@ -55,7 +52,7 @@ const Navbar = () => {
             backgroundColor: '#27c93f', // Green
           }}
         ></div>
-        {!isHomePage && (
+        {(
         <div
           style={{
             display: 'flex',

@@ -5,15 +5,22 @@ const About = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
 
+  // Replace ASCII art with image URLs
+  const gitHubImage = '/assets/githubAscii.png';
+  const linkedInImage = '/assets/linkedinAscii.png';
+  const emailImage = '/assets/emailAscii.png';
+
   // Define the content chunks with type and value
   const contentChunks = [
-    { type: 'text', value: '\n\n>>> Contact Me! <<<\n' },
-    { type: 'link', value: 'https://github.com/rai1975', label: '> GitHub' },
-    { type: 'link', value: 'https://linkedin.com/in/raihan-rafeek', label: '> LinkedIn' },
-    { type: 'link', value: 'mailto:rafeekrn@mail.uc.edu', label: '> Email [rafeekrn@mail.uc.edu]' },
+    { type: 'link', value: 'https://github.com/rai1975', label: `<img src="${gitHubImage}" alt="GitHub" style="width: 80px; height: 80px;"/>`, small: true },
+    { type: 'link', value: 'https://linkedin.com/in/raihan-rafeek', label: `<img src="${linkedInImage}" alt="LinkedIn" style="width: 80px; height: 80px;"/>`, small: true },
+    { type: 'link', value: 'mailto:rafeekrn@mail.uc.edu', label: `<img src="${emailImage}" alt="Email" style="width: 80px; height: 80px;"/>`, small: true },
+    { type: 'link', value: '/about', label: '\n> About Me\n', small: false },
+    { type: 'link', value: '/projects', label: '> Projects\n', small: false },
+    { type: 'link', value: '/experiences', label: '> Experience\n', small: false },
   ];
 
-  const typingSpeed = 50; // Speed of typing in milliseconds
+  const typingSpeed = 80; // Speed of typing in milliseconds
 
   useEffect(() => {
     // Typing animation function
@@ -22,10 +29,20 @@ const About = () => {
         const chunk = contentChunks[currentIndex];
         let chunkText = '';
 
+        // Check for specific links and apply smaller font size for images
         if (chunk.type === 'text') {
           chunkText = chunk.value;
         } else if (chunk.type === 'link') {
-          chunkText = `<a href="${chunk.value}" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
+          let label = chunk.label;
+
+          // Apply smaller font size for the ASCII art links (now images)
+          if (chunk.small === true) {
+            label = `<span style="font-size: 30px;">${label}</span>`;
+          } else {
+            label = `<a href="${chunk.value}" style="color: #00ff00; text-decoration: none;">${label}</a>`;
+          }
+
+          chunkText = label;
         }
 
         setText((prev) => prev + chunkText); // Append the text or link
