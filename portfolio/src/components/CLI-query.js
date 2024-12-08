@@ -19,7 +19,7 @@ const CommandLineNavigation = () => {
     }
 
     if (parts[0] === 'cd') {
-      if (parts[1] === '../') {
+      if (parts[1] === '../' || parts[1] === 'home') {
         navigate('/'); // Go to home
       } else if (parts[1] === 'about') {
         navigate('/about'); // Go to About page
