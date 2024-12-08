@@ -52,66 +52,6 @@ const Navbar = () => {
             backgroundColor: '#27c93f', // Green
           }}
         ></div>
-        {(
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'right',
-            gap: '20px',
-            marginTop: '0px'
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '0px',
-            }}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '5px',
-            }}
-          >
-            About
-          </Link>
-          <Link
-            to="/experiences"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '5px',
-            }}
-          >
-            Experiences
-          </Link>
-          <Link
-            to="/projects"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '5px',
-            }}
-          >
-            Projects
-          </Link>
-        </div>
-      )}
-
     </div>
     </nav>
   );

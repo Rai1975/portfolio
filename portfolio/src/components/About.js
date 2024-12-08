@@ -5,56 +5,41 @@ const About = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
 
-  // Replace ASCII art with image URLs
-  const gitHubImage = '/assets/githubAscii.png';
-  const linkedInImage = '/assets/linkedinAscii.png';
-  const emailImage = '/assets/emailAscii.png';
+  const gitHubImage = '/assets/github-11-xxl.png';
+  const linkedInImage = '/assets/white_linkedin.png';
+  const emailImage = '/assets/ms-outlook-white.png';
 
-  // Define the content chunks with type and value
   const contentChunks = [
-    { type: 'link', value: 'https://github.com/rai1975', label: `<img src="${gitHubImage}" alt="GitHub" style="width: 80px; height: 80px;"/>`, small: true },
-    { type: 'link', value: 'https://linkedin.com/in/raihan-rafeek', label: `<img src="${linkedInImage}" alt="LinkedIn" style="width: 80px; height: 80px;"/>`, small: true },
-    { type: 'link', value: 'mailto:rafeekrn@mail.uc.edu', label: `<img src="${emailImage}" alt="Email" style="width: 80px; height: 80px;"/>`, small: true },
     { type: 'link', value: '/about', label: '\n> About Me\n', small: false },
     { type: 'link', value: '/projects', label: '> Projects\n', small: false },
     { type: 'link', value: '/experiences', label: '> Experience\n', small: false },
   ];
 
-  const typingSpeed = 80; // Speed of typing in milliseconds
+  const typingSpeed = 80;
 
   useEffect(() => {
-    // Typing animation function
     const type = () => {
       if (currentIndex < contentChunks.length) {
         const chunk = contentChunks[currentIndex];
         let chunkText = '';
 
-        // Check for specific links and apply smaller font size for images
         if (chunk.type === 'text') {
           chunkText = chunk.value;
         } else if (chunk.type === 'link') {
-          let label = chunk.label;
-
-          // Apply smaller font size for the ASCII art links (now images)
-          if (chunk.small === true) {
-            label = `<span style="font-size: 30px;">${label}</span>`;
-          } else {
-            label = `<a href="${chunk.value}" style="color: #00ff00; text-decoration: none;">${label}</a>`;
-          }
-
+          const label = `<a href="${chunk.value}" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
           chunkText = label;
         }
 
-        setText((prev) => prev + chunkText); // Append the text or link
-        setCurrentIndex((prev) => prev + 1); // Move to the next chunk
+        setText((prev) => prev + chunkText);
+        setCurrentIndex((prev) => prev + 1);
       } else {
-        setDone(true); // Typing complete
+        setDone(true);
       }
     };
 
     if (!done) {
       const timeout = setTimeout(type, typingSpeed);
-      return () => clearTimeout(timeout); // Cleanup timeout on unmount or re-run
+      return () => clearTimeout(timeout);
     }
   }, [currentIndex, done]);
 
@@ -62,44 +47,70 @@ const About = () => {
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column', // Stack image and text vertically
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        minHeight: '100vh', // Ensure the container takes full screen height
+        minHeight: '100vh',
         backgroundColor: '#1e1e1e',
         color: '#00ff00',
         fontFamily: 'Consolas, monospace',
         padding: '15px',
         boxSizing: 'border-box',
-        overflow: 'hidden', // Prevent any extra scrolling or white space
+        overflow: 'hidden',
       }}
     >
-      {/* Scalable Image with 8-bit effect */}
+      {/* Profile Picture with Neon Glow */}
       <img
         src="/assets/me.jpg"
-        alt="8-bit image"
+        alt="8-bit profile"
         style={{
-          filter: 'contrast(200%) saturate(200%) brightness(150%) grayscale(100%) pixelate(50%)',
           imageRendering: 'pixelated',
-          width: '80%', // Make image take up 80% of available width
-          maxWidth: '500px', // Optional: Limit maximum size for large screens
-          marginBottom: '20px', // Adjust gap between image and text
-          height: 'auto', // Maintain aspect ratio
+          width: '80%',
+          maxWidth: '500px',
+          marginBottom: '20px',
+          height: 'auto',
+          boxShadow: '0 0 5px 2px rgba(0, 255, 0, 0.8)', // Neon green glow
         }}
       />
 
+      {/* Clickable Images for Links */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px' }}>
+        <a href="https://github.com/rai1975" target="_blank" rel="noopener noreferrer">
+          <img
+            src={gitHubImage}
+            alt="GitHub"
+            style={{ width: '75px', height: '75px', cursor: 'pointer' }}
+          />
+        </a>
+        <a href="https://linkedin.com/in/raihan-rafeek" target="_blank" rel="noopener noreferrer">
+          <img
+            src={linkedInImage}
+            alt="LinkedIn"
+            style={{ width: '80px', height: '80px', cursor: 'pointer' }}
+          />
+        </a>
+        <a href="mailto:rafeekrn@mail.uc.edu" target="_blank" rel="noopener noreferrer">
+          <img
+            src={emailImage}
+            alt="Email"
+            style={{ width: '80px', height: '80px', cursor: 'pointer' }}
+          />
+        </a>
+      </div>
+
+      {/* Typing Animation */}
       <div
         style={{
           fontSize: '32px',
           whiteSpace: 'pre-wrap',
-          textAlign: 'center', // Center the text
-          flexGrow: 1, // Ensures this part expands to fill the available vertical space
-          wordBreak: 'break-word', // Prevents long words from overflowing
+          textAlign: 'center',
+          flexGrow: 1,
+          wordBreak: 'break-word',
         }}
-        dangerouslySetInnerHTML={{ __html: text }} // Safely insert HTML (for the links)
+        dangerouslySetInnerHTML={{ __html: text }}
       />
 
-      {/* Display blinking cursor when done */}
+      {/* Blinking Cursor */}
       {done && (
         <span
           style={{
@@ -114,7 +125,6 @@ const About = () => {
         </span>
       )}
 
-      {/* Keyframes for the blinking cursor */}
       <style>
         {`
           @keyframes blink {
