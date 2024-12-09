@@ -9,134 +9,127 @@ const About = () => {
   const [done, setDone] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Define the text and links in an array of objects
-  const contentChunks = [
-    { type: 'text', value: `Hello!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati.
+  const aboutMe = `Hello!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati.
   \nI am interested in data science, machine learning, and artificial intelligence. I enjoy building things and prefer to learn new things by making.
-  \nOutside the software realm, I also love climbing, motorsports, photography, and music!\n`},
+  \nOutside the software realm, I also love climbing, motorsports, photography, and music!\n`
+
+  const altAboutme = `personal about me. Like my hobbies and uni life and stuff`
+
+  const contentChunks = [
+    { type: 'text', value: isLandingPage ? aboutMe : altAboutme }
   ];
 
-  const typingSpeed = 60; // Speed of typing in milliseconds
+  const typingSpeed = 60;
 
   useEffect(() => {
-    // Typing animation function
     const type = () => {
       if (currentIndex < contentChunks.length) {
         const currentChunk = contentChunks[currentIndex];
         setText((prev) => prev + (currentChunk.type === 'text' ? currentChunk.value : ''));
 
-        // Check if the current chunk is a link and add it after typing the text part
         if (currentChunk.type === 'link') {
           setText((prev) => prev + `<a href="${currentChunk.value}" rel="noopener noreferrer" style="color: #00ff00; text-decoration: none;">${currentChunk.label}</a>\n`);
         }
 
         setCurrentIndex((prev) => prev + 1);
       } else {
-        setDone(true); // Typing complete
+        setDone(true);
       }
     };
 
     if (!done) {
       const timeout = setTimeout(type, typingSpeed);
-      return () => clearTimeout(timeout); // Cleanup timeout on unmount or re-run
+      return () => clearTimeout(timeout);
     }
   }, [currentIndex, done, contentChunks]);
 
   useEffect(() => {
-    // Dynamically update the `isMobile` state when the window is resized
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize); // Cleanup event listener
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Array of image paths (ADD REST)
   const personalImagePaths = [
-    'assets/me.jpg',
-    'assets/me2.jpg',
-    'assets/me3.jpg',
-    'assets/me4.jpg'
+    'assets/tetons.jpg',
+    'assets/teaching.jpg',
+    'assets/rock.jpg',
+    'assets/climbing.jpg'
   ];
 
   return (
     <div
       style={{
         display: 'flex',
-        flexDirection: isLandingPage ? 'column' : 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: isLandingPage ? '100vh' : 'calc(100vh - 100px)', // Reduced height
+        flexDirection: isLandingPage ? 'column' : isMobile ? 'column' : 'row',
+        alignItems: isLandingPage ? 'left' : 'flex-start',
+        justifyContent: isLandingPage ? 'left' : 'center',
+        minHeight: isLandingPage ? '100vh' : 'calc(100vh - 30px)',
         backgroundColor: '#1e1e1e',
         color: 'white',
         fontFamily: 'Consolas, monospace',
-        padding: isLandingPage ? '0px' : '10px', // Reduced padding
+        padding: isLandingPage ? '0px' : '20px',
         boxSizing: 'border-box',
-        gap: isLandingPage ? '0' : '30px', // Reduced gap
+        gap: isLandingPage ? '0 ' : '20px',
       }}
     >
-        {!isLandingPage && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '30px',
-              width: '100%',
-              maxWidth: '200px',
-              margin: '0',
-            }}
-          >
-            {personalImagePaths.map((imagePath, index) => (
-              <div
-                key={index}
+      {!isLandingPage && (
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: '20px',
+            maxWidth: '600px',
+            margin: isMobile ? '0 auto' : '0',
+          }}
+        >
+          {personalImagePaths.map((imagePath, index) => (
+            <div
+              key={index}
+              style={{
+                width: isMobile ? '100%' : '280px',
+                height: '280px',
+                borderRadius: '10px',
+                overflow: 'hidden',
+                boxShadow: '0 0 10px #00ff00',
+              }}
+            >
+              <img
+                src={imagePath}
+                alt={`Raihan Rafeek ${index + 1}`}
                 style={{
-                  width: '200px',
-                  height: '200px',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  boxShadow: '0 0 20px #00ff00', // Neon green glow
-                  flexShrink: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
                 }}
-              >
-                <img
-                  src={imagePath}
-                  alt={`Raihan Rafeek ${index + 1}`}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        )}
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
-      {/* Terminal Content */}
       <div
         style={{
-          width: isLandingPage ? '100%' : 'auto',
-          flexGrow: isLandingPage ? 1 : 0,
+          width: isLandingPage ? '100%' : isMobile ? '100%' : '40%',
+          marginLeft: isLandingPage ? '0' : isMobile ? '0' : '20px',
           backgroundColor: '#1e1e1e',
           borderRadius: isLandingPage ? '0 0 10px 10px' : '10px',
           padding: '15px',
           boxSizing: 'border-box',
           overflow: 'hidden',
           whiteSpace: 'pre-wrap',
-          color: '#00ff00', // Green text
-          fontSize: isLandingPage ? '32px' : '22px', // Slightly smaller font
+          color: '#00ff00',
+          fontSize: isLandingPage ? '32px' : '30px',
           textAlign: isLandingPage ? 'left' : 'center',
-          maxWidth: isLandingPage ? 'none' : '600px',
+          maxWidth: '600px',
         }}
         dangerouslySetInnerHTML={{
           __html: text + (done && isMobile && isLandingPage ? '\n\n>>> Scroll to know more about me <<<\n' : ''),
         }}
       />
 
-      {/* Keyframes for the blinking cursor */}
       <style>
         {`
           @keyframes blink {

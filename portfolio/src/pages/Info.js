@@ -10,7 +10,7 @@ const About = () => {
   const emailImage = '/assets/ms-outlook-white.png';
 
   const contentChunks = [
-    { type: 'link', value: '/about', label: '\n> About Me\n', small: false },
+    { type: 'link', value: '/about', label: '\n> More About Me\n', small: false },
     { type: 'link', value: '/projects', label: '> Projects\n', small: false },
     { type: 'link', value: '/experiences', label: '> Experience\n', small: false },
   ];
