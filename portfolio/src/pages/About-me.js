@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const Home = () => {
+const About = () => {
+  const location = useLocation();
+  const isLandingPage = location.pathname === '/';
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Detect initial screen size
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   // Define the text and links in an array of objects
   const contentChunks = [
@@ -49,37 +52,87 @@ const Home = () => {
     return () => window.removeEventListener('resize', handleResize); // Cleanup event listener
   }, []);
 
+  // Array of image paths (ADD REST)
+  const personalImagePaths = [
+    'assets/me.jpg',
+    'assets/me2.jpg',
+    'assets/me3.jpg',
+    'assets/me4.jpg'
+  ];
+
   return (
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: isLandingPage ? 'column' : 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        height: '100vh',
+        justifyContent: 'center',
+        minHeight: isLandingPage ? '100vh' : 'calc(100vh - 100px)', // Reduced height
         backgroundColor: '#1e1e1e',
         color: 'white',
         fontFamily: 'Consolas, monospace',
-        padding: '0px',
+        padding: isLandingPage ? '0px' : '10px', // Reduced padding
         boxSizing: 'border-box',
+        gap: isLandingPage ? '0' : '30px', // Reduced gap
       }}
     >
+        {!isLandingPage && (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '30px',
+              width: '100%',
+              maxWidth: '200px',
+              margin: '0',
+            }}
+          >
+            {personalImagePaths.map((imagePath, index) => (
+              <div
+                key={index}
+                style={{
+                  width: '200px',
+                  height: '200px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  boxShadow: '0 0 20px #00ff00', // Neon green glow
+                  flexShrink: 0,
+                }}
+              >
+                <img
+                  src={imagePath}
+                  alt={`Raihan Rafeek ${index + 1}`}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
       {/* Terminal Content */}
       <div
         style={{
-          width: '100%',
-          flexGrow: 1,
+          width: isLandingPage ? '100%' : 'auto',
+          flexGrow: isLandingPage ? 1 : 0,
           backgroundColor: '#1e1e1e',
-          borderRadius: '0 0 10px 10px',
+          borderRadius: isLandingPage ? '0 0 10px 10px' : '10px',
           padding: '15px',
           boxSizing: 'border-box',
           overflow: 'hidden',
           whiteSpace: 'pre-wrap',
           color: '#00ff00', // Green text
-          fontSize: '32px',
+          fontSize: isLandingPage ? '32px' : '22px', // Slightly smaller font
+          textAlign: isLandingPage ? 'left' : 'center',
+          maxWidth: isLandingPage ? 'none' : '600px',
         }}
         dangerouslySetInnerHTML={{
-          __html: text + (done && isMobile ? '\n\n>>> Scroll to know more about me <<<\n' : ''),
+          __html: text + (done && isMobile && isLandingPage ? '\n\n>>> Scroll to know more about me <<<\n' : ''),
         }}
       />
 
@@ -97,4 +150,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default About;

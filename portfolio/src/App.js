@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/NavBar';
-import About from './components/About';
+import About from './pages/About-me';
 import LandingPage from './pages/landingPage';
 import Experiences from './pages/Experience';
 import Projects from './pages/Projects';
 import CommandLineNavigation from './components/CLI-query';
-import WhyDidYouDoThat from './components/Error';
+import WhyDidYouDoThat from './pages/Error';
 
 const App = () => {
   return (

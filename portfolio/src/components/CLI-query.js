@@ -25,7 +25,7 @@ const CommandLineNavigation = () => {
         navigate('/about'); // Go to About page
       } else if (parts[1] === 'projects') {
         navigate('/projects'); // Go to Projects page
-      } else if (parts[1] === 'experience') {
+      } else if (parts[1] === 'experience' || parts[1] === 'experiences') {
         navigate('/experiences'); // Go to Experiences page
       } else {
         setError(`Error: '${parts[1]}' is not a valid directory.`);
@@ -33,7 +33,8 @@ const CommandLineNavigation = () => {
     } else if (parts[0] === 'help') {
       setError(`Available commands:
       - cd [directory]: Navigate to a page (e.g., cd about, cd ../).
-      - help: Show this help message.`);
+      - help: Show this help message.
+      !! DO NOT use sudo commands`);
     } else if  (x === false) {
       setError(`Error: '${command}' is not a valid command. Type 'help' for assistance.`);
     }
@@ -66,7 +67,7 @@ const CommandLineNavigation = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a command (e.g., cd about)"
+          placeholder="Use commands to navigate! (e.g., cd about to go to About Me)"
           style={{
             backgroundColor: 'transparent',
             color: '#00ff00',

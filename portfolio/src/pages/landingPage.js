@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from '../components/Info';
-import About from '../components/About';
+import Home from './About-me';
+import About from './Info';
 
 const LandingPage = () => {
   return (
