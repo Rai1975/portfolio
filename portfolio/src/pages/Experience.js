@@ -154,16 +154,6 @@ const Experience = () => {
                   {exp.description}
                 </p>
 
-                {/* Add separator */}
-                {index < experiences.length - 1 && (
-                  <hr
-                    style={{
-                      border: '0',
-                      borderTop: '1px solid #444',
-                      margin: '20px 0',
-                    }}
-                  />
-                )}
               </article>
             ))}
           </div>

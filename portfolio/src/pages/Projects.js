@@ -10,6 +10,7 @@ const Projects = () => {
     'General': [],
     'Web Development': [],
   }); // Categorized projects state
+  const [modalImage, setModalImage] = useState(null); // Modal image state
 
   const fullText = `Projects`; // Typing effect text
   const typingSpeed = 50; // Speed of typing in milliseconds
@@ -66,6 +67,25 @@ const Projects = () => {
 
     fetchProjects();
   }, []);
+
+  const closeModal = () => setModalImage(null); // Close the modal
+
+  useEffect(() => {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  };
+
+  if (modalImage) {
+    window.addEventListener('keydown', handleKeyDown);
+  }
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [modalImage]);
+
 
   return (
     <div
@@ -183,7 +203,9 @@ const Projects = () => {
                             maxWidth: '800px',
                             maxHeight: '500px',
                             borderRadius: '10px',
+                            cursor: 'pointer',
                           }}
+                          onClick={() => setModalImage(proj.screenshot)} // Open modal on image click
                         />
                       </div>
                       <p style={{ color: '#00ff00', margin: '0 0', fontSize: '30px' }}>{proj.stack}</p>
@@ -223,6 +245,36 @@ const Projects = () => {
           </span>
         )}
       </div>
+
+      {/* Modal for displaying larger image */}
+      {modalImage && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+          }}
+          onClick={closeModal} // Close modal on background click
+        >
+          <img
+            src={modalImage}
+            alt="Enlarged project"
+            style={{
+              maxWidth: '90%',
+              maxHeight: '90%',
+              borderRadius: '10px',
+              boxShadow: '0 0 15px rgba(0, 0, 0, 0.5)',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };

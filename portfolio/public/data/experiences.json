@@ -21,7 +21,7 @@
         "title": "Marketting Chair",
         "organization": "CubeCats, University of Cincinnati",
         "date": "Aug 2024 - Present",
-        "description": "TBD"
+        "description": "> Boosted social media engagement for UC CubeCats, achieving a 1,000% increase in account interactions\n> Filmed, co-directed, and edited promotional content showcasing club events and launches\n> Expanded club membership by 150% through enhanced campus visibility and outreach efforts"
       },
     {
       "logo": "/assets/inl.png",
@@ -29,7 +29,7 @@
       "title": "Full Stack Software Engineer Intern",
       "organization": "Materials and Fuels Complex, Idaho National Laboratory",
       "date": "May 2024 - Aug 2024",
-      "description": "Contributed to the development of safety-critical software for nuclear inventory management using Ruby on Rails and PostgreSQL, ensuring compliance with strict regulatory standards and minimizing risk\nImplemented major changes to improve search result filtering speed by optimizing queries through a database migration and implementing caching\nResolved 30+ critical bugs, including new features, and UI/UX inconsistencies ensuring smooth and reliable application functionality\nCollaborated with engineers in an Agile environment, assisting continuous improvement while receiving mentorship from experienced professionals"
+      "description": "> Contributed to the development of safety-critical software for nuclear inventory management using Ruby on Rails and PostgreSQL, ensuring compliance with strict regulatory standards and minimizing risk\n> Implemented major changes to improve search result filtering speed by optimizing queries through a database migration and implementing caching\n> Resolved 30+ critical bugs, including new features, and UI/UX inconsistencies ensuring smooth and reliable application functionality\n> Collaborated with engineers in an Agile environment, assisting continuous improvement while receiving mentorship from experienced professionals"
     },
     {
     "logo": "/assets/inl.png",
@@ -37,6 +37,6 @@
     "title": "Full Stack Software Engineer Intern",
     "organization": "Materials and Fuels Complex, Idaho National Laboratory",
     "date": "Aug 2023 - Dec 2023",
-    "description": "Contributed to the development of safety-critical software for nuclear inventory management using Ruby on Rails and PostgreSQL, ensuring compliance with strict regulatory standards and minimizing risk\nImplemented major changes to improve search result filtering speed by optimizing queries through a database migration and implementing caching\nResolved 30+ critical bugs, including new features, and UI/UX inconsistencies ensuring smooth and reliable application functionality\nCollaborated with engineers in an Agile environment, assisting continuous improvement while receiving mentorship from experienced professionals"
+    "description": "> Contributed to the development of safety-critical software for nuclear inventory management using Ruby on Rails and PostgreSQL, ensuring compliance with strict regulatory standards and minimizing risk\n> Implemented major changes to improve search result filtering speed by optimizing queries through a database migration and implementing caching\n> Resolved 30+ critical bugs, including new features, and UI/UX inconsistencies ensuring smooth and reliable application functionality\n> Collaborated with engineers in an Agile environment, assisting continuous improvement while receiving mentorship from experienced professionals"
     }
   ]
