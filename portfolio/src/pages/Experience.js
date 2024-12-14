@@ -170,21 +170,10 @@ const Experience = () => {
               animation: 'blink 1s step-start infinite',
             }}
           >
-            |
+          &nbsp;
           </span>
         )}
       </div>
-
-      {/* Keyframes for Animations */}
-      <style>
-        {`
-          @keyframes blink {
-            50% {
-              opacity: 0;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };

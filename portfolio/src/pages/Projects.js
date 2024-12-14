@@ -241,7 +241,7 @@ const Projects = () => {
               animation: 'blink 1s step-start infinite',
             }}
           >
-            |
+            &nbsp;
           </span>
         )}
       </div>

@@ -109,31 +109,6 @@ const About = () => {
         }}
         dangerouslySetInnerHTML={{ __html: text }}
       />
-
-      {/* Blinking Cursor */}
-      {done && (
-        <span
-          style={{
-            backgroundColor: '#00ff00',
-            color: '#1e1e1e',
-            padding: '0 2px',
-            display: 'inline-block',
-            animation: 'blink 1s step-start infinite',
-          }}
-        >
-          |
-        </span>
-      )}
-
-      <style>
-        {`
-          @keyframes blink {
-            50% {
-              opacity: 0;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };

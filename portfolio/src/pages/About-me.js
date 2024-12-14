@@ -11,28 +11,28 @@ const About = () => {
 
   const aboutMe = `Hello!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati.
   \nI am interested in data science, machine learning, and artificial intelligence. I enjoy building things and prefer to learn new things by making.
-  \nOutside the software realm, I also love climbing, motorsports, photography, and music!\n`
+  \nOutside the software realm, I also love climbing, motorsports, photography, and music!\n`;
 
   const altAboutme = `Hey there! I'm a curious builder who loves turning ideas into reality. Whether it’s diving into machine learning and AI or tinkering with aerospace software, I’m all about exploring cool, new challenges.\n
-When I’m not geeking out over code, you can probably find me scaling a climbing wall or playing Minecraft. Life’s an adventure, and I’m here to enjoy every bit of it. I'm also a CLI monkey 🐵`
+When I’m not geeking out over code, you can probably find me scaling a climbing wall or playing Minecraft. Life’s an adventure, and I’m here to enjoy every bit of it. I'm also a CLI monkey 🐵`;
 
   const contentChunks = [
-    { type: 'text', value: isLandingPage ? aboutMe : altAboutme }
+    { type: 'text', value: isLandingPage ? aboutMe : altAboutme },
   ];
 
-  const typingSpeed = 60;
+  const typingSpeed = 10;
 
   useEffect(() => {
     const type = () => {
       if (currentIndex < contentChunks.length) {
         const currentChunk = contentChunks[currentIndex];
-        setText((prev) => prev + (currentChunk.type === 'text' ? currentChunk.value : ''));
+        const currentText = currentChunk.type === 'text' ? currentChunk.value : '';
 
-        if (currentChunk.type === 'link') {
-          setText((prev) => prev + `<a href="${currentChunk.value}" rel="noopener noreferrer" style="color: #00ff00; text-decoration: none;">${currentChunk.label}</a>\n`);
+        if (text.length < currentText.length) {
+          setText((prev) => prev + currentText[text.length]);
+        } else {
+          setCurrentIndex((prev) => prev + 1);
         }
-
-        setCurrentIndex((prev) => prev + 1);
       } else {
         setDone(true);
       }
@@ -42,7 +42,7 @@ When I’m not geeking out over code, you can probably find me scaling a climbin
       const timeout = setTimeout(type, typingSpeed);
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, done, contentChunks]);
+  }, [currentIndex, text, done, contentChunks]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -57,7 +57,7 @@ When I’m not geeking out over code, you can probably find me scaling a climbin
     'assets/tetons.jpg',
     'assets/teaching.jpg',
     'assets/rock.jpg',
-    'assets/climbing.jpg'
+    'assets/climbing.jpg',
   ];
 
   return (
@@ -127,7 +127,11 @@ When I’m not geeking out over code, you can probably find me scaling a climbin
           maxWidth: '600px',
         }}
         dangerouslySetInnerHTML={{
-          __html: text + (done && isMobile && isLandingPage ? '\n\n>>> Scroll to know more about me <<<\n' : ''),
+          __html:
+            text +
+            (!done
+              ? '<span style="background-color: #00ff00;">|</span>'
+              : '<span style="background-color: #00ff00; animation: blink 1s step-start infinite;">|</span>'),
         }}
       />
 
