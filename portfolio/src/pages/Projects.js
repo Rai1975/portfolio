@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
 const Projects = () => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(''); // Typing effect text
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [done, setDone] = useState(false);
-  const [projects, setProjects] = useState([]);
+  const [done, setDone] = useState(false); // Typing effect done state
+  const [projects, setProjects] = useState([]); // All projects
+  const [categorizedProjects, setCategorizedProjects] = useState({
+    'AI/ML': [],
+    'General': [],
+    'Web Development': [],
+  }); // Categorized projects state
+  const [modalImage, setModalImage] = useState(null); // Modal image state
 
-  const fullText = `Projects`;
+  const fullText = `Projects`; // Typing effect text
   const typingSpeed = 50; // Speed of typing in milliseconds
 
+  const categories = ['AI/ML', 'General', 'Web Development'];
+
+  // Typing effect function
   useEffect(() => {
     const type = () => {
       if (currentIndex < fullText.length) {
@@ -25,13 +34,32 @@ const Projects = () => {
     }
   }, [currentIndex, done, fullText]);
 
-
+  // Fetch and categorize projects
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await fetch('/data/projects.json');
         const data = await response.json();
+        console.log("Projects Response: ", data);
+
+        // Categorize projects
+        const categorized = {
+          'AI/ML': [],
+          'General': [],
+          'Web Development': [],
+        };
+
+        data.forEach(project => {
+          if (categorized[project.category]) {
+            categorized[project.category].push(project);
+          }
+        });
+
+        console.log("Categorized projects: ", categorized);
+
+        // Update state
         setProjects(data);
+        setCategorizedProjects(categorized); // Update the categorized projects state
       } catch (error) {
         console.error('Error fetching projects:', error);
       }
@@ -39,6 +67,25 @@ const Projects = () => {
 
     fetchProjects();
   }, []);
+
+  const closeModal = () => setModalImage(null); // Close the modal
+
+  useEffect(() => {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  };
+
+  if (modalImage) {
+    window.addEventListener('keydown', handleKeyDown);
+  }
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [modalImage]);
+
 
   return (
     <div
@@ -74,63 +121,113 @@ const Projects = () => {
         {text}
         {done && (
           <div style={{ marginTop: '20px', width: '100%' }}>
-            {projects.map((proj, index) => (
-              <article
-                key={index}
-                style={{
-                  marginBottom: '30px',
-                  color: '#ddd',
-                  lineHeight: '1.6',
-                }}
+            {/* Navigation Links for Categories */}
+            <div style={{ marginBottom: '20px' }}>
+              {categories.map((category, index) => (
+                <span key={index}>
+                  <a
+                    href={`#${category}`}
+                    style={{
+                      color: '#00ff00',
+                      textDecoration: 'none',
+                      fontSize: '30px',
+                      marginRight: '20px',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = '#bbb')}
+                    onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
+                  >
+                    {category}
+                  </a>
+                  {index < categories.length - 1 && (
+                    <span style={{ marginRight: '20px', color: '#00ff00', fontSize: '30px' }}>|</span>
+                  )}
+                </span>
+              ))}
+            </div>
+
+            {/* Render Projects by Category */}
+            {categories.map((category) => (
+              <section
+                id={category}
+                key={category}
+                style={{ marginBottom: '50px' }}
               >
-                <a
-                  href={proj.link}
+                <h2
                   style={{
                     color: '#00ff00',
-                    textDecoration: 'none',
-                    fontSize: '80px',
-                  }}
-                  onMouseEnter={(e) => (e.target.style.color = '#bbb')}
-                  onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
-                >
-                  {proj.title}
-                </a>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
+                    fontSize: '40px',
+                    borderBottom: '2px solid #00ff00',
                     marginBottom: '20px',
                   }}
                 >
-                  <img
-                    src={proj.screenshot}
-                    alt={`${proj.title} screenshot`}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      maxWidth: '1000px',
-                      borderRadius: '10px',
-                    }}
-                  />
-                </div>
-                <p style={{ color: '#00ff00', margin: '0 0', fontSize: '30px' }}>{proj.stack}</p>
-                <p style={{ marginTop: '10px', fontSize: '25px' }}>{proj.description}</p>
+                  {category}
+                </h2>
 
-                {/* Add separator */}
-                {index < projects.length - 1 && (
-                  <hr
-                    style={{
-                      border: '0',
-                      borderTop: '1px solid #444',
-                      margin: '20px 0',
-                    }}
-                  />
+                {categorizedProjects[category] && categorizedProjects[category].length > 0 ? (
+                  categorizedProjects[category].map((proj, index) => (
+                    <article
+                      key={index}
+                      style={{
+                        marginBottom: '30px',
+                        color: '#ddd',
+                        lineHeight: '1.6',
+                      }}
+                    >
+                      <a
+                        href={proj.link}
+                        style={{
+                          color: '#00ff00',
+                          textDecoration: 'none',
+                          fontSize: '45px',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = '#bbb')}
+                        onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
+                      >
+                        {proj.title}
+                      </a>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          flexDirection: 'column',
+                          marginBottom: '20px',
+                        }}
+                      >
+                        <img
+                          src={proj.screenshot}
+                          alt={`${proj.title} screenshot`}
+                          style={{
+                            width: '100%',
+                            height: 'auto',
+                            maxWidth: '800px',
+                            maxHeight: '500px',
+                            borderRadius: '10px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={() => setModalImage(proj.screenshot)} // Open modal on image click
+                        />
+                      </div>
+                      <p style={{ color: '#00ff00', margin: '0 0', fontSize: '30px' }}>{proj.stack}</p>
+                      <p style={{ marginTop: '10px', fontSize: '25px' }}>{proj.description}</p>
+
+                      {/* Add separator */}
+                      {index < categorizedProjects[category].length - 1 && (
+                        <hr
+                          style={{
+                            border: '0',
+                            borderTop: '1px solid #444',
+                            margin: '20px 0',
+                          }}
+                        />
+                      )}
+                    </article>
+                  ))
+                ) : (
+                  <p style={{ fontSize: '20px', color: '#bbb' }}>No projects in this category</p>
                 )}
-              </article>
+              </section>
             ))}
-
           </div>
         )}
 
@@ -144,10 +241,40 @@ const Projects = () => {
               animation: 'blink 1s step-start infinite',
             }}
           >
-            |
+            &nbsp;
           </span>
         )}
       </div>
+
+      {/* Modal for displaying larger image */}
+      {modalImage && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+          }}
+          onClick={closeModal} // Close modal on background click
+        >
+          <img
+            src={modalImage}
+            alt="Enlarged project"
+            style={{
+              maxWidth: '90%',
+              maxHeight: '90%',
+              borderRadius: '10px',
+              boxShadow: '0 0 15px rgba(0, 0, 0, 0.5)',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };

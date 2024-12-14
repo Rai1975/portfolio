@@ -55,7 +55,6 @@ const Navbar = () => {
             backgroundColor: '#27c93f', // Green
           }}
         ></div>
-        {!isHomePage && (
         <div
           style={{
             display: 'flex',
@@ -64,18 +63,20 @@ const Navbar = () => {
             marginTop: '0px'
           }}
         >
-          <Link
-            to="/"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '0px',
-            }}
-          >
-            Home
-          </Link>
+          {!isHomePage && (
+            <Link
+              to="/"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                fontSize: '18px',
+                padding: '5px 15px',
+                borderRadius: '0px',
+              }}
+            >
+              Home
+            </Link>
+          )}
           <Link
             to="/about"
             style={{
@@ -113,9 +114,7 @@ const Navbar = () => {
             Projects
           </Link>
         </div>
-      )}
-
-    </div>
+      </div>
     </nav>
   );
 };

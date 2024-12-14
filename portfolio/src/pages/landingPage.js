@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from '../components/Info';
-import About from '../components/About';
+import Home from './About-me';
+import About from './Info';
 
 const LandingPage = () => {
   return (
@@ -8,11 +8,11 @@ const LandingPage = () => {
       style={{
         display: 'flex',
         justifyContent: 'space-between',
-        padding: '20px',
         backgroundColor: '#1e1e1e',
         height: '100vh',
         boxSizing: 'border-box',
         flexWrap: 'wrap',
+        position: 'relative',
       }}
     >
       {/* Left Column: Home Component */}
@@ -20,7 +20,8 @@ const LandingPage = () => {
         style={{
           flex: 1,
           minWidth: '300px',
-          marginRight: '20px',
+          marginRight: '0px',
+          backgroundColor: '#1e1e1e'
         }}
       >
         <Home />
