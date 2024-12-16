@@ -1,66 +1,88 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <nav
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         backgroundColor: '#2e2e2e',
         padding: '10px 20px',
-        borderRadius: '0px 0px 0 0',
         fontFamily: 'Consolas, monospace',
       }}
     >
-      {/* Three Circles */}
+      {/* Top Bar */}
       <div
         style={{
           width: '100%',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundColor: '#2e2e2e',
+          justifyContent: 'space-between',
           padding: '5px 10px',
           boxSizing: 'border-box',
         }}
       >
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#ff5f56', // Red
-            marginRight: '8px',
-          }}
-        ></div>
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#ffbd2e', // Yellow
-            marginRight: '8px',
-          }}
-        ></div>
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: '#27c93f', // Green
-          }}
-        ></div>
+        {/* Three Circles */}
         <div
           style={{
             display: 'flex',
-            justifyContent: 'right',
+            alignItems: 'center',
+          }}
+        >
+          <div
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#ff5f56', // Red
+              marginRight: '8px',
+            }}
+          ></div>
+          <div
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#ffbd2e', // Yellow
+              marginRight: '8px',
+            }}
+          ></div>
+          <div
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#27c93f', // Green
+            }}
+          ></div>
+        </div>
+
+        {/* Links for Desktop */}
+        <div
+          style={{
+            display: isMobile ? 'none' : 'flex', // Hide desktop links if mobile
             gap: '20px',
-            marginTop: '0px'
+            justifyContent: 'center',
+            marginTop: '10px',
           }}
         >
           {!isHomePage && (
@@ -71,7 +93,7 @@ const Navbar = () => {
                 textDecoration: 'none',
                 fontSize: '18px',
                 padding: '5px 15px',
-                borderRadius: '0px',
+                borderRadius: '5px',
               }}
             >
               Home
@@ -114,7 +136,107 @@ const Navbar = () => {
             Projects
           </Link>
         </div>
+
+        {/* Hamburger Menu */}
+        {isMobile && (
+          <button
+            onClick={toggleMenu}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#00ff00',
+              fontSize: '24px',
+              cursor: 'pointer',
+              display: 'block',
+            }}
+          >
+            ☰
+          </button>
+        )}
       </div>
+
+      {/* Side Menu for Mobile */}
+      {isMenuOpen && isMobile && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '250px',
+            backgroundColor: '#2e2e2e',
+            padding: '20px',
+            boxShadow: '2px 0 5px rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            flexDirection: 'column',
+            zIndex: 1000,
+          }}
+        >
+          <button
+            onClick={toggleMenu}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#00ff00',
+              fontSize: '24px',
+              cursor: 'pointer',
+              alignSelf: 'flex-end',
+              marginBottom: '20px',
+            }}
+          >
+            ✕
+          </button>
+          {!isHomePage && (
+            <Link
+              to="/"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                fontSize: '18px',
+                marginBottom: '10px',
+              }}
+              onClick={toggleMenu}
+            >
+              Home
+            </Link>
+          )}
+          <Link
+            to="/about"
+            style={{
+              color: '#00ff00',
+              textDecoration: 'none',
+              fontSize: '18px',
+              marginBottom: '10px',
+            }}
+            onClick={toggleMenu}
+          >
+            About
+          </Link>
+          <Link
+            to="/experiences"
+            style={{
+              color: '#00ff00',
+              textDecoration: 'none',
+              fontSize: '18px',
+              marginBottom: '10px',
+            }}
+            onClick={toggleMenu}
+          >
+            Experiences
+          </Link>
+          <Link
+            to="/projects"
+            style={{
+              color: '#00ff00',
+              textDecoration: 'none',
+              fontSize: '18px',
+            }}
+            onClick={toggleMenu}
+          >
+            Projects
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };
