@@ -76,69 +76,8 @@ const Navbar = () => {
           ></div>
         </div>
 
-        {/* Links for Desktop */}
-        <div
-          style={{
-            display: isMobile ? 'none' : 'flex', // Hide desktop links if mobile
-            gap: '20px',
-            justifyContent: 'center',
-            marginTop: '10px',
-          }}
-        >
-          {!isHomePage && (
-            <Link
-              to="/"
-              style={{
-                color: '#00ff00',
-                textDecoration: 'none',
-                fontSize: '18px',
-                padding: '5px 15px',
-                borderRadius: '5px',
-              }}
-            >
-              Home
-            </Link>
-          )}
-          <Link
-            to="/about"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '5px',
-            }}
-          >
-            About
-          </Link>
-          <Link
-            to="/experiences"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '5px',
-            }}
-          >
-            Experiences
-          </Link>
-          <Link
-            to="/projects"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              padding: '5px 15px',
-              borderRadius: '5px',
-            }}
-          >
-            Projects
-          </Link>
-        </div>
-
         {/* Hamburger Menu */}
-        {isMobile && (
+        {isMobile ? (
           <button
             onClick={toggleMenu}
             style={{
@@ -152,6 +91,68 @@ const Navbar = () => {
           >
             ☰
           </button>
+        ) : (
+          /* Links for Desktop - Centered */
+          <div
+            style={{
+              display: 'flex',
+              gap: '20px',
+              justifyContent: 'center',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            {!isHomePage && (
+              <Link
+                to="/"
+                style={{
+                  color: '#00ff00',
+                  textDecoration: 'none',
+                  fontSize: '18px',
+                  padding: '5px 15px',
+                  borderRadius: '5px',
+                }}
+              >
+                Home
+              </Link>
+            )}
+            <Link
+              to="/about"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                fontSize: '18px',
+                padding: '5px 15px',
+                borderRadius: '5px',
+              }}
+            >
+              About
+            </Link>
+            <Link
+              to="/experiences"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                fontSize: '18px',
+                padding: '5px 15px',
+                borderRadius: '5px',
+              }}
+            >
+              Experiences
+            </Link>
+            <Link
+              to="/projects"
+              style={{
+                color: '#00ff00',
+                textDecoration: 'none',
+                fontSize: '18px',
+                padding: '5px 15px',
+                borderRadius: '5px',
+              }}
+            >
+              Projects
+            </Link>
+          </div>
         )}
       </div>
 
