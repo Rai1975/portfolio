@@ -28,6 +28,7 @@ const Navbar = () => {
         backgroundColor: '#2e2e2e',
         padding: '10px 20px',
         fontFamily: 'Consolas, monospace',
+        alignItems: 'flex-start',
       }}
     >
       {/* Top Bar */}
@@ -36,7 +37,7 @@ const Navbar = () => {
           width: '100%',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           padding: '5px 10px',
           boxSizing: 'border-box',
         }}
@@ -86,20 +87,19 @@ const Navbar = () => {
               color: '#00ff00',
               fontSize: '24px',
               cursor: 'pointer',
-              display: 'block',
+              marginLeft: 'auto',
             }}
           >
             ☰
           </button>
         ) : (
-          /* Links for Desktop - Centered */
+          /* Links for Desktop */
           <div
             style={{
               display: 'flex',
               gap: '20px',
-              justifyContent: 'center',
-              marginLeft: 'auto',
-              marginRight: 'auto',
+              justifyContent: 'flex-start',
+              marginLeft: '20px',
             }}
           >
             {!isHomePage && (
@@ -181,7 +181,7 @@ const Navbar = () => {
               color: '#00ff00',
               fontSize: '24px',
               cursor: 'pointer',
-              alignSelf: 'flex-end',
+              alignSelf: 'flex-start',
               marginBottom: '20px',
             }}
           >
