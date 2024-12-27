@@ -5,10 +5,11 @@ const Experience = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
   const [experiences, setExperiences] = useState([]);
+  const [expandedIndex, setExpandedIndex] = useState(null); // Tracks the expanded item
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const fullText = `Experience`;
-  const typingSpeed = 50; // Speed of typing in milliseconds
+  const typingSpeed = 50;
 
   // Typing animation
   useEffect(() => {
@@ -51,6 +52,10 @@ const Experience = () => {
     fetchExperiences();
   }, []);
 
+  const toggleExpand = (index) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return (
     <div
       style={{
@@ -86,85 +91,86 @@ const Experience = () => {
         {done && (
           <div style={{ marginTop: '20px', width: '100%' }}>
             {experiences.map((exp, index) => (
-              <article
+              <div
                 key={index}
                 style={{
-                  marginBottom: '30px',
-                  color: '#ddd',
-                  lineHeight: '1.6',
+                  backgroundColor: '#282828',
+                  borderRadius: '10px',
+                  marginBottom: '20px',
+                  padding: '20px',
+                  cursor: 'pointer',
+                  transition: '0.3s',
+                  boxShadow: expandedIndex === index ? '0 4px 15px rgba(0, 0, 0, 0.6)' : '0 2px 8px rgba(0, 0, 0, 0.4)',
                 }}
+                onClick={() => toggleExpand(index)}
               >
-                <h2
-                  style={{
-                    fontSize: isMobile ? '20px' :'40px',
-                    color: '#00ff00',
-                    marginBottom: '15px',
-                    borderBottom: '2px solid #00ff00',
-                    paddingBottom: '5px',
-                  }}
-                >
-                  <a
-                    href={exp.link}
-                    style={{
-                      textDecoration: 'none',
-                      color: '#00ff00',
-                    }}
-                    onMouseEnter={(e) => (e.target.style.color = '#bbb')}
-                    onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
-                  >
-                    {exp.title}
-                  </a>
-                </h2>
+                {/* Title and Logo */}
                 <div
                   style={{
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
-                    flexDirection: 'column',
-                    marginBottom: '20px',
                   }}
                 >
+                  <h2
+                    style={{
+                      fontSize: isMobile ? '20px' : '30px',
+                      color: '#00ff00',
+                      marginBottom: '0',
+                    }}
+                  >
+                    {exp.title}
+                  </h2>
                   <img
                     src={exp.logo}
                     alt={`${exp.title} logo`}
                     style={{
-                      width: 'auto',
-                      height: isMobile ? '200px' : '300px',
-                      maxWidth: isMobile ? '200px' : '400px',
-                      borderRadius: '10px',
+                      width: isMobile ? '50px' : '75px',
+                      height: 'auto',
+                      borderRadius: '5px',
                       objectFit: 'contain',
                     }}
                   />
                 </div>
-                <p
-                  style={{
-                    fontSize: isMobile ? '20px' : '25px',
-                    margin: '5px 0',
-                    color: '#00ff00',
-                  }}
-                >
-                  {exp.organization}
-                </p>
-                <p
-                  style={{
-                    fontSize: isMobile ? '15px' : '20px',
-                    margin: '5px 0',
-                    color: '#aaa',
-                  }}
-                >
-                  {exp.date}
-                </p>
-                <p
-                  style={{
-                    fontSize: isMobile ? '20px' : '22px',
-                    marginTop: '10px',
-                    color: '#ddd',
-                  }}
-                >
-                  {exp.description}
-                </p>
 
-              </article>
+                {/* Expanded Details */}
+                {expandedIndex === index && (
+                  <div
+                    style={{
+                      marginTop: '15px',
+                      color: '#ddd',
+                      lineHeight: '1.6',
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: isMobile ? '15px' : '20px',
+                        margin: '5px 0',
+                        color: '#00ff00',
+                      }}
+                    >
+                      {exp.organization}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: isMobile ? '15px' : '18px',
+                        margin: '5px 0',
+                        color: '#aaa',
+                      }}
+                    >
+                      {exp.date}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: isMobile ? '15px' : '18px',
+                        marginTop: '10px',
+                      }}
+                    >
+                      {exp.description}
+                    </p>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}
@@ -180,7 +186,7 @@ const Experience = () => {
               animation: 'blink 1s step-start infinite',
             }}
           >
-          &nbsp;
+            &nbsp;
           </span>
         )}
       </div>
