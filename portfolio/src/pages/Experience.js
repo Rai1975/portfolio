@@ -5,6 +5,7 @@ const Experience = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
   const [experiences, setExperiences] = useState([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const fullText = `Experience`;
   const typingSpeed = 50; // Speed of typing in milliseconds
@@ -25,6 +26,15 @@ const Experience = () => {
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, done, fullText]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Fetch experiences from the JSON file
   useEffect(() => {
@@ -69,7 +79,7 @@ const Experience = () => {
           overflow: 'hidden',
           whiteSpace: 'pre-wrap',
           color: '#00ff00',
-          fontSize: '55px',
+          fontSize: isMobile ? '45px' : '55px',
         }}
       >
         {text}
@@ -86,7 +96,7 @@ const Experience = () => {
               >
                 <h2
                   style={{
-                    fontSize: '40px',
+                    fontSize: isMobile ? '20px' :'40px',
                     color: '#00ff00',
                     marginBottom: '15px',
                     borderBottom: '2px solid #00ff00',
@@ -119,8 +129,8 @@ const Experience = () => {
                     alt={`${exp.title} logo`}
                     style={{
                       width: 'auto',
-                      height: '300px',
-                      maxWidth: '400px',
+                      height: isMobile ? '200px' : '300px',
+                      maxWidth: isMobile ? '200px' : '400px',
                       borderRadius: '10px',
                       objectFit: 'contain',
                     }}
@@ -128,7 +138,7 @@ const Experience = () => {
                 </div>
                 <p
                   style={{
-                    fontSize: '25px',
+                    fontSize: isMobile ? '20px' : '25px',
                     margin: '5px 0',
                     color: '#00ff00',
                   }}
@@ -137,7 +147,7 @@ const Experience = () => {
                 </p>
                 <p
                   style={{
-                    fontSize: '20px',
+                    fontSize: isMobile ? '15px' : '20px',
                     margin: '5px 0',
                     color: '#aaa',
                   }}
@@ -146,7 +156,7 @@ const Experience = () => {
                 </p>
                 <p
                   style={{
-                    fontSize: '22px',
+                    fontSize: isMobile ? '20px' : '22px',
                     marginTop: '10px',
                     color: '#ddd',
                   }}
