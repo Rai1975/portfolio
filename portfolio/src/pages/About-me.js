@@ -79,14 +79,14 @@ When I’m not geeking out over code, you can probably find me scaling a climbin
       {!isLandingPage && (
         <div
           style={{
-            display: 'grid',
+            display: isMobile ? 'inline-flex' : 'grid',
             gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
             gap: '20px',
             maxWidth: '600px',
             margin: isMobile ? '0 auto' : '0',
           }}
         >
-          {personalImagePaths.map((imagePath, index) => (
+          {(isMobile ? personalImagePaths.slice(0, 2) : personalImagePaths).map((imagePath, index) => (
             <div
               key={index}
               style={{

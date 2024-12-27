@@ -13,6 +13,7 @@ const About = () => {
     { type: 'link', value: '/about', label: '\n> More About Me\n', small: false },
     { type: 'link', value: '/projects', label: '> Projects\n', small: false },
     { type: 'link', value: '/experiences', label: '> Experience\n', small: false },
+
   ];
 
   const typingSpeed = 80;

@@ -5,12 +5,14 @@ const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false); // Typing effect done state
   const [projects, setProjects] = useState([]); // All projects
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [categorizedProjects, setCategorizedProjects] = useState({
     'AI/ML': [],
     'General': [],
     'Web Development': [],
   }); // Categorized projects state
   const [modalImage, setModalImage] = useState(null); // Modal image state
+  const [expandedProject, setExpandedProject] = useState(null); // Track expanded project
 
   const fullText = `Projects`; // Typing effect text
   const typingSpeed = 50; // Speed of typing in milliseconds
@@ -33,6 +35,15 @@ const Projects = () => {
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, done, fullText]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Fetch and categorize projects
   useEffect(() => {
@@ -71,21 +82,24 @@ const Projects = () => {
   const closeModal = () => setModalImage(null); // Close the modal
 
   useEffect(() => {
-  const handleKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      closeModal();
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    if (modalImage) {
+      window.addEventListener('keydown', handleKeyDown);
     }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [modalImage]);
+
+  const toggleExpand = (projectTitle) => {
+    setExpandedProject((prev) => (prev === projectTitle ? null : projectTitle));
   };
-
-  if (modalImage) {
-    window.addEventListener('keydown', handleKeyDown);
-  }
-
-  return () => {
-    window.removeEventListener('keydown', handleKeyDown);
-  };
-}, [modalImage]);
-
 
   return (
     <div
@@ -103,7 +117,6 @@ const Projects = () => {
         overflowY: 'auto',
       }}
     >
-      {/* Terminal Content */}
       <div
         style={{
           width: '100%',
@@ -115,13 +128,12 @@ const Projects = () => {
           overflow: 'hidden',
           whiteSpace: 'pre-wrap',
           color: '#00ff00',
-          fontSize: '55px',
+          fontSize: isMobile ? '40px' : '55px',
         }}
       >
         {text}
         {done && (
           <div style={{ marginTop: '20px', width: '100%' }}>
-            {/* Navigation Links for Categories */}
             <div style={{ marginBottom: '20px' }}>
               {categories.map((category, index) => (
                 <span key={index}>
@@ -130,8 +142,8 @@ const Projects = () => {
                     style={{
                       color: '#00ff00',
                       textDecoration: 'none',
-                      fontSize: '30px',
-                      marginRight: '20px',
+                      fontSize: isMobile ? '15px' : '30px',
+                      marginRight: isMobile ? '5px' : '20px',
                     }}
                     onMouseEnter={(e) => (e.target.style.color = '#bbb')}
                     onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
@@ -139,13 +151,12 @@ const Projects = () => {
                     {category}
                   </a>
                   {index < categories.length - 1 && (
-                    <span style={{ marginRight: '20px', color: '#00ff00', fontSize: '30px' }}>|</span>
+                    <span style={{ marginRight: isMobile ? '5px' : '20px', color: '#00ff00', fontSize: isMobile ? '15px' : '30px' }}>|</span>
                   )}
                 </span>
               ))}
             </div>
 
-            {/* Render Projects by Category */}
             {categories.map((category) => (
               <section
                 id={category}
@@ -155,7 +166,7 @@ const Projects = () => {
                 <h2
                   style={{
                     color: '#00ff00',
-                    fontSize: '40px',
+                    fontSize: isMobile ? '30px' : '40px',
                     borderBottom: '2px solid #00ff00',
                     marginBottom: '20px',
                   }}
@@ -173,27 +184,27 @@ const Projects = () => {
                         lineHeight: '1.6',
                       }}
                     >
-                      <a
-                        href={proj.link}
-                        style={{
-                          color: '#00ff00',
-                          textDecoration: 'none',
-                          fontSize: '45px',
-                        }}
-                        onMouseEnter={(e) => (e.target.style.color = '#bbb')}
-                        onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
-                      >
-                        {proj.title}
-                      </a>
                       <div
                         style={{
                           display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
                           flexDirection: 'column',
-                          marginBottom: '20px',
+                          cursor: 'pointer',
+                          border: '1px solid #444',
+                          borderRadius: '10px',
+                          padding: '15px',
+                          backgroundColor: expandedProject === proj.title ? '#333' : '#222',
                         }}
+                        onClick={() => toggleExpand(proj.title)}
                       >
+                        <h3
+                          style={{
+                            fontSize: isMobile ? '20px' : '30px',
+                            margin: '0 0 10px',
+                            color: '#00ff00',
+                          }}
+                        >
+                          {proj.title}
+                        </h3>
                         <img
                           src={proj.screenshot}
                           alt={`${proj.title} screenshot`}
@@ -205,26 +216,22 @@ const Projects = () => {
                             borderRadius: '10px',
                             cursor: 'pointer',
                           }}
-                          onClick={() => setModalImage(proj.screenshot)} // Open modal on image click
-                        />
-                      </div>
-                      <p style={{ color: '#00ff00', margin: '0 0', fontSize: '30px' }}>{proj.stack}</p>
-                      <p style={{ marginTop: '10px', fontSize: '25px' }}>{proj.description}</p>
-
-                      {/* Add separator */}
-                      {index < categorizedProjects[category].length - 1 && (
-                        <hr
-                          style={{
-                            border: '0',
-                            borderTop: '1px solid #444',
-                            margin: '20px 0',
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setModalImage(proj.screenshot);
                           }}
                         />
-                      )}
+                        {expandedProject === proj.title && (
+                          <div style={{ marginTop: '10px' }}>
+                            <p style={{ color: '#00ff00', fontSize: isMobile ? '20px' : '30px' }}>{proj.stack}</p>
+                            <p style={{ marginTop: '10px', fontSize: isMobile ? '15px' : '25px' }}>{proj.description}</p>
+                          </div>
+                        )}
+                      </div>
                     </article>
                   ))
                 ) : (
-                  <p style={{ fontSize: '20px', color: '#bbb' }}>No projects in this category</p>
+                  <p style={{ fontSize: isMobile ? '15px' : '20px', color: '#bbb' }}>No projects in this category</p>
                 )}
               </section>
             ))}
@@ -246,7 +253,6 @@ const Projects = () => {
         )}
       </div>
 
-      {/* Modal for displaying larger image */}
       {modalImage && (
         <div
           style={{
@@ -261,7 +267,7 @@ const Projects = () => {
             alignItems: 'center',
             zIndex: 1000,
           }}
-          onClick={closeModal} // Close modal on background click
+          onClick={closeModal}
         >
           <img
             src={modalImage}
