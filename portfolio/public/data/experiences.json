@@ -1,5 +1,13 @@
 [
     {
+      "logo": "/assets/exelixi.png",
+      "link": "https://exelixi.ai/our-ai-factory-process/",
+      "title": "AI & Data Science Intern",
+      "organization": "Exelixi AI",
+      "date": "Jan 2025 - Present",
+      "description": "> Develop AI and ML models customized to address specific customer requirements, leveraging tools such as scikit-learn, PyTorch, and other machine learning frameworks to deliver innovative solutions\n> Design and implement interactive dashboards that provided clear visualization of model performance, key feature contributions, and cost-efficiency metrics, ensuring transparency and actionable insights for stakeholders\n> Create high-quality, engaging demos to present at multiple conferences across the UAE, effectively showcasing the company’s innovative projects, core services, and long-term vision to diverse audiences\n> Collaborate in a dynamic, fast-paced startup environment, working cross-functionally to drive projects from concept to completion on time"
+    },
+    {
       "logo": "/assets/uc.png",
       "link": "https://eecs.ceas.uc.edu/~wilseypa/",
       "title": "Undergraduate Research Assistant",
