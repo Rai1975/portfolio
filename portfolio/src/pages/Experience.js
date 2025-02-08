@@ -172,6 +172,7 @@ const Experience = () => {
                       style={{
                         fontSize: isMobile ? '15px' : '18px',
                         marginTop: '10px',
+                        color: 'white'
                       }}
                     >
                       {exp.description}

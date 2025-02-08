@@ -221,7 +221,7 @@ const Projects = () => {
                           style={{ overflow: "hidden", marginTop: '10px' }}
                         >
                           <p style={{ color: '#00ff00', fontSize: isMobile ? '20px' : '30px' }}>{proj.stack}</p>
-                          <p style={{ marginTop: '10px', fontSize: isMobile ? '15px' : '25px' }}>{proj.description}</p>
+                          <p style={{ marginTop: '10px', fontSize: isMobile ? '15px' : '18px' }}>{proj.description}</p>
                         </motion.div>
                       </motion.div>
                     </motion.article>
