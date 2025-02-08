@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from "motion/react"
 
 const Projects = () => {
   const [text, setText] = useState(''); // Typing effect text
@@ -133,34 +134,19 @@ const Projects = () => {
       >
         {text}
         {done && (
-          <div style={{ marginTop: '20px', width: '100%' }}>
-            <div style={{ marginBottom: '20px' }}>
-              {categories.map((category, index) => (
-                <span key={index}>
-                  <a
-                    href={`#${category}`}
-                    style={{
-                      color: '#00ff00',
-                      textDecoration: 'none',
-                      fontSize: isMobile ? '15px' : '30px',
-                      marginRight: isMobile ? '5px' : '20px',
-                    }}
-                    onMouseEnter={(e) => (e.target.style.color = '#bbb')}
-                    onMouseLeave={(e) => (e.target.style.color = '#00ff00')}
-                  >
-                    {category}
-                  </a>
-                  {index < categories.length - 1 && (
-                    <span style={{ marginRight: isMobile ? '5px' : '20px', color: '#00ff00', fontSize: isMobile ? '15px' : '30px' }}>|</span>
-                  )}
-                </span>
-              ))}
-            </div>
-
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ marginTop: '20px', width: '100%' }}
+          >
             {categories.map((category) => (
-              <section
+              <motion.section
                 id={category}
                 key={category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
                 style={{ marginBottom: '50px' }}
               >
                 <h2
@@ -176,15 +162,19 @@ const Projects = () => {
 
                 {categorizedProjects[category] && categorizedProjects[category].length > 0 ? (
                   categorizedProjects[category].map((proj, index) => (
-                    <article
+                    <motion.article
                       key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
                       style={{
                         marginBottom: '30px',
                         color: '#ddd',
                         lineHeight: '1.6',
                       }}
                     >
-                      <div
+                      <motion.div
+                        layout
                         style={{
                           display: 'flex',
                           flexDirection: 'column',
@@ -221,21 +211,76 @@ const Projects = () => {
                             setModalImage(proj.screenshot);
                           }}
                         />
-                        {expandedProject === proj.title && (
-                          <div style={{ marginTop: '10px' }}>
-                            <p style={{ color: '#00ff00', fontSize: isMobile ? '20px' : '30px' }}>{proj.stack}</p>
-                            <p style={{ marginTop: '10px', fontSize: isMobile ? '15px' : '25px' }}>{proj.description}</p>
-                          </div>
-                        )}
-                      </div>
-                    </article>
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{
+                            opacity: expandedProject === proj.title ? 1 : 0,
+                            height: expandedProject === proj.title ? "auto" : 0,
+                          }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          style={{ overflow: "hidden", marginTop: '10px' }}
+                        >
+                          <p style={{ color: '#00ff00', fontSize: isMobile ? '20px' : '30px' }}>{proj.stack}</p>
+                          <p style={{ marginTop: '10px', fontSize: isMobile ? '15px' : '25px' }}>{proj.description}</p>
+                        </motion.div>
+                      </motion.div>
+                    </motion.article>
                   ))
                 ) : (
                   <p style={{ fontSize: isMobile ? '15px' : '20px', color: '#bbb' }}>No projects in this category</p>
                 )}
-              </section>
+              </motion.section>
             ))}
-          </div>
+          </motion.div>
+        )}
+
+        {!done && (
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
+            style={{
+              backgroundColor: '#00ff00',
+              color: '#1e1e1e',
+              padding: '0 2px',
+              display: 'inline-block',
+            }}
+          >
+            &nbsp;
+          </motion.span>
+        )}
+
+        {modalImage && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 1000,
+            }}
+            onClick={closeModal}
+          >
+            <img
+              src={modalImage}
+              alt="Enlarged project"
+              style={{
+                maxWidth: '90%',
+                maxHeight: '90%',
+                borderRadius: '10px',
+                boxShadow: '0 0 15px rgba(0, 0, 0, 0.5)',
+              }}
+            />
+          </motion.div>
         )}
 
         {!done && (
