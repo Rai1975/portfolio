@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from "motion/react"
 
 const Experience = () => {
   const [text, setText] = useState('');
@@ -57,6 +58,7 @@ const Experience = () => {
   };
 
   return (
+
     <div
       style={{
         display: 'flex',
@@ -91,8 +93,12 @@ const Experience = () => {
         {done && (
           <div style={{ marginTop: '20px', width: '100%' }}>
             {experiences.map((exp, index) => (
-              <div
+              <motion.div
                 key={index}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
                 style={{
                   backgroundColor: '#282828',
                   borderRadius: '10px',
@@ -135,13 +141,15 @@ const Experience = () => {
 
                 {/* Expanded Details */}
                 {expandedIndex === index && (
-                  <div
-                    style={{
-                      marginTop: '15px',
-                      color: '#ddd',
-                      lineHeight: '1.6',
-                    }}
-                  >
+                   <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{
+                        opacity: expandedIndex === index ? 1 : 0,
+                        height: expandedIndex === index ? "auto" : 0,
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      style={{ overflow: "hidden" }}
+                    >
                     <p
                       style={{
                         fontSize: isMobile ? '15px' : '20px',
@@ -164,13 +172,14 @@ const Experience = () => {
                       style={{
                         fontSize: isMobile ? '15px' : '18px',
                         marginTop: '10px',
+                        color: 'white'
                       }}
                     >
                       {exp.description}
                     </p>
-                  </div>
+                    </motion.div>
                 )}
-              </div>
+                </motion.div>
             ))}
           </div>
         )}
