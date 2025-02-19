@@ -12,6 +12,12 @@ const About = () => {
   const contentChunks = [
     { type: 'link', value: '/about', label: '\n> More About Me\n', small: false },
     { type: 'link', value: '/projects', label: '> Projects\n', small: false },
+    {
+      type: 'download',
+      value: '/assets/Raihan_Resume.pdf',
+      label: '> Resume\n',
+      small: false
+    },
     { type: 'link', value: '/experiences', label: '> Experience\n', small: false },
 
   ];
@@ -29,6 +35,9 @@ const About = () => {
         } else if (chunk.type === 'link') {
           const label = `<a href="${chunk.value}" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
           chunkText = label;
+        } else if (chunk.type === 'download') {
+          const label = `<a href="${chunk.value}" download="Raihan_Rafeek_Resune.pdf" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
+          chunkText = label
         }
 
         setText((prev) => prev + chunkText);
@@ -104,7 +113,7 @@ const About = () => {
         style={{
           fontSize: '32px',
           whiteSpace: 'pre-wrap',
-          textAlign: 'center',
+          textAlign: 'left',
           flexGrow: 1,
           wordBreak: 'break-word',
         }}
