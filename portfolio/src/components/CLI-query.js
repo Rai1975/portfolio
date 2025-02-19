@@ -67,7 +67,7 @@ const CommandLineNavigation = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Use commands to navigate! (e.g., cd about to go to About Me)"
+          placeholder="Use commands to navigate! ['help' for all commands]"
           style={{
             backgroundColor: 'transparent',
             color: '#00ff00',

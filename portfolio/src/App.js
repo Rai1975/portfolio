@@ -5,6 +5,7 @@ import About from './pages/About-me';
 import LandingPage from './pages/landingPage';
 import Experiences from './pages/Experience';
 import Projects from './pages/Projects';
+import ResumePage from './pages/resumePage';
 import CommandLineNavigation from './components/CLI-query';
 import WhyDidYouDoThat from './pages/Error';
 
@@ -25,6 +26,7 @@ const Layout = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/experiences" element={<Experiences />} />
+        <Route path="/resume" element={<ResumePage />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/error" element={<WhyDidYouDoThat />} />
       </Routes>
