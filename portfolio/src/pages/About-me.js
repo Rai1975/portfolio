@@ -54,10 +54,10 @@ When I’m not geeking out over code, you can probably find me scaling a climbin
   }, []);
 
   const personalImagePaths = [
-    'assets/tetons.jpg',
-    'assets/teaching.jpg',
-    'assets/rock.jpg',
-    'assets/climbing.jpg',
+    'assets/tetons.webp',
+    'assets/teaching.webp',
+    'assets/rock.webp',
+    'assets/climbing.webp',
   ];
 
   return (

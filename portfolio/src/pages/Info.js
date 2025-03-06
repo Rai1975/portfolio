@@ -71,7 +71,7 @@ const About = () => {
     >
       {/* Profile Picture with Neon Glow */}
       <img
-        src="/assets/me.jpg"
+        src="/assets/me.webp"
         alt="8-bit profile"
         style={{
           imageRendering: 'pixelated',

@@ -23,12 +23,17 @@ const Navbar = () => {
   return (
     <nav
       style={{
-        display: 'flex',
-        flexDirection: 'column',
+        position: 'sticky', // Keeps it stuck at the top
+        top: 0,
+        width: '100%',
+        zIndex: 1000,
         backgroundColor: '#2e2e2e',
         padding: '10px 20px',
         fontFamily: 'Consolas, monospace',
         alignItems: 'flex-start',
+        display: 'flex',
+        flexDirection: 'column',
+        boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.3)',
       }}
     >
       {/* Top Bar */}
@@ -49,32 +54,9 @@ const Navbar = () => {
             alignItems: 'center',
           }}
         >
-          <div
-            style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: '#ff5f56', // Red
-              marginRight: '8px',
-            }}
-          ></div>
-          <div
-            style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: '#ffbd2e', // Yellow
-              marginRight: '8px',
-            }}
-          ></div>
-          <div
-            style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: '#27c93f', // Green
-            }}
-          ></div>
+          <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ff5f56', marginRight: '8px' }}></div>
+          <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ffbd2e', marginRight: '8px' }}></div>
+          <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27c93f' }}></div>
         </div>
 
         {/* Hamburger Menu */}
@@ -94,73 +76,28 @@ const Navbar = () => {
           </button>
         ) : (
           /* Links for Desktop */
-          <div
-            style={{
-              display: 'flex',
-              gap: '20px',
-              justifyContent: 'flex-start',
-              marginLeft: '20px',
-            }}
-          >
-            {!isHomePage && (
-              <Link
-                to="/"
-                style={{
-                  color: '#00ff00',
-                  textDecoration: 'none',
-                  fontSize: '18px',
-                  padding: '5px 15px',
-                  borderRadius: '5px',
-                }}
-              >
-                Home
-              </Link>
-            )}
-            <Link
-              to="/about"
-              style={{
-                color: '#00ff00',
-                textDecoration: 'none',
-                fontSize: '18px',
-                padding: '5px 15px',
-                borderRadius: '5px',
-              }}
-            >
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'flex-start', marginLeft: '20px' }}>
+            <Link to="/" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', padding: '5px 15px', borderRadius: '5px' }}>
+              Home
+            </Link>
+            <Link to="/about" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', padding: '5px 15px', borderRadius: '5px' }}>
               About
             </Link>
-            <Link
-              to="/experiences"
-              style={{
-                color: '#00ff00',
-                textDecoration: 'none',
-                fontSize: '18px',
-                padding: '5px 15px',
-                borderRadius: '5px',
-              }}
-            >
+            <Link to="/experiences" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', padding: '5px 15px', borderRadius: '5px' }}>
               Experiences
             </Link>
-            <Link
-              to="/projects"
-              style={{
-                color: '#00ff00',
-                textDecoration: 'none',
-                fontSize: '18px',
-                padding: '5px 15px',
-                borderRadius: '5px',
-              }}
-            >
+            <Link to="/projects" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', padding: '5px 15px', borderRadius: '5px' }}>
               Projects
             </Link>
           </div>
         )}
       </div>
 
-      {/* Side Menu for Mobile */}
+      {/* Mobile Side Menu */}
       {isMenuOpen && isMobile && (
         <div
           style={{
-            position: 'fixed',
+            position: 'fixed', // Fixed so it stays in place
             top: 0,
             left: 0,
             height: '100%',
@@ -170,7 +107,7 @@ const Navbar = () => {
             boxShadow: '2px 0 5px rgba(0, 0, 0, 0.5)',
             display: 'flex',
             flexDirection: 'column',
-            zIndex: 1000,
+            zIndex: 1001,
           }}
         >
           <button
@@ -188,52 +125,17 @@ const Navbar = () => {
             ✕
           </button>
           {!isHomePage && (
-            <Link
-              to="/"
-              style={{
-                color: '#00ff00',
-                textDecoration: 'none',
-                fontSize: '18px',
-                marginBottom: '10px',
-              }}
-              onClick={toggleMenu}
-            >
+            <Link to="/" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', marginBottom: '10px' }} onClick={toggleMenu}>
               Home
             </Link>
           )}
-          <Link
-            to="/about"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              marginBottom: '10px',
-            }}
-            onClick={toggleMenu}
-          >
+          <Link to="/about" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', marginBottom: '10px' }} onClick={toggleMenu}>
             About
           </Link>
-          <Link
-            to="/experiences"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-              marginBottom: '10px',
-            }}
-            onClick={toggleMenu}
-          >
+          <Link to="/experiences" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', marginBottom: '10px' }} onClick={toggleMenu}>
             Experiences
           </Link>
-          <Link
-            to="/projects"
-            style={{
-              color: '#00ff00',
-              textDecoration: 'none',
-              fontSize: '18px',
-            }}
-            onClick={toggleMenu}
-          >
+          <Link to="/projects" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px' }} onClick={toggleMenu}>
             Projects
           </Link>
         </div>

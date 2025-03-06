@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { isMotionValue, motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Projects = () => {
   const [expandedProject, setExpandedProject] = useState(null);
@@ -49,13 +49,33 @@ const Projects = () => {
     fetchProjects();
   }, []);
 
-  const toggleExpand = (projectTitle) => {
-    setExpandedProject((prev) => (prev === projectTitle ? null : projectTitle));
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setExpandedProject(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const openProject = (project) => {
+    setExpandedProject(project);
+  };
+
+  const closeModal = () => {
+    setExpandedProject(null);
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace' }}>
-      <div style={{ color: '#00ff00', fontSize: isMobile ? '45px' : '55px', marginBottom: '20px', fontFamily: 'Consolas, monospace', padding: '15px', fontWeight: 'lighter'}}>{text}</div>
+    <div style={{ padding: '20px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace', position: 'relative' }}>
+      <div style={{ color: '#00ff00', fontSize: isMobile ? '45px' : '55px', marginBottom: '20px', fontFamily: 'Consolas, monospace', padding: '15px', fontWeight: 'lighter' }}>
+        {text}
+      </div>
+
+      {/* Projects Grid */}
       <div
         style={{
           display: 'grid',
@@ -73,40 +93,122 @@ const Projects = () => {
               border: '1px solid #444',
               borderRadius: '10px',
               padding: '15px',
-              backgroundColor: expandedProject === proj.title ? '#333' : '#222',
+              backgroundColor: '#222',
               cursor: 'pointer',
             }}
-            onClick={() => toggleExpand(proj.title)}
+            onClick={() => openProject(proj)}
           >
             <h3 style={{ color: '#00ff00', marginBottom: '10px' }}>
-              <a href={proj.link} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', fontSize: isMobile ? '20px' : '30px'}}>
-                {proj.title}
-              </a>
+              {proj.title}
             </h3>
             <img
               src={proj.screenshot}
               alt={`${proj.title} screenshot`}
               style={{ width: '100%', height: 'auto', borderRadius: '10px' }}
             />
-            {expandedProject === proj.title && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                transition={{ duration: 0.3 }}
-                style={{ marginTop: '10px' }}
-              >
-                <p style={{ color: '#00ff00' }}>{proj.stack}</p>
-                <p style={{
-                        fontSize: isMobile ? '15px' : '18px',
-                        marginTop: '10px',
-                        color: 'white',
-                        whiteSpace: 'pre-line'
-                      }} >{proj.description}</p>
-              </motion.div>
-            )}
           </motion.div>
         ))}
       </div>
+
+      {/* Modal (Centered with Escape Key Support) */}
+      <AnimatePresence>
+        {expandedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backdropFilter: 'blur(10px)',
+              backgroundColor: 'rgba(0, 0, 0, 0.6)',
+              zIndex: 100,
+            }}
+            onClick={closeModal} // Clicking outside closes modal
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              style={{
+                backgroundColor: '#222',
+                padding: '20px',
+                borderRadius: '10px',
+                width: isMobile ? '90%' : '50%',
+                maxHeight: '80vh',
+                overflowY: 'auto',
+                zIndex: 200,
+                boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)',
+              }}
+              onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside it
+            >
+              <button
+                onClick={closeModal}
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '15px',
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: '24px',
+                  cursor: 'pointer',
+                }}
+              >
+                ✖
+              </button>
+
+              <h2 style={{ color: '#00ff00', textAlign: 'center', marginBottom: '10px' }}>
+                {expandedProject.title}
+              </h2>
+
+              <img
+                src={expandedProject.screenshot}
+                alt={`${expandedProject.title} screenshot`}
+                style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px' }}
+              />
+
+              <p style={{ color: '#00ff00' }}>{expandedProject.stack}</p>
+              <p style={{
+                fontSize: isMobile ? '15px' : '18px',
+                marginTop: '10px',
+                color: 'white',
+                whiteSpace: 'pre-line'
+              }}>
+                {expandedProject.description}
+              </p>
+
+              <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <a
+                  href={expandedProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: 'white',
+                    textDecoration: 'none',
+                    backgroundColor: '#27c93f',
+                    padding: '10px 15px',
+                    borderRadius: '5px',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                    display: 'inline-block',
+                  }}
+                >
+                  View on GitHub
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
