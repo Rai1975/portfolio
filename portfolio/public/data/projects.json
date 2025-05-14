@@ -48,5 +48,12 @@
     "description": "> This is an auxiliary script to collect course assignments from Canvas and insert them into Todoist using Canvas and Todoist API!\n\n> This project has a bit of a niche audience, but this serves very purposeful in my daily life to automate my to-do lists based on my assignments.",
     "screenshot": "/assets/canvas2doist.webp",
     "category": "Web Development"
+  },
+  {
+    "link": "",
+    "title": "Hand-made Custom Watch",
+    "stack": "seiko NH44, building, machine tools, 3d printing",
+    "description": "> Wanted a really cool transparent watch, but they're a little too expensive. So I built my own!\n\n> Used a Seiko NH44 movement and a 3d printed plastic housing and strap.",
+    "screenshot": "/assets/watch.jpg"
   }
 ]
