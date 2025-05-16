@@ -36,7 +36,7 @@ const About = () => {
           const label = `<a href="${chunk.value}" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
           chunkText = label;
         } else if (chunk.type === 'download') {
-          const label = `<a href="${chunk.value}" download="Raihan_Rafeek_Resune.pdf" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
+          const label = `<a href="${chunk.value}" download="Raihan_Rafeek_Resume.pdf" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
           chunkText = label
         }
 
