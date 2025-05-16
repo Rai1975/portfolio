@@ -4,7 +4,7 @@
       "link": "https://exelixi.ai/our-ai-factory-process/",
       "title": "AI & Data Science Intern",
       "organization": "Exelixi AI",
-      "date": "Jan 2025 - Apr 2025",
+      "date": "Jan 2023 - Apr 2023",
       "description": "> Develop AI and ML models customized to address specific customer requirements, leveraging tools such as scikit-learn, PyTorch, and other machine learning frameworks to deliver innovative solutions\n> Design and implement interactive dashboards that provided clear visualization of model performance, key feature contributions, and cost-efficiency metrics, ensuring transparency and actionable insights for stakeholders\n> Create high-quality, engaging demos to present at multiple conferences across the UAE, effectively showcasing the company’s innovative projects, core services, and long-term vision to diverse audiences\n> Collaborate in a dynamic, fast-paced startup environment, working cross-functionally to drive projects from concept to completion on time"
     },
     {
@@ -12,7 +12,7 @@
       "link": "https://eecs.ceas.uc.edu/~wilseypa/",
       "title": "Undergraduate Research Assistant",
       "organization": "Experimental Computation Lab, University of Cincinnati",
-      "date": "Aug 2024 - Present",
+      "date": "Aug 2022 - Present",
       "description": "> Develop and optimize algorithms to efficiently analyze and extract meaningful features from high-dimensional datasets using Topological Data Analysis (TDA) techniques like persistent homology\n\n> Investigate and implement dimensionality reduction techniques, such as PCA, t-SNE, and UMAP, to reduce the complexity of high-dimensional datasets while preserving critical features for downstream tasks\n\n> Enhance computational efficiency by reducing time complexity and memory usage, enabling faster data processing for larger datasets"
     },
     {
@@ -20,7 +20,7 @@
       "link": "https://uccubecats.github.io/",
       "title": "ADCS Physics Simulation",
       "organization": "LEOPARDSAT-1, University of Cincinnati",
-      "date": "Aug 2024 - Present",
+      "date": "Aug 2022 - Present",
       "description": "> Create simulation software for Passive Attitude Determination and Control Systems (ADCS) for CubeSats (partnering with NASA and nanoracks), utilizing Pandas, NumPy, and SciPy for data analysis and calculations\n\n> Apply physical models of magnetic materials and hysteresis curves to simulate magnetic torques into the CubeSat’s detumbling algorithm, improving the efficiency and stability of the attitude control system\n\n> Integrate data pre-processing pipeline for synthetic dataset with over 6,000,000 data points to reduce runtime for the hysteresis model\n\n> Collaborate with interdisciplinary teams to refine simulation models and ensure alignment with mission objectives"
     },
     {
@@ -28,7 +28,7 @@
         "link": "https://uccubecats.github.io/",
         "title": "Marketing Chair",
         "organization": "CubeCats, University of Cincinnati",
-        "date": "Aug 2024 - Present",
+        "date": "Aug 2022 - Present",
         "description": "> Boosted social media engagement for UC CubeCats, achieving a 1,000% increase in account interactions\n\n> Filmed, co-directed, and edited promotional content showcasing club events and launches\n\n> Expanded club membership by 150% through enhanced campus visibility and outreach efforts"
       },
     {
@@ -36,7 +36,7 @@
       "link": "https://inl.gov/",
       "title": "Full Stack Software Engineer Intern",
       "organization": "Materials and Fuels Complex, Idaho National Laboratory",
-      "date": "May 2024 - Aug 2024",
+      "date": "May 2023 - Aug 2023",
       "description": "> Contributed to the development of safety-critical software for nuclear inventory management using Ruby on Rails and PostgreSQL, ensuring compliance with strict regulatory standards and minimizing risk\n\n> Implemented major changes to improve search result filtering speed by optimizing queries through a database migration and implementing caching\n\n> Resolved 30+ critical bugs, including new features, and UI/UX inconsistencies ensuring smooth and reliable application functionality\n\n> Collaborated with engineers in an Agile environment, assisting continuous improvement while receiving mentorship from experienced professionals"
     },
     {
