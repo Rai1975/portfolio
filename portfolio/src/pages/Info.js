@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const About = () => {
   const [text, setText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [done, setDone] = useState(false);
+  const animationRef = useRef(null);
+  const contentIndexRef = useRef(0);
 
   const gitHubImage = '/assets/github-11-xxl.png';
   const linkedInImage = '/assets/white_linkedin.png';
@@ -19,15 +19,14 @@ const About = () => {
       small: false
     },
     { type: 'link', value: '/experiences', label: '> Experience\n', small: false },
-
   ];
 
   const typingSpeed = 80;
 
   useEffect(() => {
-    const type = () => {
-      if (currentIndex < contentChunks.length) {
-        const chunk = contentChunks[currentIndex];
+    const renderNextChunk = () => {
+      if (contentIndexRef.current < contentChunks.length) {
+        const chunk = contentChunks[contentIndexRef.current];
         let chunkText = '';
 
         if (chunk.type === 'text') {
@@ -37,21 +36,27 @@ const About = () => {
           chunkText = label;
         } else if (chunk.type === 'download') {
           const label = `<a href="${chunk.value}" download="Raihan_Rafeek_Resume.pdf" style="color: #00ff00; text-decoration: none;">${chunk.label}</a>`;
-          chunkText = label
+          chunkText = label;
         }
 
-        setText((prev) => prev + chunkText);
-        setCurrentIndex((prev) => prev + 1);
-      } else {
-        setDone(true);
+        setText(prev => prev + chunkText);
+        contentIndexRef.current++;
+
+        // Schedule the next chunk
+        animationRef.current = setTimeout(renderNextChunk, typingSpeed);
       }
     };
 
-    if (!done) {
-      const timeout = setTimeout(type, typingSpeed);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, done]);
+    // Start the animation
+    renderNextChunk();
+
+    // Cleanup function
+    return () => {
+      if (animationRef.current) {
+        clearTimeout(animationRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div
