@@ -9,9 +9,9 @@ const About = () => {
   const [done, setDone] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const aboutMe = `Hello!\nMy name is Raihan Rafeek, I am a third year computer science major at the University of Cincinnati.
-  \nI am interested in data science, machine learning, and artificial intelligence. I enjoy building things and prefer to learn new things by making.
-  \nOutside the software realm, I also love climbing, motorsports, photography, and music!\n`;
+  const aboutMe = `Hello!\nMy name is Raihan Rafeek, I am a fourth year computer science major at the University of Cincinnati.
+  \nI am interested in data science, machine learning, backend-development, database architecture, and artificial intelligence. I enjoy building things and prefer to learn new things by making.
+  \nOutside the software realm, I also love climbing, motorsports, photography, and music! (Seriously, I love to talk about music)\n`;
 
   const altAboutme = `Hey there! I'm a curious builder who loves turning ideas into reality. Whether it’s diving into machine learning and AI or tinkering with aerospace software, I’m all about exploring cool, new challenges.\n
 When I’m not geeking out over code, you can probably find me scaling a climbing wall or playing Minecraft. Life’s an adventure, and I’m here to enjoy every bit of it. I'm also a CLI monkey 🐵`;
