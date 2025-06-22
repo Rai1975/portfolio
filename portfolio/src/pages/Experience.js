@@ -477,7 +477,7 @@ const Experience = () => {
                   }}
                 >
                   {/* Extract just the year from the date */}
-                  {exp.date.split(' - ')[0].split(' ').pop()}
+                  {exp.date.split(' - ')[1].split(' ').pop()}
                 </p>
               </div>
             ))}

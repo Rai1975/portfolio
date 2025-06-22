@@ -7,6 +7,14 @@
     "date": "Aug 2024 - Present",
     "description": "> Create simulation software for Passive Attitude Determination and Control Systems (ADCS) for CubeSats (partnering with NASA and nanoracks), utilizing Pandas, NumPy, and SciPy for data analysis and calculations\n\n> Apply physical models of magnetic materials and hysteresis curves to simulate magnetic torques into the CubeSat’s detumbling algorithm, improving the efficiency and stability of the attitude control system\n\n> Integrate data pre-processing pipeline for synthetic dataset with over 6,000,000 data points to reduce runtime for the hysteresis model\n\n> Collaborate with interdisciplinary teams to refine simulation models and ensure alignment with mission objectives"
   },
+  {
+      "logo": "/assets/leopardsat.webp",
+      "link": "https://uccubecats.github.io/",
+      "title": "Marketing Chair",
+      "organization": "CubeCats, University of Cincinnati",
+      "date": "Aug 2024 - Present",
+      "description": "> Boosted social media engagement for UC CubeCats, achieving a 1,000% increase in account interactions\n\n> Filmed, co-directed, and edited promotional content showcasing club events and launches\n\n> Expanded club membership by 150% through enhanced campus visibility and outreach efforts"
+    },
     {
       "logo": "/assets/exelixi.png",
       "link": "https://exelixi.ai/our-ai-factory-process/",
@@ -23,14 +31,6 @@
       "date": "Aug 2024 - June 2025",
       "description": "> Develop and optimize algorithms to efficiently analyze and extract meaningful features from high-dimensional datasets using Topological Data Analysis (TDA) techniques like persistent homology\n\n> Investigate and implement dimensionality reduction techniques, such as PCA, t-SNE, and UMAP, to reduce the complexity of high-dimensional datasets while preserving critical features for downstream tasks\n\n> Enhance computational efficiency by reducing time complexity and memory usage, enabling faster data processing for larger datasets"
     },
-    {
-        "logo": "/assets/leopardsat.webp",
-        "link": "https://uccubecats.github.io/",
-        "title": "Marketing Chair",
-        "organization": "CubeCats, University of Cincinnati",
-        "date": "Aug 2024 - Present",
-        "description": "> Boosted social media engagement for UC CubeCats, achieving a 1,000% increase in account interactions\n\n> Filmed, co-directed, and edited promotional content showcasing club events and launches\n\n> Expanded club membership by 150% through enhanced campus visibility and outreach efforts"
-      },
     {
       "logo": "/assets/inl.webp",
       "link": "https://inl.gov/",
