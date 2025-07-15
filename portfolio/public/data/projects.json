@@ -1,5 +1,14 @@
 [
   {
+    "link": "https://github.com/Aryagarg23/wb_hack_sf",
+    "title": "Gyrus",
+    "stack": "python, flask, electronjs, neo4j, crewai, langchain, huggingface, sentence-transformers",
+    "description":
+        "> Agent-based browser than helps you own your thoughts instead of cognitvely offloading.\n\n> Gyrus helps make your interactions with the web easier by using agents and intent-memory-mapping to pre-emptively figure out your intent in a query and direct you to the appropriate sources.\n\n> It uses an ensemble of crewai and langchain agents to orchestrate retrieving previous intent from memory and another suite of intent based fine-tuned agents.",
+    "screenshot": "/assets/gyrus.png",
+    "category": "AI/ML"
+  },
+  {
     "link": "https://github.com/KaaustaaubShankar/WhiteBox",
     "title": "Whitebox",
     "stack": "python, flask, reactjs, neo4j, llama, langchain, huggingface, docker, openai",
