@@ -7,8 +7,8 @@ const Projects = () => {
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
-  const typingSpeed = 50;
-  const fullText = 'Projects';
+  const typingSpeed = 10;
+  const fullText = 'raihan@uc:~$ cat projects.txt';
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
@@ -70,8 +70,8 @@ const Projects = () => {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace', position: 'relative' }}>
-      <div style={{ color: '#00ff00', fontSize: isMobile ? '45px' : '55px', marginBottom: '20px', fontFamily: 'Consolas, monospace', padding: '15px', fontWeight: 'lighter' }}>
+    <div style={{ padding: '10px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace', position: 'relative' }}>
+      <div style={{ color: '#00ff00', fontSize: isMobile ? '20px' : '35px', marginBottom: '20px', fontFamily: 'Courier New, monospace', padding: '15px', whiteSpace: 'pre-wrap' }}>
         {text}
       </div>
 
@@ -147,6 +147,7 @@ const Projects = () => {
                 overflowY: 'auto',
                 zIndex: 200,
                 boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)',
+                position: 'relative'
               }}
               onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside it
             >
