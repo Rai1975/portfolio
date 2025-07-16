@@ -76,7 +76,7 @@ const LandingPage = () => {
           <span></span>
           <span></span>
           <span></span>
-          <a href="/home" style={iconStyle}><FaHome /></a>
+          <a href="/" style={iconStyle}><FaHome /></a>
           <a href="/experiences" style={iconStyle}><FaUser /></a>
           <a href="/projects" style={iconStyle}><FaProjectDiagram /></a>
         </div>
