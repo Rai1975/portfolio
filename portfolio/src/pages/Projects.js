@@ -203,7 +203,7 @@ const Projects = () => {
                     display: 'inline-block',
                   }}
                 >
-                  View on GitHub
+                  {expandedProject.title === 'Rent Radar' ? 'View Website' : 'View on Github'}
                 </a>
               </div>
             </motion.div>
