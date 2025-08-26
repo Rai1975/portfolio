@@ -30,7 +30,7 @@ const Layout = () => {
         <Route path="/error" element={<WhyDidYouDoThat />} />
         <Route path="/uiclass" element={<UIClass />} />
       </Routes>
-      <CommandLineNavigation /> {/* Always visible command-line navigation */}
+      <CommandLineNavigation />
     </div>
   );
 };

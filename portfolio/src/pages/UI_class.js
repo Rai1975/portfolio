@@ -8,7 +8,7 @@ const UIClass = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
   const typingSpeed = 10;
-  const fullText = 'raihan@uc:~$ cat uiclass.txt\n>> This page is for CS5167 - User Interface';
+  const fullText = 'raihan_rafeek@cs5167:~$ cat uiclass.txt\n>> This page is for CS5167 - User Interface';
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const UIClass = () => {
   };
 
   return (
-    <div style={{ padding: '10px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', padding: '10px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace', position: 'relative', boxSizing: 'border-box', overflowX: 'hidden' }}>
       <div style={{ color: '#00ff00', fontSize: isMobile ? '20px' : '35px', marginBottom: '20px', fontFamily: 'Courier New, monospace', padding: '15px', whiteSpace: 'pre-wrap' }}>
         {text}
       </div>
