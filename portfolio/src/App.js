@@ -7,6 +7,7 @@ import Experiences from './pages/Experience';
 import Projects from './pages/Projects';
 import CommandLineNavigation from './components/CLI-query';
 import WhyDidYouDoThat from './pages/Error';
+import UIClass from './pages/UI_class';
 
 const App = () => {
   return (
@@ -27,8 +28,9 @@ const Layout = () => {
         <Route path="/experiences" element={<Experiences />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/error" element={<WhyDidYouDoThat />} />
+        <Route path="/uiclass" element={<UIClass />} />
       </Routes>
-      <CommandLineNavigation /> {/* Always visible command-line navigation */}
+      <CommandLineNavigation />
     </div>
   );
 };
