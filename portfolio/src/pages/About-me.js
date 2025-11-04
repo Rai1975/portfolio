@@ -19,8 +19,8 @@ My philosophy? Learn by building, break things, then build them better.
 > ls interests/
 ├── technical/
 │   ├── machine_learning.py
-│   ├── data_science.sql
-│   ├── backend_development.js
+│   ├── backend_development.cs
+│   ├── frontend_design.jsx
 │   └── database_architecture.md
 └── personal/
     ├── rock_climbing.gear

@@ -17,11 +17,18 @@ const App = () => {
   );
 };
 
-// Layout component to conditionally include Navbar and CommandLineNavigation
 const Layout = () => {
   return (
-    <div style={{ paddingBottom: '0px', overflowX: 'hidden' }}> {/* Prevent overlap of bottom-fixed components */}
-      <Navbar />
+    <div style={{ paddingTop: '60px', paddingBottom: '90px', backround: '#1e1e1e;'}}>
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000
+      }}>
+        <Navbar />
+      </div>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<About />} />
@@ -30,7 +37,15 @@ const Layout = () => {
         <Route path="/error" element={<WhyDidYouDoThat />} />
         <Route path="/uiclass" element={<UIClass />} />
       </Routes>
-      <CommandLineNavigation />
+      <div style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000
+      }}>
+        <CommandLineNavigation />
+      </div>
     </div>
   );
 };

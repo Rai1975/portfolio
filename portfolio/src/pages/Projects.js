@@ -95,17 +95,33 @@ const Projects = () => {
               padding: '15px',
               backgroundColor: '#222',
               cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: '95%', // Make all cards equal height
             }}
             onClick={() => openProject(proj)}
           >
             <h3 style={{ color: '#00ff00', marginBottom: '10px' }}>
               {proj.title}
             </h3>
-            <img
-              src={proj.screenshot}
-              alt={`${proj.title} screenshot`}
-              style={{ width: '100%', height: 'auto', borderRadius: '10px' }}
-            />
+            <div style={{
+              width: '100%',
+              height: isMobile ? '200px' : '250px',
+              overflow: 'hidden',
+              borderRadius: '10px',
+              backgroundColor: '#333',
+            }}>
+              <img
+                src={proj.screenshot}
+                alt={`${proj.title} screenshot`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover', // This crops/scales the image to fill the container
+                  borderRadius: '10px',
+                }}
+              />
+            </div>
           </motion.div>
         ))}
       </div>

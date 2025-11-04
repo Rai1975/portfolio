@@ -74,7 +74,7 @@ const TerminalExperience = () => {
       {done && experiences.map((exp, index) => (
         <div style={{
           fontFamily: 'Consolas, monospace',
-          color: '#00ff00',
+          color: 'white',
           marginBottom: '40px'
         }}>
           <div style={{
