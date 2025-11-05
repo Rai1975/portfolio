@@ -19,7 +19,7 @@ const App = () => {
 
 const Layout = () => {
   return (
-    <div style={{ paddingTop: '60px', paddingBottom: '90px', backround: '#1e1e1e;'}}>
+    <div style={{ paddingTop: '60px', paddingBottom: '40px', background: '#1e1e1e;'}}>
       <div style={{
         position: 'fixed',
         top: 0,

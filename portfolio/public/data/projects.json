@@ -1,5 +1,14 @@
 [
   {
+    "link": "https://github.com/Rai1975/SASEHackProj---UC",
+    "title": "MindLine",
+    "stack": "python, twilio, flask, langchain, reactjs, materialui, psql",
+    "description":
+        "> MindLine is a new take on journalling. Why have to open apps and type to say your thoughts out? Simply call the mindline number, speak your thoughts, and hang up.\n\n> MindLine creates a transcript of the phone call, does object recognition and emotion-object relations to give you patterns on how you feel about certain things and how those feelings developed over time.\n\n> Based on the insights from the transcripts, MindLine also identifies bad habits or feelings and suggests things on the home-screen to the user to help get over them.",
+    "screenshot": "/assets/mindline.jpg",
+    "category": "Web Development"
+  },
+  {
     "link": "https://www.rentradar.org",
     "title": "Rent Radar",
     "stack": "python, flask, langchain, reactjs, materialui, psql",

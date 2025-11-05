@@ -86,7 +86,7 @@ const TerminalExperience = () => {
             alignItems: 'center'
           }}>
             <span>
-              ➤ #{index + 1}: {exp.title} @ {exp.organization} ({exp.date})
+              ➤ #{index + 1}: {exp.title} @ {exp.organization}
             </span>
             <img src={exp.logo} alt={`${exp.title} logo`} style={{ height: '40px', objectFit: 'contain' }} />
           </div>
