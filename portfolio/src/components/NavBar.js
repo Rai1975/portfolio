@@ -89,8 +89,8 @@ const Navbar = () => {
             <Link to="/projects" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', padding: '5px 15px', borderRadius: '5px' }}>
               Projects
             </Link>
-            <Link to="/uiclass" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', padding: '5px 15px', borderRadius: '5px' }}>
-              UI Class
+            <Link to="/class" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', padding: '5px 15px', borderRadius: '5px' }}>
+              Coursework
             </Link>
           </div>
         )}

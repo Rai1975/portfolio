@@ -7,7 +7,7 @@ import Experiences from './pages/Experience';
 import Projects from './pages/Projects';
 import CommandLineNavigation from './components/CLI-query';
 import WhyDidYouDoThat from './pages/Error';
-import UIClass from './pages/UI_class';
+import Coursework from './pages/Coursework';
 
 const App = () => {
   return (
@@ -35,7 +35,7 @@ const Layout = () => {
         <Route path="/experiences" element={<Experiences />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/error" element={<WhyDidYouDoThat />} />
-        <Route path="/uiclass" element={<UIClass />} />
+        <Route path="/class" element={<Coursework />} />
       </Routes>
       <div style={{
         position: 'fixed',

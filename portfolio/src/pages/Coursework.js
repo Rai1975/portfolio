@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const UIClass = () => {
+const Projects = () => {
   const [expandedProject, setExpandedProject] = useState(null);
   const [projects, setProjects] = useState([]);
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
   const typingSpeed = 10;
-  const fullText = 'raihan_rafeek@cs5167:~$ cat uiclass.txt\n>> This page is for CS5167 - User Interface';
+  const fullText = 'raihan@uc:~$ cat coursework.txt';
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const UIClass = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/data/uiclass.json');
+        const response = await fetch('/data/coursework.json');
         const data = await response.json();
         setProjects(data);
       } catch (error) {
@@ -70,7 +70,7 @@ const UIClass = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', padding: '10px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace', position: 'relative', boxSizing: 'border-box', overflowX: 'hidden' }}>
+    <div style={{ padding: '10px', backgroundColor: '#1e1e1e', color: 'white', fontFamily: 'Consolas, monospace', position: 'relative' }}>
       <div style={{ color: '#00ff00', fontSize: isMobile ? '20px' : '35px', marginBottom: '20px', fontFamily: 'Courier New, monospace', padding: '15px', whiteSpace: 'pre-wrap' }}>
         {text}
       </div>
@@ -95,17 +95,33 @@ const UIClass = () => {
               padding: '15px',
               backgroundColor: '#222',
               cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: '95%', // Make all cards equal height
             }}
             onClick={() => openProject(proj)}
           >
             <h3 style={{ color: '#00ff00', marginBottom: '10px' }}>
               {proj.title}
             </h3>
-            <img
-              src={proj.screenshot}
-              alt={`${proj.title} screenshot`}
-              style={{ width: '100%', height: 'auto', borderRadius: '10px' }}
-            />
+            <div style={{
+              width: '100%',
+              height: isMobile ? '200px' : '250px',
+              overflow: 'hidden',
+              borderRadius: '10px',
+              backgroundColor: '#333',
+            }}>
+              <img
+                src={proj.screenshot}
+                alt={`${proj.title} screenshot`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover', // This crops/scales the image to fill the container
+                  borderRadius: '10px',
+                }}
+              />
+            </div>
           </motion.div>
         ))}
       </div>
@@ -214,4 +230,4 @@ const UIClass = () => {
   );
 };
 
-export default UIClass;
+export default Projects;
