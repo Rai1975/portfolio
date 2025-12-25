@@ -190,7 +190,7 @@ const Projects = () => {
               <img
                 src={expandedProject.screenshot}
                 alt={`${expandedProject.title} screenshot`}
-                style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px' }}
+                style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px', maxHeight: '500px' }}
               />
 
               <p style={{ color: '#00ff00' }}>{expandedProject.stack}</p>
@@ -219,7 +219,7 @@ const Projects = () => {
                     display: 'inline-block',
                   }}
                 >
-                  {expandedProject.title === 'Rent Radar' ? 'View Website' : 'View on Github'}
+                  {expandedProject.stack === 'Course: User Interface | Svelte' ? 'View Website' : 'View on Github'}
                 </a>
               </div>
             </motion.div>

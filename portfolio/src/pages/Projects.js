@@ -219,7 +219,7 @@ const Projects = () => {
                     display: 'inline-block',
                   }}
                 >
-                  {expandedProject.title === 'Rent Radar' ? 'View Website' : 'View on Github'}
+                  {expandedProject.title === 'Rent Radar' ? 'View Website' : expandedProject.title === 'Hand-made Custom Watch' ? 'View Movement' :  'View on Github'}
                 </a>
               </div>
             </motion.div>
