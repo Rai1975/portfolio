@@ -154,8 +154,11 @@ const Navbar = () => {
             <Link to="/experiences" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', marginBottom: '10px' }} onClick={toggleMenu}>
               Experiences
             </Link>
-            <Link to="/projects" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px' }} onClick={toggleMenu}>
+            <Link to="/projects" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px', marginBottom: '10px' }} onClick={toggleMenu}>
               Projects
+            </Link>
+            <Link to="/class" style={{ color: '#00ff00', textDecoration: 'none', fontSize: '18px' }} onClick={toggleMenu}>
+              Coursework
             </Link>
           </div>
         </>
