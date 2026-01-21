@@ -12,8 +12,8 @@ raihan@uc:~$ Raihan Rafeek
 4th year CS student @ University of Cincinnati
 
 > cat bio.txt
-Hey there! I'm a curious builder who turns ideas into reality through code.
-I live in the intersection of data science, ML, and backend architecture.
+Hey there! I'm a curious builder who like turns ideas into reality.
+I live in the intersection of data science, ML, backend architecture and product design.
 My philosophy? Learn by building, break things, then build them better.
 
 > ls interests/
