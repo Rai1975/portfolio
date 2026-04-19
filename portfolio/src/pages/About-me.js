@@ -14,6 +14,121 @@ const COLORS = {
   comment: '#666',
 };
 
+// ─── Card Component ───────────────────────────────────────────────────────────
+
+const CardPaginator = ({ data, renderCard }) => {
+  const [idx, setIdx] = useState(0);
+  return (
+    <div style={{
+      border: '1px solid #333', borderRadius: 6, padding: '12px 14px',
+      margin: '4px 0', background: '#222',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+        <button
+          disabled={idx === 0}
+          onClick={() => setIdx(i => i - 1)}
+          style={navBtnStyle}
+        >&lt; prev</button>
+        <button
+          disabled={idx === data.length - 1}
+          onClick={() => setIdx(i => i + 1)}
+          style={navBtnStyle}
+        >next &gt;</button>
+        <span style={{ color: '#666', fontSize: 12, fontFamily: 'Consolas, monospace' }}>
+          {idx + 1} / {data.length}
+        </span>
+      </div>
+      {renderCard(data[idx])}
+    </div>
+  );
+};
+
+const navBtnStyle = {
+  background: '#2d2d2d', border: '1px solid #444', borderRadius: 4,
+  color: '#00ff00', fontFamily: 'Consolas, monospace', fontSize: 12,
+  padding: '2px 8px', cursor: 'pointer', lineHeight: 1.6,
+};
+
+const ExperienceCard = ({ item }) => (
+  <div>
+    <div style={{ color: '#ffab40', fontSize: 14, fontFamily: 'Consolas, monospace', fontWeight: 'bold', marginBottom: 2 }}>
+      {item.title} — {item.organization}
+    </div>
+    <div style={{ color: '#888', fontSize: 12, fontFamily: 'Consolas, monospace', marginBottom: 6 }}>
+      {item.date}
+    </div>
+    {item.description && item.description.split('\n').map((line, i) => (
+      <div key={i} style={{ color: '#00ff00', fontSize: 13, fontFamily: 'Consolas, monospace', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+        {line}
+      </div>
+    ))}
+    {item.link && (
+      <a href={item.link} target="_blank" rel="noreferrer"
+        style={{ color: '#4ecdc4', fontSize: 13, fontFamily: 'Consolas, monospace', display: 'block', marginTop: 6 }}>
+        {item.link}
+      </a>
+    )}
+  </div>
+);
+
+const ProjectCard = ({ item }) => (
+  <div>
+    <div style={{ color: '#ffab40', fontSize: 14, fontFamily: 'Consolas, monospace', fontWeight: 'bold', marginBottom: 4 }}>
+      {item.title}
+    </div>
+    <div style={{ marginBottom: 6 }}>
+      {item.category && <Tag>{item.category}</Tag>}
+      {item.stack && item.stack.split(',').map(s => <Tag key={s}>{s.trim()}</Tag>)}
+    </div>
+    {item.description && item.description.split('\n').map((line, i) => (
+      <div key={i} style={{ color: '#00ff00', fontSize: 13, fontFamily: 'Consolas, monospace', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+        {line}
+      </div>
+    ))}
+    {item.link && (
+      <a href={item.link} target="_blank" rel="noreferrer"
+        style={{ color: '#4ecdc4', fontSize: 13, fontFamily: 'Consolas, monospace', display: 'block', marginTop: 6 }}>
+        {item.link}
+      </a>
+    )}
+  </div>
+);
+
+const CourseworkCard = ({ item }) => (
+  <div>
+    <div style={{ color: '#ffab40', fontSize: 14, fontFamily: 'Consolas, monospace', fontWeight: 'bold', marginBottom: 4 }}>
+      {typeof item === 'string' ? item : (item.title || item.name || JSON.stringify(item))}
+    </div>
+    {item.description && item.description.split('\n').map((line, i) => (
+      <div key={i} style={{ color: '#00ff00', fontSize: 13, fontFamily: 'Consolas, monospace', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+        {line}
+      </div>
+    ))}
+  </div>
+);
+
+const Tag = ({ children }) => (
+  <span style={{
+    display: 'inline-block', background: '#2d2d2d', border: '1px solid #444',
+    borderRadius: 3, color: '#ffab40', fontSize: 11, padding: '1px 6px',
+    margin: '2px 2px 0 0', fontFamily: 'Consolas, monospace',
+  }}>
+    {children}
+  </span>
+);
+
+// ─── Link rendering helper ────────────────────────────────────────────────────
+
+// Renders a line value that may contain HTML anchor tags (set via raw HTML lines)
+const LineContent = ({ value }) => {
+  if (value && value.includes('<a ')) {
+    return <span dangerouslySetInnerHTML={{ __html: value }} />;
+  }
+  return <>{value}</>;
+};
+
+// ─── Static command definitions ───────────────────────────────────────────────
+
 const staticCommands = {
   help: () => [
     { t: 'out', v: 'Available commands:' },
@@ -78,9 +193,9 @@ const staticCommands = {
     { t: 'out', v: '  └── music_collection/  ← seriously, let\'s talk music!' },
   ],
   contact: () => [
-    { t: 'out', v: 'GitHub:    github.com/raihanrafeek' },
-    { t: 'out', v: 'LinkedIn:  linkedin.com/in/raihanrafeek' },
-    { t: 'out', v: 'Email:     rafeek.rn@mail.uc.edu' },
+    { t: 'out', v: 'GitHub:    <a href="https://github.com/raihanrafeek" target="_blank" rel="noreferrer">github.com/raihanrafeek</a>' },
+    { t: 'out', v: 'LinkedIn:  <a href="https://linkedin.com/in/raihanrafeek" target="_blank" rel="noreferrer">linkedin.com/in/raihanrafeek</a>' },
+    { t: 'out', v: 'Email:     <a href="mailto:rafeek.rn@mail.uc.edu">rafeek.rn@mail.uc.edu</a>' },
     { t: 'comment', v: '(or just catch me on campus)' },
   ],
   education: () => [
@@ -161,76 +276,18 @@ const catFiles = {
   ],
   'resume.pdf': [{ t: 'err', v: 'Binary file — try `contact` to reach out for a copy.' }],
   'contact.txt': staticCommands.contact(),
-  'experience.json': [{ t: 'comment', v: 'tip: run `experience` for the formatted view' }],
-  'projects.json': [{ t: 'comment', v: 'tip: run `projects` for the formatted view' }],
-  'coursework.json': [{ t: 'comment', v: 'tip: run `coursework` for the formatted view' }],
+  'experience.json': [{ t: 'comment', v: 'tip: run `experience` for the card view' }],
+  'projects.json': [{ t: 'comment', v: 'tip: run `projects` for the card view' }],
+  'coursework.json': [{ t: 'comment', v: 'tip: run `coursework` for the card view' }],
 };
 
-// Render experience entries from JSON
-function renderExperience(data) {
-  if (!Array.isArray(data) || data.length === 0) {
-    return [{ t: 'err', v: 'experience.json is empty or invalid.' }];
-  }
-  const lines = [];
-  data.forEach((item, idx) => {
-    if (idx > 0) lines.push({ t: 'comment', v: '' });
-    lines.push({ t: 'path', v: `[${idx + 1}] ${item.title} — ${item.organization}` });
-    lines.push({ t: 'comment', v: `    ${item.date}` });
-    if (item.link) lines.push({ t: 'comment', v: `    ${item.link}` });
-    if (item.description) {
-      item.description.split('\n').forEach(line => {
-        if (line.trim()) lines.push({ t: 'out', v: `    ${line.trim()}` });
-      });
-    }
-  });
-  return lines;
-}
+// ─── Fuzzy match ──────────────────────────────────────────────────────────────
 
-// Render projects entries from JSON
-function renderProjects(data) {
-  if (!Array.isArray(data) || data.length === 0) {
-    return [{ t: 'err', v: 'projects.json is empty or invalid.' }];
-  }
-  const lines = [];
-  data.forEach((item, idx) => {
-    if (idx > 0) lines.push({ t: 'comment', v: '' });
-    lines.push({ t: 'path', v: `[${idx + 1}] ${item.title}` });
-    if (item.category) lines.push({ t: 'comment', v: `    category: ${item.category}` });
-    if (item.stack) lines.push({ t: 'comment', v: `    stack:    ${item.stack}` });
-    if (item.link) lines.push({ t: 'comment', v: `    link:     ${item.link}` });
-    if (item.description) {
-      item.description.split('\n').forEach(line => {
-        if (line.trim()) lines.push({ t: 'out', v: `    ${line.trim()}` });
-      });
-    }
-  });
-  return lines;
-}
-
-// Render coursework entries from JSON
-function renderCoursework(data) {
-  if (!Array.isArray(data) || data.length === 0) {
-    return [{ t: 'err', v: 'coursework.json is empty or invalid.' }];
-  }
-  const lines = [{ t: 'out', v: 'Relevant Coursework:' }];
-  data.forEach((item) => {
-    if (typeof item === 'string') {
-      lines.push({ t: 'path', v: `  ├── ${item}` });
-    } else {
-      lines.push({ t: 'path', v: `  ├── ${item.title || item.name || JSON.stringify(item)}` });
-      if (item.description) lines.push({ t: 'comment', v: `  │     ${item.description}` });
-    }
-  });
-  return lines;
-}
-
-// Fuzzy/prefix match
 function matchCommands(query) {
   if (!query) return [];
   const q = query.toLowerCase();
   return COMMAND_LIST.filter(cmd => {
     if (cmd.startsWith(q)) return true;
-    // fuzzy: all chars of query appear in order in cmd
     let ci = 0;
     for (let i = 0; i < cmd.length && ci < q.length; i++) {
       if (cmd[i] === q[ci]) ci++;
@@ -238,6 +295,8 @@ function matchCommands(query) {
     return ci === q.length;
   }).slice(0, 8);
 }
+
+// ─── Initial output ───────────────────────────────────────────────────────────
 
 const INITIAL_LINES = [
   { t: 'out', v: 'Welcome to raihan\'s portfolio.' },
@@ -248,6 +307,8 @@ const INITIAL_LINES = [
   { t: 'comment', v: '' },
   { t: 'comment', v: 'type `help` to explore' },
 ];
+
+// ─── Main Terminal ────────────────────────────────────────────────────────────
 
 const Terminal = () => {
   const [lines, setLines] = useState(INITIAL_LINES);
@@ -261,7 +322,6 @@ const Terminal = () => {
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Load JSON files on mount
   useEffect(() => {
     const load = async (path, key) => {
       try {
@@ -289,23 +349,16 @@ const Terminal = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [lines]);
 
-  // Update suggestions as input changes
   useEffect(() => {
     const trimmed = input.trimStart();
-    // Only suggest if it looks like the first token (no space yet, or just started)
-    const firstToken = trimmed.split(' ')[0];
     if (!trimmed || trimmed.includes(' ')) {
       setSuggestions([]);
     } else {
-      const matches = matchCommands(firstToken);
+      const matches = matchCommands(trimmed.split(' ')[0]);
       setSuggestions(matches);
       setSelectedSuggestion(0);
     }
   }, [input]);
-
-  const appendLines = (newLines) => {
-    setLines(prev => [...prev, ...newLines]);
-  };
 
   const runCommand = (raw) => {
     const cmd = raw.trim();
@@ -315,13 +368,45 @@ const Terminal = () => {
     setCmdHistory(prev => [cmd, ...prev]);
     setHistIdx(-1);
 
-    const newLines = [{ t: 'prompt', cmd }];
     const lower = cmd.toLowerCase();
 
     if (lower === 'clear') {
       setLines([]);
       return;
     }
+
+    const promptLine = { t: 'prompt', cmd };
+
+    // Card commands — append a special card line type
+    if (lower === 'experience') {
+      const data = jsonData.experience;
+      if (data === null) {
+        setLines(prev => [...prev, promptLine, { t: 'comment', v: 'loading experience.json...' }]);
+      } else {
+        setLines(prev => [...prev, promptLine, { t: 'card', cardType: 'experience', data }]);
+      }
+      return;
+    }
+    if (lower === 'projects') {
+      const data = jsonData.projects;
+      if (data === null) {
+        setLines(prev => [...prev, promptLine, { t: 'comment', v: 'loading projects.json...' }]);
+      } else {
+        setLines(prev => [...prev, promptLine, { t: 'card', cardType: 'projects', data }]);
+      }
+      return;
+    }
+    if (lower === 'coursework') {
+      const data = jsonData.coursework;
+      if (data === null) {
+        setLines(prev => [...prev, promptLine, { t: 'comment', v: 'loading coursework.json...' }]);
+      } else {
+        setLines(prev => [...prev, promptLine, { t: 'card', cardType: 'coursework', data }]);
+      }
+      return;
+    }
+
+    let newLines = [promptLine];
 
     if (lower.startsWith('echo ')) {
       newLines.push({ t: 'out', v: cmd.slice(5) });
@@ -344,24 +429,6 @@ const Terminal = () => {
       newLines.push({ t: 'comment', v: 'you\'re already home.' });
     } else if (lower === 'man') {
       newLines.push({ t: 'err', v: 'What manual page do you want? Try `help`.' });
-    } else if (lower === 'experience') {
-      if (jsonData.experience === null) {
-        newLines.push({ t: 'comment', v: 'loading experience.json...' });
-      } else {
-        newLines.push(...renderExperience(jsonData.experience));
-      }
-    } else if (lower === 'projects') {
-      if (jsonData.projects === null) {
-        newLines.push({ t: 'comment', v: 'loading projects.json...' });
-      } else {
-        newLines.push(...renderProjects(jsonData.projects));
-      }
-    } else if (lower === 'coursework') {
-      if (jsonData.coursework === null) {
-        newLines.push({ t: 'comment', v: 'loading coursework.json...' });
-      } else {
-        newLines.push(...renderCoursework(jsonData.coursework));
-      }
     } else if (staticCommands[lower]) {
       newLines.push(...staticCommands[lower]());
     } else {
@@ -383,17 +450,11 @@ const Terminal = () => {
         setSelectedSuggestion(i => (i - 1 + suggestions.length) % suggestions.length);
         return;
       }
-      if (e.key === 'Tab' || e.key === 'Enter') {
-        if (e.key === 'Tab') e.preventDefault();
-        if (e.key === 'Enter' && suggestions[selectedSuggestion] !== input.trim()) {
-          // Tab completes; Enter runs if exact match, otherwise completes
-          if (e.key === 'Tab' || input.trim() !== suggestions[selectedSuggestion]) {
-            e.preventDefault();
-            setInput(suggestions[selectedSuggestion]);
-            setSuggestions([]);
-            return;
-          }
-        }
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        setInput(suggestions[selectedSuggestion]);
+        setSuggestions([]);
+        return;
       }
       if (e.key === 'Escape') {
         setSuggestions([]);
@@ -465,6 +526,46 @@ const Terminal = () => {
         overflowY: 'auto',
       }}>
         {lines.map((line, i) => {
+          // Card lines
+          if (line.t === 'card') {
+            const { cardType, data } = line;
+            if (!data || data.length === 0) {
+              return (
+                <div key={i} style={{ fontSize, color: COLORS.err }}>
+                  {cardType}.json is empty or invalid.
+                </div>
+              );
+            }
+            if (cardType === 'experience') {
+              return (
+                <CardPaginator
+                  key={i}
+                  data={data}
+                  renderCard={(item) => <ExperienceCard item={item} />}
+                />
+              );
+            }
+            if (cardType === 'projects') {
+              return (
+                <CardPaginator
+                  key={i}
+                  data={data}
+                  renderCard={(item) => <ProjectCard item={item} />}
+                />
+              );
+            }
+            if (cardType === 'coursework') {
+              return (
+                <CardPaginator
+                  key={i}
+                  data={data}
+                  renderCard={(item) => <CourseworkCard item={item} />}
+                />
+              );
+            }
+          }
+
+          // Prompt lines
           if (line.t === 'prompt') {
             return (
               <div key={i} style={{ fontSize, lineHeight: '1.6', marginTop: '4px' }}>
@@ -473,6 +574,8 @@ const Terminal = () => {
               </div>
             );
           }
+
+          // Regular text lines (may contain anchor tags)
           return (
             <div key={i} style={{
               fontSize,
@@ -480,7 +583,7 @@ const Terminal = () => {
               color: COLORS[line.t] ?? '#fff',
               whiteSpace: 'pre-wrap',
             }}>
-              {line.v}
+              <LineContent value={line.v} />
             </div>
           );
         })}
@@ -489,7 +592,6 @@ const Terminal = () => {
 
       {/* Input row + autocomplete */}
       <div style={{ flexShrink: 0, position: 'relative' }}>
-        {/* Autocomplete popup */}
         {suggestions.length > 0 && (
           <div style={{
             position: 'absolute',
@@ -528,7 +630,6 @@ const Terminal = () => {
           </div>
         )}
 
-        {/* Input */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
