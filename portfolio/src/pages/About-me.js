@@ -154,8 +154,8 @@ const staticCommands = {
   ],
   whoami: () => [
     { t: 'out', v: 'raihan rafeek' },
-    { t: 'out', v: '4th year cs @ university of cincinnati' },
-    { t: 'out', v: 'product engineer intern @ benchmark gensuite. NEXT innovation scholar.' },
+    { t: 'out', v: 'senior year cs @ university of cincinnati' },
+    { t: 'out', v: 'ex-product intern @ Benchmark Gensuite. 2x intern @ Idaho National Laboratory. NEXT innovation scholar.' },
     { t: 'out', v: 'computing. programming. music. design.' },
   ],
   bio: () => [
@@ -200,7 +200,7 @@ const staticCommands = {
   ],
   education: () => [
     { t: 'path', v: 'university of cincinnati' },
-    { t: 'out', v: '  undergrad computer science — 4th year' },
+    { t: 'out', v: '  undergrad computer science — senior year' },
     { t: 'out', v: '  focus: very focused... jk i like ai/nlp/ml/backend+infra' },
     { t: 'out', v: '  GPA: 3.97' },
     { t: 'comment', v: 'i have a life, i swear' },
@@ -208,9 +208,9 @@ const staticCommands = {
   music: () => [
     { t: 'out', v: 'currently listening to:' },
     { t: 'path', v: '  ├── periphery — luck as a constant' },
-    { t: 'path', v: '  ├── fakemink — baklava' },
-    { t: 'path', v: '  ├── deadmau5 — ghosts n stuff' },
-    { t: 'path', v: '  └── justice — genesis' },
+    { t: 'path', v: '  ├── thirty seconds to mars — the kill' },
+    { t: 'path', v: '  ├── eric clapton — bad love' },
+    { t: 'path', v: '  └── skrillex — soma' },
     { t: 'comment', v: 'Genre: "yes"' },
   ],
   ls: () => [

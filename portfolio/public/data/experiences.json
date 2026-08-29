@@ -4,16 +4,16 @@
     "link": "https://benchmarkgensuite.com/ai-for-ehs/",
     "title": "Product Engineer Intern",
     "organization": "Benchmark Gensuite",
-    "date": "Mar 2026 - Present",
-    "description": "\n> Develop AI agents using as part of Gen-AI initiative \n\n> Create and modify REST API Endpoints and models to adapt data for agent use"
+    "date": "Mar 2026 - Aug 2026",
+    "description": "> Restructured and optimized API endpoints to support agentic tool interactions, improving compatibility with AI agents while preserving JWT-based authentication\n\n> Designed and deployed a dynamically extensible agent architecture spanning 5+ product capabilities, enabling users to generate reports, manage tasks, and execute actions through a unified interface\n\n> Built an internal AI-powered reporting and task-management workflow, reducing user navigation from 4–5 pages to 1\n\n> Optimized agent orchestration and inference pipelines, reducing average response time by 75%"
   },
   {
     "logo": "/assets/NIS.png",
-    "link": "https://uccubecats.github.io/",
+    "link": "https://www.innovation.uc.edu/campaigns/next-innovation-scholars.html",
     "title": "Scholar",
     "organization": "NEXT Innovation Scholars, UC",
     "date": "Aug 2025 - Present",
-    "description": "\n> Awarded presidential university scholarship focused around innovation and finding solutions to problems that clients didn't even know they had\n\n> Work with corporate partners like US Bank and University of Cincinnati to tackle problems they face with new innovative solutions, developed with reference to insights gained through landscape research"
+    "description": "> 1819 x U.S. Bank Insights Project - Led stakeholder interviews with U.S. Bank partners to uncover next-gen insights and opportunities for strengthening the partnership between U.S. Bank, 1819 Innovation Hub, and UC.\n\n> CCPS EEP Insights Project - Conducted stakeholder interviews and insight generation in collaboration with UC’s College of Cooperative Education and Professional Practice (CCPS) to uncover opportunities for the future of experiential education and student-employer partnerships.\n\n> Futures Foresight Project - Conducted extensive landscape research, artifact generation, and world-building using foresight methodologies to envision plausible future scenarios and create a grounded glimpse into how society, technology, and institutions could evolve over the coming years."
   },
   {
     "logo": "/assets/leopardsat.webp",
