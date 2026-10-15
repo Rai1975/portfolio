@@ -258,6 +258,9 @@ html {
 
 /* ---------- carousel ---------- */
 .gui-carousel-wrap { position: relative; }
+/* Gutter matches .gui-inner (max-width 1180px + 20px side padding) so the
+   first/last card sits flush with the section header above it. */
+:root { --gui-gutter: max(20px, calc((100vw - 1180px) / 2 + 20px)); }
 /* Full-bleed viewport: track spans the entire page while the header and
    controls stay in the centered column. */
 .gui-carousel-viewport {
@@ -272,10 +275,11 @@ html {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 8px max(20px, calc((100vw - 1180px) / 2 + 20px)) 16px;
+  padding: 8px var(--gui-gutter) 16px;
+  scroll-padding-inline: var(--gui-gutter);
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 255, 0, 0.4) transparent;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 /* Blurred overflow hints: only visible when there is more to scroll. */
 .gui-fade {
@@ -303,19 +307,11 @@ html {
 .gui-fade-left { left: 0; right: auto; }
 .gui-carousel-wrap.has-more-left .gui-fade-left { opacity: 1; }
 .gui-carousel-wrap.has-more-right .gui-fade-right { opacity: 1; }
-.gui-carousel::-webkit-scrollbar { height: 8px; }
-.gui-carousel::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 0, 0.3);
-  border-radius: 8px;
-}
-.gui-carousel::after {
-  content: "";
-  flex: 0 0 4px;
-}
+.gui-carousel::-webkit-scrollbar { display: none; }
 
 .gui-card {
   flex: 0 0 clamp(300px, 80vw, 380px);
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -545,11 +541,11 @@ html {
 }
 
 @media (max-width: 860px) {
+  :root { --gui-gutter: max(12px, calc((100vw - 1180px) / 2 + 12px)); }
   .gui-hero { grid-template-columns: 1fr; padding: 20px; }
   .gui-avatar { max-width: 240px; margin: 0 auto; }
   .gui-inner { padding: 0 12px 110px; }
   .gui-topnav { top: 8px; font-size: 12px; flex-wrap: nowrap; }
-  .gui-carousel { padding-inline: max(12px, calc((100vw - 1180px) / 2 + 12px)); }
   .gui-fade { width: clamp(44px, 16vw, 90px); }
 }
 
