@@ -1,0 +1,558 @@
+/* Terminal + glossy translucent theme for the GUI view.
+   Terminal tokens preserved: #1a1a1a bg, #00ff00 green, #4ecdc4 cyan,
+   #ffab40 orange, #ff5252 red. Glass added via rgba + backdrop-filter. */
+
+:root {
+  --gui-bg: #1a1a1a;
+  --gui-bg-soft: #1e1e1e;
+  --gui-green: #00ff00;
+  --gui-cyan: #4ecdc4;
+  --gui-orange: #ffab40;
+  --gui-red: #ff5252;
+  --gui-text: #e8e8e8;
+  --gui-muted: #888;
+  --gui-glass: rgba(34, 34, 34, 0.55);
+  --gui-glass-strong: rgba(30, 30, 30, 0.78);
+  --gui-border: rgba(0, 255, 0, 0.18);
+  --gui-mono: Consolas, "Courier New", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.gui-root {
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 420px at 15% -5%, rgba(0, 255, 0, 0.09), transparent 60%),
+    radial-gradient(800px 380px at 90% 10%, rgba(78, 205, 196, 0.08), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(255, 171, 64, 0.05), transparent 60%),
+    var(--gui-bg);
+  color: var(--gui-text);
+  font-family: var(--gui-mono);
+  position: relative;
+  overflow-x: clip;
+}
+
+/* subtle terminal grid + scanline overlay */
+.gui-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black 30%, transparent 100%);
+}
+
+.gui-root::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  opacity: 0.35;
+}
+
+.gui-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 120px;
+}
+
+::selection {
+  background: rgba(0, 255, 0, 0.35);
+  color: #061006;
+}
+
+/* ---------- glass primitives ---------- */
+.glass {
+  background: var(--gui-glass);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--gui-border);
+  border-radius: 14px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 18px rgba(0, 255, 0, 0.06);
+}
+
+.glass-strong {
+  background: var(--gui-glass-strong);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--gui-border);
+  border-radius: 14px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 24px rgba(0, 255, 0, 0.08);
+}
+
+.prompt { color: var(--gui-cyan); }
+.gui-green { color: var(--gui-green); }
+.gui-orange { color: var(--gui-orange); }
+.gui-muted { color: var(--gui-muted); }
+
+/* ---------- top mini nav ---------- */
+.gui-topnav {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  margin: 12px auto 0;
+  max-width: 1180px;
+  flex-wrap: wrap;
+}
+
+.gui-topnav .dots { display: flex; gap: 6px; margin-right: 6px; }
+.gui-topnav .dot { width: 11px; height: 11px; border-radius: 50%; }
+.gui-hamburger {
+  margin-left: auto;
+  font-family: var(--gui-mono);
+  font-size: 16px;
+  line-height: 1;
+  padding: 7px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  color: var(--gui-green);
+  background: rgba(0, 255, 0, 0.08);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+}
+.gui-hamburger:hover { background: rgba(0, 255, 0, 0.16); }
+.gui-hamburger:focus-visible {
+  outline: 2px solid var(--gui-cyan);
+  outline-offset: 2px;
+}
+.gui-mobile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}
+.gui-mobile-menu .gui-navlink {
+  font-size: 15px;
+  padding: 12px 14px;
+  width: 100%;
+  text-align: left;
+}
+.gui-navlink {
+  color: var(--gui-green);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+}
+.gui-navlink:hover {
+  border-color: var(--gui-border);
+  background: rgba(0, 255, 0, 0.08);
+}
+.gui-navlink:focus-visible {
+  outline: 2px solid var(--gui-green);
+  outline-offset: 2px;
+}
+
+/* ---------- hero ---------- */
+.gui-hero {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 20px;
+  padding: 28px;
+}
+
+.gui-avatar {
+  width: 100%;
+  border-radius: 12px;
+  image-rendering: pixelated;
+  display: block;
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  box-shadow: 0 0 5px 2px rgba(0, 255, 0, 0.35), 0 0 32px rgba(0, 255, 0, 0.15);
+}
+
+.gui-typed {
+  font-size: clamp(15px, 2.4vw, 20px);
+  line-height: 1.7;
+  min-height: 2.2em;
+  word-break: break-word;
+}
+.gui-caret {
+  display: inline-block;
+  width: 10px;
+  height: 1.15em;
+  background: var(--gui-green);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: gui-blink 1s step-start infinite;
+}
+@keyframes gui-blink { 50% { opacity: 0; } }
+
+.gui-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+.gui-btn {
+  font-family: var(--gui-mono);
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid rgba(0, 255, 0, 0.4);
+  color: #061006;
+  background: var(--gui-green);
+  font-weight: bold;
+  box-shadow: 0 0 18px rgba(0, 255, 0, 0.35);
+}
+.gui-btn.secondary {
+  background: rgba(0, 255, 0, 0.08);
+  color: var(--gui-green);
+  box-shadow: none;
+}
+.gui-btn:hover { filter: brightness(1.08); }
+.gui-btn:focus-visible {
+  outline: 2px solid var(--gui-cyan);
+  outline-offset: 2px;
+}
+
+.gui-social-row { display: flex; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
+.gui-social {
+  color: var(--gui-green);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 0, 0.22);
+  background: rgba(0, 255, 0, 0.05);
+}
+.gui-social:hover { background: rgba(0, 255, 0, 0.12); }
+
+/* ---------- sections ---------- */
+.gui-section { margin-top: 56px; scroll-margin-top: 90px; }
+.gui-section-head {
+  padding: 18px 22px;
+  margin-bottom: 16px;
+}
+.gui-section-title { font-size: clamp(17px, 2.6vw, 22px); color: var(--gui-green); }
+.gui-section-sub { color: var(--gui-muted); font-size: 13px; margin-top: 6px; }
+
+/* ---------- carousel ---------- */
+.gui-carousel-wrap { position: relative; }
+/* Gutter matches .gui-inner (max-width 1180px + 20px side padding) so the
+   first/last card sits flush with the section header above it. */
+:root { --gui-gutter: max(20px, calc((100vw - 1180px) / 2 + 20px)); }
+/* Full-bleed viewport: track spans the entire page while the header and
+   controls stay in the centered column. */
+.gui-carousel-viewport {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+.gui-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 8px var(--gui-gutter) 16px;
+  scroll-padding-inline: var(--gui-gutter);
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* Blurred overflow hints: only visible when there is more to scroll. */
+.gui-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(56px, 11vw, 170px);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: linear-gradient(to right, rgba(26, 26, 26, 0.55), transparent);
+  -webkit-backdrop-filter: blur(7px) saturate(140%);
+  backdrop-filter: blur(7px) saturate(140%);
+  -webkit-mask-image: linear-gradient(to right, black, transparent);
+  mask-image: linear-gradient(to right, black, transparent);
+}
+.gui-fade-right {
+  right: 0;
+  left: auto;
+  background: linear-gradient(to left, rgba(26, 26, 26, 0.55), transparent);
+  -webkit-mask-image: linear-gradient(to left, black, transparent);
+  mask-image: linear-gradient(to left, black, transparent);
+}
+.gui-fade-left { left: 0; right: auto; }
+.gui-carousel-wrap.has-more-left .gui-fade-left { opacity: 1; }
+.gui-carousel-wrap.has-more-right .gui-fade-right { opacity: 1; }
+.gui-carousel::-webkit-scrollbar { display: none; }
+
+.gui-card {
+  flex: 0 0 clamp(300px, 80vw, 380px);
+  scroll-snap-align: start;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.gui-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 28px rgba(0, 255, 0, 0.12);
+}
+
+.gui-card-title {
+  color: var(--gui-orange);
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.gui-card-meta { color: var(--gui-muted); font-size: 12px; margin-top: 4px; }
+.gui-card-logo {
+  height: 34px;
+  max-width: 140px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 8px;
+}
+.gui-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.gui-card-body {
+  color: var(--gui-text);
+  font-size: 13.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  flex: 1;
+}
+.gui-card-body .bullet { color: var(--gui-green); }
+.gui-chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.gui-chip {
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 171, 64, 0.4);
+  color: var(--gui-orange);
+  background: rgba(255, 171, 64, 0.08);
+}
+.gui-chip.cyan {
+  border-color: rgba(78, 205, 196, 0.4);
+  color: var(--gui-cyan);
+  background: rgba(78, 205, 196, 0.08);
+}
+.gui-card-shot {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #333;
+  margin: 8px 0 4px;
+  cursor: zoom-in;
+}
+.gui-card-link {
+  color: var(--gui-cyan);
+  font-size: 13px;
+  margin-top: 12px;
+  word-break: break-all;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(78, 205, 196, 0.5);
+  align-self: flex-start;
+}
+.gui-card-link:hover { color: #fff; }
+
+.gui-carousel-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+.gui-arrow {
+  font-family: var(--gui-mono);
+  background: rgba(0, 255, 0, 0.08);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  color: var(--gui-green);
+  border-radius: 9px;
+  padding: 7px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.gui-arrow:hover:not(:disabled) { background: rgba(0, 255, 0, 0.16); }
+.gui-arrow:disabled { opacity: 0.35; cursor: default; }
+.gui-arrow:focus-visible {
+  outline: 2px solid var(--gui-cyan);
+  outline-offset: 2px;
+}
+.gui-counter { color: var(--gui-muted); font-size: 12px; }
+.gui-dots { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+.gui-dot {
+  width: 22px;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(0, 255, 0, 0.18);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.gui-dot.active { background: var(--gui-green); box-shadow: 0 0 10px rgba(0,255,0,0.5); }
+.gui-dot:focus-visible {
+  outline: 2px solid var(--gui-cyan);
+  outline-offset: 2px;
+}
+
+/* ---------- contact / footer ---------- */
+.gui-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.gui-contact-card {
+  padding: 18px;
+  text-decoration: none;
+  color: var(--gui-text);
+  display: block;
+}
+.gui-contact-card:hover { border-color: rgba(0, 255, 0, 0.45); }
+.gui-contact-card b { color: var(--gui-green); display: block; margin-bottom: 6px; }
+.gui-contact-card span { color: var(--gui-muted); font-size: 13px; word-break: break-all; }
+.gui-footer {
+  margin-top: 28px;
+  text-align: center;
+  color: var(--gui-muted);
+  font-size: 12px;
+  padding: 18px;
+}
+
+/* ---------- floating view toggle ---------- */
+.gui-view-toggle {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-family: var(--gui-mono);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--gui-green);
+  background: rgba(20, 20, 20, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(0, 255, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 255, 0, 0.18);
+}
+.gui-view-toggle:hover { background: rgba(0, 255, 0, 0.14); }
+.gui-view-toggle:focus-visible {
+  outline: 2px solid var(--gui-cyan);
+  outline-offset: 3px;
+}
+.gui-view-toggle .pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gui-green);
+  box-shadow: 0 0 10px var(--gui-green);
+  animation: gui-blink 1.6s infinite;
+}
+
+/* ---------- modal ---------- */
+.gui-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  cursor: zoom-out;
+}
+.gui-modal {
+  max-width: 860px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 22px;
+  cursor: default;
+  position: relative;
+}
+.gui-modal img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.gui-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ---------- states ---------- */
+.gui-state {
+  padding: 30px 22px;
+  text-align: center;
+  color: var(--gui-muted);
+  font-size: 14px;
+  scroll-snap-align: center;
+  flex: 0 0 100%;
+}
+
+@media (max-width: 860px) {
+  :root { --gui-gutter: max(12px, calc((100vw - 1180px) / 2 + 12px)); }
+  .gui-hero { grid-template-columns: 1fr; padding: 20px; }
+  .gui-avatar { max-width: 240px; margin: 0 auto; }
+  .gui-inner { padding: 0 12px 110px; }
+  .gui-topnav { top: 8px; font-size: 12px; flex-wrap: nowrap; }
+  .gui-fade { width: clamp(44px, 16vw, 90px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gui-carousel { scroll-behavior: auto; }
+  .gui-caret, .gui-view-toggle .pulse { animation: none; }
+  .gui-card { transition: none; }
+  .gui-fade { transition: none; }
+}

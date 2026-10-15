@@ -1,40 +1,58 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import About from './pages/About-me';
-import LandingPage from './pages/landingPage';
-import Experiences from './pages/Experience';
-import Projects from './pages/Projects';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import Terminal from './pages/About-me';
+import GuiHome from './components/gui/GuiHome';
 import WhyDidYouDoThat from './pages/Error';
-import Coursework from './pages/Coursework';
+import ViewToggle from './components/ViewToggle';
+import { isMobileDevice } from './hooks/useIsMobile';
+import './styles/gui.css';
+
+// If the user previously chose terminal, honor it on root visits.
+// Defaults to GUI view otherwise. Mobile always stays in GUI.
+const DefaultRoute = () => {
+  const location = useLocation();
+  if (location.pathname !== '/') return <GuiHome />;
+  // Deep anchor links (e.g. /#projects from legacy routes) always stay in GUI.
+  if (location.hash) return <GuiHome />;
+  if (isMobileDevice()) return <GuiHome />;
+  try {
+    if (localStorage.getItem('portfolio-view') === 'terminal') {
+      return <Navigate to="/terminal" replace />;
+    }
+  } catch {
+    /* ignore storage errors */
+  }
+  return <GuiHome />;
+};
+
+// Terminal has no mobile layout — bounce mobile visitors back to the GUI.
+const TerminalRoute = () => {
+  if (isMobileDevice()) return <Navigate to="/" replace />;
+  return <Terminal />;
+};
+
+// Legacy /about pointed at the terminal; keep that on desktop only.
+const AboutRedirect = () => {
+  if (isMobileDevice()) return <Navigate to="/" replace />;
+  return <Navigate to="/terminal" replace />;
+};
 
 const App = () => {
   return (
     <Router>
-      <About />
-    </Router>
-  );
-};
-
-const Layout = () => {
-  return (
-    <div style={{ paddingTop: '60px', paddingBottom: '40px', background: '#1e1e1e;'}}>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/experiences" element={<Experiences />} />
-        <Route path="/projects" element={<Projects />} />
+        <Route path="/" element={<DefaultRoute />} />
+        <Route path="/terminal" element={<TerminalRoute />} />
         <Route path="/error" element={<WhyDidYouDoThat />} />
-        <Route path="/class" element={<Coursework />} />
+        {/* Legacy terminal-era routes now live inside the single GUI page */}
+        <Route path="/experiences" element={<Navigate to="/#experiences" replace />} />
+        <Route path="/projects" element={<Navigate to="/#projects" replace />} />
+        <Route path="/class" element={<Navigate to="/#coursework" replace />} />
+        <Route path="/about" element={<AboutRedirect />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <div style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000
-      }}>
-      </div>
-    </div>
+      <ViewToggle />
+    </Router>
   );
 };
 

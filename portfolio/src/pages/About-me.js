@@ -71,7 +71,24 @@ const ExperienceCard = ({ item }) => (
   </div>
 );
 
-const ProjectCard = ({ item }) => (
+const ProjectCard = ({ item }) => {
+  const [enlarged, setEnlarged] = useState(false);
+
+  useEffect(() => {
+    if (!enlarged) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setEnlarged(false);
+    };
+    window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [enlarged]);
+
+  return (
   <div>
     <div style={{ color: '#ffab40', fontSize: 14, fontFamily: 'Consolas, monospace', fontWeight: 'bold', marginBottom: 4 }}>
       {item.title}
@@ -80,6 +97,29 @@ const ProjectCard = ({ item }) => (
       {item.category && <Tag>{item.category}</Tag>}
       {item.stack && item.stack.split(',').map(s => <Tag key={s}>{s.trim()}</Tag>)}
     </div>
+    {item.screenshot && (
+      <div style={{ margin: '8px 0', textAlign: 'left' }}>
+        <img
+          src={item.screenshot}
+          alt={`${item.title} screenshot — click to enlarge`}
+          title="Click to enlarge"
+          loading="lazy"
+          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          onClick={(e) => { e.stopPropagation(); setEnlarged(true); }}
+          style={{
+            display: 'block',
+            maxWidth: '320px',
+            width: '100%',
+            maxHeight: '200px',
+            objectFit: 'cover',
+            border: '1px solid #444',
+            borderRadius: '4px',
+            backgroundColor: '#333',
+            cursor: 'zoom-in',
+          }}
+        />
+      </div>
+    )}
     {item.description && item.description.split('\n').map((line, i) => (
       <div key={i} style={{ color: '#00ff00', fontSize: 13, fontFamily: 'Consolas, monospace', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
         {line}
@@ -91,8 +131,77 @@ const ProjectCard = ({ item }) => (
         {item.link}
       </a>
     )}
+    {enlarged && item.screenshot && (
+      <div
+        onClick={(e) => { e.stopPropagation(); setEnlarged(false); }}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backdropFilter: 'blur(8px)',
+          zIndex: 1000,
+          padding: '20px',
+          cursor: 'zoom-out',
+        }}
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            position: 'relative',
+            maxWidth: '90vw',
+            maxHeight: '85vh',
+            backgroundColor: '#222',
+            border: '1px solid #444',
+            borderRadius: '8px',
+            padding: '12px',
+            boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.5)',
+          }}
+        >
+          <button
+            onClick={() => setEnlarged(false)}
+            aria-label="Close image"
+            style={{
+              position: 'absolute',
+              top: '6px',
+              right: '10px',
+              background: 'transparent',
+              border: 'none',
+              color: 'white',
+              fontSize: '22px',
+              cursor: 'pointer',
+            }}
+          >
+            ✖
+          </button>
+          <img
+            src={item.screenshot}
+            alt={`${item.title} screenshot full size`}
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            style={{
+              display: 'block',
+              maxWidth: '86vw',
+              maxHeight: '70vh',
+              width: 'auto',
+              height: 'auto',
+              objectFit: 'contain',
+              borderRadius: '6px',
+            }}
+          />
+          <div style={{ color: '#00ff00', textAlign: 'center', marginTop: '8px', fontSize: 13, fontFamily: 'Consolas, monospace' }}>
+            {item.title} — esc or click outside to close
+          </div>
+        </div>
+      </div>
+    )}
   </div>
-);
+  );
+};
 
 const CourseworkCard = ({ item }) => (
   <div>
