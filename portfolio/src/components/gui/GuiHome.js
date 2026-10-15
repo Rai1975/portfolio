@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import usePortfolioData from '../../hooks/usePortfolioData';
+import useIsMobile from '../../hooks/useIsMobile';
 import Hero from './Hero';
 import Section from './Section';
 import ExperienceCarousel from './ExperienceCarousel';
@@ -11,6 +12,21 @@ import ContactFooter from './ContactFooter';
 const GuiHome = () => {
   const { experiences, projects, coursework } = usePortfolioData();
   const location = useLocation();
+  const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close the mobile menu when switching back to desktop layout.
+  useEffect(() => {
+    if (!isMobile) setMenuOpen(false);
+  }, [isMobile]);
+
+  // Close on Escape for keyboard users.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
 
   // Support /#experiences style deep links (incl. legacy route redirects).
   useEffect(() => {
@@ -33,11 +49,35 @@ const GuiHome = () => {
             <span className="dot" style={{ background: '#28c840' }} />
           </span>
           <span className="prompt" style={{ fontSize: 13 }}>raihan@uc:~</span>
-          <a className="gui-navlink" href="#experiences">experiences</a>
-          <a className="gui-navlink" href="#projects">projects</a>
-          <a className="gui-navlink" href="#coursework">coursework</a>
-          <a className="gui-navlink" href="#contact">contact</a>
-          <Link className="gui-navlink" to="/terminal" style={{ marginLeft: 'auto' }}>&gt;_ terminal</Link>
+          {isMobile ? (
+            <>
+              <button
+                className="gui-hamburger"
+                aria-expanded={menuOpen}
+                aria-controls="gui-mobile-menu"
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                onClick={() => setMenuOpen((o) => !o)}
+              >
+                <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
+              </button>
+              {menuOpen && (
+                <div id="gui-mobile-menu" className="gui-mobile-menu glass-strong">
+                  <a className="gui-navlink" href="#experiences" onClick={() => setMenuOpen(false)}>experiences</a>
+                  <a className="gui-navlink" href="#projects" onClick={() => setMenuOpen(false)}>projects</a>
+                  <a className="gui-navlink" href="#coursework" onClick={() => setMenuOpen(false)}>coursework</a>
+                  <a className="gui-navlink" href="#contact" onClick={() => setMenuOpen(false)}>contact</a>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <a className="gui-navlink" href="#experiences">experiences</a>
+              <a className="gui-navlink" href="#projects">projects</a>
+              <a className="gui-navlink" href="#coursework">coursework</a>
+              <a className="gui-navlink" href="#contact">contact</a>
+              <Link className="gui-navlink" to="/terminal" style={{ marginLeft: 'auto' }}>&gt;_ terminal</Link>
+            </>
+          )}
         </nav>
 
         <Hero />

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import useIsMobile from '../../hooks/useIsMobile';
 
 const FULL = 'whoami — raihan rafeek // senior cs @ uc';
 
 const Hero = () => {
   const [text, setText] = useState('');
+  const isMobile = useIsMobile();
   const reduced = typeof window !== 'undefined' &&
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
@@ -51,7 +53,7 @@ const Hero = () => {
         <div className="gui-cta-row">
           <a className="gui-btn" href="#experiences">↓ experiences</a>
           <a className="gui-btn secondary" href="/assets/Raihan_Resume.pdf" target="_blank" rel="noreferrer">resume.pdf</a>
-          <a className="gui-btn secondary" href="/terminal">open terminal</a>
+          {!isMobile && <a className="gui-btn secondary" href="/terminal">open terminal</a>}
         </div>
         <p className="gui-muted" style={{ fontSize: 12, marginTop: 14 }}>
           ( tip: use ← → arrows or swipe inside each section to cycle cards )

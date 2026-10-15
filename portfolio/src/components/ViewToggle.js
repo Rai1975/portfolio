@@ -1,10 +1,15 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useIsMobile from '../hooks/useIsMobile';
 
 const ViewToggle = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobile = useIsMobile();
   const isTerminal = location.pathname.startsWith('/terminal');
+
+  // Terminal mode is desktop-only — hide the toggle entirely on mobile.
+  if (isMobile) return null;
 
   const flip = () => {
     const next = isTerminal ? '/' : '/terminal';
