@@ -367,6 +367,11 @@ html {
   color: var(--gui-orange);
   background: rgba(255, 171, 64, 0.08);
 }
+.gui-chip.green {
+  border-color: rgba(0, 255, 0, 0.4);
+  color: var(--gui-green);
+  background: rgba(0, 255, 0, 0.08);
+}
 .gui-chip.cyan {
   border-color: rgba(78, 205, 196, 0.4);
   color: var(--gui-cyan);
@@ -432,6 +437,145 @@ html {
   outline: 2px solid var(--gui-cyan);
   outline-offset: 2px;
 }
+
+/* ---------- blog ---------- */
+.gui-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.gui-filter {
+  font-family: var(--gui-mono);
+  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--gui-green);
+  background: transparent;
+  border: 1px solid rgba(0, 255, 0, 0.22);
+}
+.gui-filter:hover { background: rgba(0, 255, 0, 0.08); }
+.gui-filter.active { background: rgba(0, 255, 0, 0.14); border-color: rgba(0, 255, 0, 0.5); }
+.gui-filter:focus-visible { outline: 2px solid var(--gui-cyan); outline-offset: 2px; }
+
+.gui-post-list { display: flex; flex-direction: column; gap: 14px; }
+.gui-post-row { padding: 18px 22px; transition: border-color 0.2s ease; }
+.gui-post-row:hover { border-color: rgba(0, 255, 0, 0.4); }
+.gui-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--gui-muted);
+  font-size: 12px;
+}
+.gui-post-title {
+  display: block;
+  margin-top: 8px;
+  color: var(--gui-orange);
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.gui-post-title:hover { text-decoration: underline; text-underline-offset: 4px; }
+.gui-post-summary { color: var(--gui-text); font-size: 13.5px; line-height: 1.7; margin: 6px 0 0; }
+.gui-tag { font-family: var(--gui-mono); cursor: pointer; text-decoration: none; }
+.gui-tag:hover { background: rgba(255, 171, 64, 0.18); }
+
+.gui-post-wrap { max-width: 780px; margin: 0 auto; }
+.gui-post { padding: clamp(20px, 4vw, 40px); }
+.gui-post-h1 {
+  color: var(--gui-orange);
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 1.3;
+  margin: 18px 0 10px;
+}
+.gui-pub-box {
+  margin: 16px 0 4px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--gui-orange);
+  background: rgba(255, 171, 64, 0.06);
+  border-radius: 0 10px 10px 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+}
+.gui-pub-box .gui-card-link { margin-top: 6px; }
+.gui-post-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+.gui-post-pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 18px;
+  color: var(--gui-orange);
+  font-size: 14px;
+  text-decoration: none;
+}
+.gui-post-pager-link:hover { border-color: rgba(0, 255, 0, 0.4); }
+
+/* rendered markdown, shared by the GUI post page and the terminal reader */
+.gui-prose { color: var(--gui-text); font-size: 15px; line-height: 1.8; margin-top: 22px; overflow-wrap: break-word; }
+.gui-prose h1, .gui-prose h2, .gui-prose h3, .gui-prose h4 {
+  color: var(--gui-green);
+  line-height: 1.35;
+  margin: 1.8em 0 0.6em;
+}
+.gui-prose h1 { font-size: 22px; }
+.gui-prose h2 { font-size: 19px; }
+.gui-prose h2::before { content: "## "; color: var(--gui-muted); }
+.gui-prose h3 { font-size: 16px; }
+.gui-prose h3::before { content: "### "; color: var(--gui-muted); }
+.gui-prose p { margin: 0 0 1.1em; }
+.gui-prose a { color: var(--gui-cyan); text-decoration: none; border-bottom: 1px dashed rgba(78, 205, 196, 0.5); }
+.gui-prose a:hover { color: #fff; }
+.gui-prose strong { color: #fff; }
+.gui-prose em { color: var(--gui-orange); }
+.gui-prose ul, .gui-prose ol { padding-left: 1.4em; margin: 0 0 1.1em; }
+.gui-prose li { margin-bottom: 0.35em; }
+.gui-prose ul li::marker { content: "▸ "; color: var(--gui-green); }
+.gui-prose blockquote {
+  margin: 1.2em 0;
+  padding: 4px 16px;
+  border-left: 3px solid var(--gui-cyan);
+  color: #bbb;
+  background: rgba(78, 205, 196, 0.05);
+}
+.gui-prose code {
+  font-family: var(--gui-mono);
+  font-size: 0.9em;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: rgba(0, 255, 0, 0.08);
+  color: var(--gui-green);
+}
+.gui-prose pre {
+  margin: 0 0 1.2em;
+  padding: 14px 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.gui-prose pre code { padding: 0; background: none; font-size: 13px; line-height: 1.6; }
+.gui-prose img {
+  max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: block;
+  margin: 1em auto;
+}
+.gui-prose hr { border: none; border-top: 1px dashed rgba(0, 255, 0, 0.25); margin: 2em 0; }
+.gui-prose table { border-collapse: collapse; width: 100%; margin: 0 0 1.2em; font-size: 13.5px; display: block; overflow-x: auto; }
+.gui-prose th, .gui-prose td { border: 1px solid rgba(255, 255, 255, 0.12); padding: 6px 10px; text-align: left; }
+.gui-prose th { color: var(--gui-orange); }
+.gui-prose > :first-child { margin-top: 0; }
+
+/* terminal flavour: plain green text, sized by the terminal */
+.term-prose { color: var(--gui-green); font-size: inherit; line-height: 1.6; margin-top: 10px; }
+.term-prose strong { color: #fff; }
 
 /* ---------- contact / footer ---------- */
 .gui-contact-grid {
@@ -588,6 +732,7 @@ html {
   }
   .gui-fade-left { background: linear-gradient(to right, rgba(26, 26, 26, 0.3), transparent); }
   .gui-fade-right { background: linear-gradient(to left, rgba(26, 26, 26, 0.3), transparent); }
+  .gui-post-pager { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

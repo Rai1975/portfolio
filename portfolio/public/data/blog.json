@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "hello, world",
+    "date": "2026-10-21",
+    "kind": "note",
+    "tags": ["meta"],
+    "summary": "what this space is for — publications, plus writeups on whatever i'm reading, building, or chewing on."
+  }
+]

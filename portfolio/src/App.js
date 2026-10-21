@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Terminal from './pages/About-me';
 import GuiHome from './components/gui/GuiHome';
+import BlogIndex from './components/gui/BlogIndex';
+import BlogPost from './components/gui/BlogPost';
 import WhyDidYouDoThat from './pages/Error';
 import ViewToggle from './components/ViewToggle';
 import { isMobileDevice } from './hooks/useIsMobile';
@@ -43,6 +45,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<DefaultRoute />} />
         <Route path="/terminal" element={<TerminalRoute />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/error" element={<WhyDidYouDoThat />} />
         {/* Legacy terminal-era routes now live inside the single GUI page */}
         <Route path="/experiences" element={<Navigate to="/#experiences" replace />} />
