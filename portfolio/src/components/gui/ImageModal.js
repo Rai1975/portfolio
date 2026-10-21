@@ -6,12 +6,13 @@ import { createPortal } from 'react-dom';
 // position:fixed and clip the overlay to the card.
 const ImageModal = ({ src, title, onClose }) => {
   useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', onKey);
+    // Capture phase + preventDefault so an enclosing CardModal ignores this Escape.
+    const onKey = (e) => { if (e.key === 'Escape') { e.preventDefault(); onClose(); } };
+    window.addEventListener('keydown', onKey, true);
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
-      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('keydown', onKey, true);
       document.body.style.overflow = prev;
     };
   }, [onClose]);

@@ -516,6 +516,39 @@ html {
   cursor: default;
   position: relative;
 }
+.gui-carousel .gui-card { cursor: pointer; }
+
+/* expanded card reader: the modal panel is the glass, so strip the card's own */
+.gui-card-modal { padding: 28px clamp(18px, 4vw, 40px); }
+.gui-card-modal .gui-card {
+  flex: none;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transform: none;
+}
+/* keep clear of the close button */
+.gui-card-modal .gui-card-head,
+.gui-card-modal .gui-card > .gui-card-title { padding-right: 32px; }
+.gui-card-modal .gui-card-title { font-size: 20px; }
+.gui-card-modal img.gui-card-logo { width: auto; height: 44px; border: none; }
+.gui-card-modal .gui-card-meta { font-size: 13px; }
+.gui-card-modal .gui-card-body { font-size: 15px; line-height: 1.8; }
+.gui-card-modal .gui-card-body > div { margin-bottom: 8px; }
+.gui-card-modal .gui-chip { font-size: 12px; }
+.gui-card-modal .gui-card-shot { height: auto; max-height: 55vh; object-fit: contain; }
+.gui-card-modal-hint {
+  color: var(--gui-green);
+  text-align: center;
+  margin-top: 18px;
+  font-size: 12px;
+  opacity: 0.7;
+}
 .gui-modal img {
   width: 100%;
   border-radius: 10px;

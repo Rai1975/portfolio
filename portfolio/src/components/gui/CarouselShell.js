@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import CardModal from './CardModal';
 
 const CarouselShell = ({ items, renderCard, label }) => {
   const trackRef = useRef(null);
   const [idx, setIdx] = useState(0);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(false);
+  const [openIdx, setOpenIdx] = useState(null);
+  const closeModal = useCallback(() => setOpenIdx(null), []);
   const count = items?.length ?? 0;
 
   const step = useCallback(() => {
@@ -63,6 +66,21 @@ const CarouselShell = ({ items, renderCard, label }) => {
   const onKeyDown = (e) => {
     if (e.key === 'ArrowRight') { e.preventDefault(); goTo(idx + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(idx - 1); }
+    if (e.key === 'Enter' && e.target === trackRef.current) { e.preventDefault(); setOpenIdx(idx); }
+  };
+
+  // Delegated: clicking anywhere on a card (except its links, buttons or
+  // screenshot) opens it full screen. The contains() check skips clicks that
+  // bubble up through React portals such as ImageModal.
+  const onTrackClick = (e) => {
+    const el = trackRef.current;
+    if (!el || !el.contains(e.target)) return;
+    if (e.target.closest('a, button, .gui-card-shot')) return;
+    if (window.getSelection()?.toString()) return;
+    const card = e.target.closest('.gui-card');
+    if (!card) return;
+    const i = Array.prototype.indexOf.call(el.children, card);
+    if (i >= 0) setOpenIdx(i);
   };
 
   if (!items) {
@@ -80,7 +98,8 @@ const CarouselShell = ({ items, renderCard, label }) => {
           ref={trackRef}
           tabIndex={0}
           onKeyDown={onKeyDown}
-          aria-label={`${label} carousel — use left and right arrows to cycle`}
+          onClick={onTrackClick}
+          aria-label={`${label} carousel — use left and right arrows to cycle, enter to expand`}
         >
           {items.map((item, i) => (
             <React.Fragment key={item.title ? `${item.title}-${i}` : i}>
@@ -91,6 +110,11 @@ const CarouselShell = ({ items, renderCard, label }) => {
         <div className="gui-fade gui-fade-left" aria-hidden="true" />
         <div className="gui-fade gui-fade-right" aria-hidden="true" />
       </div>
+      {openIdx !== null && items[openIdx] && (
+        <CardModal label={items[openIdx].title || label} onClose={closeModal}>
+          {renderCard(items[openIdx], openIdx)}
+        </CardModal>
+      )}
       <div className="gui-carousel-bar">
         <button className="gui-arrow" onClick={() => goTo(idx - 1)} disabled={idx === 0} aria-label={`Previous ${label}`}>
           &lt; prev
