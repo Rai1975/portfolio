@@ -32,6 +32,7 @@ html {
   font-family: var(--gui-mono);
   position: relative;
   overflow-x: clip;
+  container-type: inline-size;
 }
 
 /* subtle terminal grid + scanline overlay */
@@ -68,7 +69,7 @@ html {
   z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 20px 120px;
+  padding: 12px 20px 120px;
 }
 
 ::selection {
@@ -115,7 +116,7 @@ html {
   align-items: center;
   gap: 8px;
   padding: 10px 14px;
-  margin: 12px auto 0;
+  margin: 0 auto;
   max-width: 1180px;
   flex-wrap: wrap;
 }
@@ -258,16 +259,17 @@ html {
 
 /* ---------- carousel ---------- */
 .gui-carousel-wrap { position: relative; }
-/* Gutter matches .gui-inner (max-width 1180px + 20px side padding) so the
-   first/last card sits flush with the section header above it. */
-:root { --gui-gutter: max(20px, calc((100vw - 1180px) / 2 + 20px)); }
+/* Gutter matches .gui-inner (1180px content box + 20px side padding outside it)
+   so the first/last card sits flush with the section header above it.
+   cqw (width of .gui-root) instead of vw so a desktop scrollbar doesn't skew it. */
+:root { --gui-gutter: max(20px, calc((100cqw - 1180px) / 2)); }
 /* Full-bleed viewport: track spans the entire page while the header and
    controls stay in the centered column. */
 .gui-carousel-viewport {
   position: relative;
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100cqw;
+  max-width: 100cqw;
+  margin-left: calc(50% - 50cqw);
 }
 .gui-carousel {
   display: flex;
@@ -541,12 +543,18 @@ html {
 }
 
 @media (max-width: 860px) {
-  :root { --gui-gutter: max(12px, calc((100vw - 1180px) / 2 + 12px)); }
+  :root { --gui-gutter: max(12px, calc((100cqw - 1180px) / 2)); }
   .gui-hero { grid-template-columns: 1fr; padding: 20px; }
   .gui-avatar { max-width: 240px; margin: 0 auto; }
-  .gui-inner { padding: 0 12px 110px; }
+  .gui-inner { padding: 12px 12px 110px; }
   .gui-topnav { top: 8px; font-size: 12px; flex-wrap: nowrap; }
-  .gui-fade { width: clamp(44px, 16vw, 90px); }
+  .gui-fade {
+    width: clamp(36px, 12vw, 70px);
+    -webkit-backdrop-filter: blur(2.5px) saturate(120%);
+    backdrop-filter: blur(2.5px) saturate(120%);
+  }
+  .gui-fade-left { background: linear-gradient(to right, rgba(26, 26, 26, 0.3), transparent); }
+  .gui-fade-right { background: linear-gradient(to left, rgba(26, 26, 26, 0.3), transparent); }
 }
 
 @media (prefers-reduced-motion: reduce) {
