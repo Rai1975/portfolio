@@ -6,5 +6,21 @@
     "kind": "note",
     "tags": ["meta"],
     "summary": "what this space is for — publications, plus writeups on whatever i'm reading, building, or chewing on."
+  },
+  {
+    "slug": "topology-paper",
+    "title": "Topological Study of β-Sparsified d-Uniform Hypergraph-Based Simplicial Complexes",
+    "date": "2026-04-01",
+    "kind": "publication",
+    "tags": ["data-mining", "data-analysis", "high-dimensional-data", "topology"],
+    "summary": "paper i co-authored about algorithmically extracting features from higher dimensional data using sparsified simplicial complexes"
+  },
+  {
+    "slug": "interaction",
+    "title": "Humans, Computers, and what now?",
+    "date": "2026-10-22",
+    "kind": "article",
+    "tags": ["thoughts", "reading", "hci", "experience design"],
+    "summary": "blah - coming soon"
   }
 ]
