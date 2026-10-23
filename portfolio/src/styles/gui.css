@@ -11,8 +11,10 @@
   --gui-red: #ff5252;
   --gui-text: #e8e8e8;
   --gui-muted: #888;
-  --gui-glass: rgba(34, 34, 34, 0.55);
-  --gui-glass-strong: rgba(30, 30, 30, 0.78);
+  /* Opaque enough to read as glass without a per-element backdrop blur,
+     which was repainting ~30 layers on every scroll frame. */
+  --gui-glass: rgba(34, 34, 34, 0.82);
+  --gui-glass-strong: rgba(30, 30, 30, 0.9);
   --gui-border: rgba(0, 255, 0, 0.18);
   --gui-mono: Consolas, "Courier New", monospace;
 }
@@ -47,6 +49,8 @@ html {
     linear-gradient(90deg, rgba(0, 255, 0, 0.035) 1px, transparent 1px);
   background-size: 32px 32px;
   mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black 30%, transparent 100%);
+  /* own compositor layer so the fixed overlay isn't repainted on scroll */
+  transform: translateZ(0);
 }
 
 .gui-root::after {
@@ -62,6 +66,7 @@ html {
     rgba(0, 0, 0, 0.12) 4px
   );
   opacity: 0.35;
+  transform: translateZ(0);
 }
 
 .gui-inner {
@@ -80,26 +85,30 @@ html {
 /* ---------- glass primitives ---------- */
 .glass {
   background: var(--gui-glass);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--gui-border);
   border-radius: 14px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 18px rgba(0, 255, 0, 0.06);
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .glass-strong {
   background: var(--gui-glass-strong);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--gui-border);
   border-radius: 14px;
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 8px 24px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 0 24px rgba(0, 255, 0, 0.08);
+    0 0 16px rgba(0, 255, 0, 0.06);
+}
+
+/* Real blur only where content actually slides underneath. */
+.gui-topnav.glass-strong,
+.gui-mobile-menu.glass-strong,
+.gui-modal.glass-strong {
+  background: rgba(30, 30, 30, 0.78);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
 }
 
 .prompt { color: var(--gui-cyan); }
@@ -293,16 +302,14 @@ html {
   z-index: 3;
   opacity: 0;
   transition: opacity 0.25s ease;
-  background: linear-gradient(to right, rgba(26, 26, 26, 0.55), transparent);
-  -webkit-backdrop-filter: blur(7px) saturate(140%);
-  backdrop-filter: blur(7px) saturate(140%);
+  background: linear-gradient(to right, rgba(26, 26, 26, 0.85), transparent);
   -webkit-mask-image: linear-gradient(to right, black, transparent);
   mask-image: linear-gradient(to right, black, transparent);
 }
 .gui-fade-right {
   right: 0;
   left: auto;
-  background: linear-gradient(to left, rgba(26, 26, 26, 0.55), transparent);
+  background: linear-gradient(to left, rgba(26, 26, 26, 0.85), transparent);
   -webkit-mask-image: linear-gradient(to left, black, transparent);
   mask-image: linear-gradient(to left, black, transparent);
 }
@@ -318,14 +325,11 @@ html {
   display: flex;
   flex-direction: column;
   min-height: 300px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .gui-card:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 0 28px rgba(0, 255, 0, 0.12);
+  border-color: rgba(0, 255, 0, 0.35);
 }
 
 .gui-card-title {
@@ -358,6 +362,14 @@ html {
   flex: 1;
 }
 .gui-card-body .bullet { color: var(--gui-green); }
+.gui-card-expand {
+  margin-top: 8px;
+  color: var(--gui-cyan);
+  font-size: 12px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.gui-card:hover .gui-card-expand { opacity: 1; text-decoration: underline; }
 .gui-chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
 .gui-chip {
   font-size: 11px;
@@ -379,8 +391,10 @@ html {
 }
 .gui-card-shot {
   width: 100%;
-  height: 170px;
-  object-fit: cover;
+  /* 16:9 box, image letterboxed rather than cropped/zoomed to fill */
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: contain;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #333;
@@ -617,9 +631,9 @@ html {
   font-weight: bold;
   cursor: pointer;
   color: var(--gui-green);
-  background: rgba(20, 20, 20, 0.72);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  backdrop-filter: blur(18px) saturate(180%);
+  background: rgba(20, 20, 20, 0.8);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 255, 0, 0.4);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 255, 0, 0.18);
 }
@@ -646,9 +660,9 @@ html {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.7);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   cursor: zoom-out;
 }
 .gui-modal {
@@ -727,11 +741,9 @@ html {
   .gui-topnav { top: 8px; font-size: 12px; flex-wrap: nowrap; }
   .gui-fade {
     width: clamp(36px, 12vw, 70px);
-    -webkit-backdrop-filter: blur(2.5px) saturate(120%);
-    backdrop-filter: blur(2.5px) saturate(120%);
   }
-  .gui-fade-left { background: linear-gradient(to right, rgba(26, 26, 26, 0.3), transparent); }
-  .gui-fade-right { background: linear-gradient(to left, rgba(26, 26, 26, 0.3), transparent); }
+  .gui-fade-left { background: linear-gradient(to right, rgba(26, 26, 26, 0.6), transparent); }
+  .gui-fade-right { background: linear-gradient(to left, rgba(26, 26, 26, 0.6), transparent); }
   .gui-post-pager { grid-template-columns: 1fr; }
 }
 

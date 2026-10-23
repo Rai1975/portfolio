@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import CarouselShell from './CarouselShell';
+import CardBody from './CardBody';
 import ImageModal from './ImageModal';
 
-const clean = (line) => line.replace(/^>\s?/, '');
-
-export const ProjectGlassCard = ({ item }) => {
+export const ProjectGlassCard = ({ item, expanded = false }) => {
   const [enlarged, setEnlarged] = useState(false);
 
   return (
@@ -23,17 +22,12 @@ export const ProjectGlassCard = ({ item }) => {
           alt={`${item.title} screenshot — click to enlarge`}
           title="Click to enlarge"
           loading="lazy"
+          decoding="async"
           onClick={(e) => { e.stopPropagation(); setEnlarged(true); }}
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
       )}
-      {item.description && (
-        <div className="gui-card-body">
-          {item.description.split('\n').filter((l) => l.trim()).map((line, i) => (
-            <div key={i}><span className="bullet">▸ </span>{clean(line.trim())}</div>
-          ))}
-        </div>
-      )}
+      <CardBody description={item.description} expanded={expanded} />
       {item.link ? (
         <a className="gui-card-link" href={item.link} target="_blank" rel="noreferrer">view project ↗</a>
       ) : (
@@ -46,8 +40,10 @@ export const ProjectGlassCard = ({ item }) => {
   );
 };
 
+const renderProject = (item, i, expanded) => <ProjectGlassCard item={item} expanded={expanded} />;
+
 const ProjectsCarousel = ({ items }) => (
-  <CarouselShell items={items} label="projects" renderCard={(item) => <ProjectGlassCard item={item} />} />
+  <CarouselShell items={items} label="projects" renderCard={renderProject} />
 );
 
 export default ProjectsCarousel;

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import CardModal from './CardModal';
 
 const CarouselShell = ({ items, renderCard, label }) => {
@@ -10,10 +10,15 @@ const CarouselShell = ({ items, renderCard, label }) => {
   const closeModal = useCallback(() => setOpenIdx(null), []);
   const count = items?.length ?? 0;
 
+  // Card width + gap, cached so scrolling doesn't force a layout read.
+  const stepRef = useRef(0);
   const step = useCallback(() => {
+    if (stepRef.current) return stepRef.current;
     const el = trackRef.current;
     const first = el?.querySelector(':scope > *');
-    return first ? first.offsetWidth + 16 : 360;
+    if (!first) return 360;
+    stepRef.current = first.offsetWidth + 16;
+    return stepRef.current;
   }, []);
 
   const updateEdges = useCallback(() => {
@@ -41,24 +46,35 @@ const CarouselShell = ({ items, renderCard, label }) => {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+    // Coalesce scroll events to at most one state update per frame.
+    let scrollFrame = 0;
     const onScroll = () => {
-      const w = step();
-      setIdx(Math.max(0, Math.min(count - 1, Math.round(el.scrollLeft / w))));
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        const w = step();
+        setIdx(Math.max(0, Math.min(count - 1, Math.round(el.scrollLeft / w))));
+        updateEdges();
+      });
+    };
+    const onResize = () => {
+      stepRef.current = 0;
       updateEdges();
     };
     updateEdges();
     const frame = requestAnimationFrame(updateEdges);
     el.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', updateEdges);
+    window.addEventListener('resize', onResize);
     let observer = null;
     if (typeof ResizeObserver !== 'undefined') {
-      observer = new ResizeObserver(updateEdges);
+      observer = new ResizeObserver(onResize);
       observer.observe(el);
     }
     return () => {
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(scrollFrame);
       el.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', updateEdges);
+      window.removeEventListener('resize', onResize);
       if (observer) observer.disconnect();
     };
   }, [count, step, updateEdges, items]);
@@ -83,6 +99,13 @@ const CarouselShell = ({ items, renderCard, label }) => {
     if (i >= 0) setOpenIdx(i);
   };
 
+  // Cards only depend on items, so index/dot changes don't re-render them.
+  const cards = useMemo(() => (items || []).map((item, i) => (
+    <React.Fragment key={item.title ? `${item.title}-${i}` : i}>
+      {renderCard(item, i)}
+    </React.Fragment>
+  )), [items, renderCard]);
+
   if (!items) {
     return <div className="gui-state glass">loading {label}…</div>;
   }
@@ -101,18 +124,14 @@ const CarouselShell = ({ items, renderCard, label }) => {
           onClick={onTrackClick}
           aria-label={`${label} carousel — use left and right arrows to cycle, enter to expand`}
         >
-          {items.map((item, i) => (
-            <React.Fragment key={item.title ? `${item.title}-${i}` : i}>
-              {renderCard(item, i)}
-            </React.Fragment>
-          ))}
+          {cards}
         </div>
         <div className="gui-fade gui-fade-left" aria-hidden="true" />
         <div className="gui-fade gui-fade-right" aria-hidden="true" />
       </div>
       {openIdx !== null && items[openIdx] && (
         <CardModal label={items[openIdx].title || label} onClose={closeModal}>
-          {renderCard(items[openIdx], openIdx)}
+          {renderCard(items[openIdx], openIdx, true)}
         </CardModal>
       )}
       <div className="gui-carousel-bar">

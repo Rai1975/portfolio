@@ -1,5 +1,38 @@
 [
   {
+    "link": "https://github.com/Rai1975/MindLine",
+    "title": "MindLine",
+    "stack": "python, aws strands, aws bedrock, neo4j, psql",
+    "description":"> Won 2nd Place in CEAS Summer Innovation Challenge acquiring over $2,500 in funding.\n\n>MindLine is a novel take on journaling. What if your journal could talk back to you? Well, MindLine can.\n\n>MindLine has a unique pipeline, starting with an NLP creating a tree of objects and adjectives from your entries.\n\n>Then, an ensemble of ML models classifies sentiments and emotions assosicated with those objects, backed up by using adjectives and the NLP tree as the source.\n\n>Combining the outputs of the ML and NLP model, we have a PostgreSQL database of everything in your life that can be indexed by emotion and sentiment.\n\n>Finally, a set of agents periodically maintain a knowledge graph of you based on your journal entries. Allowing you to uncover patterns that occur organically without you even noticing, with prompts to reflect on.",
+    "screenshot": "/assets/mindline.webp",
+    "category": "AI/ML"
+  },
+  {
+    "link": "https://github.com/Aryagarg23/wb_hack_sf",
+    "title": "Gyrus",
+    "stack": "python, flask, electronjs, neo4j, crewai, langchain, huggingface, sentence-transformers",
+    "description":
+        "> Agent-based browser than helps you own your thoughts instead of cognitvely offloading.\n\n> Gyrus helps make your interactions with the web easier by using agents and intent-memory-mapping to pre-emptively figure out your intent in a query and direct you to the appropriate sources.\n\n> It uses an ensemble of crewai and langchain agents to orchestrate retrieving previous intent from memory and another suite of intent based fine-tuned agents.",
+    "screenshot": "/assets/gyrus.webp",
+    "category": "AI/ML"
+  },
+  {
+    "link": "https://github.com/Rai1975/Randy-The-Otter",
+    "title": "Randy The Otter",
+    "stack": "python, js, chrome mv3, aws strands, aws bedrock",
+    "description": "",
+    "screenshot": "/assets/randy.jpg",
+    "category": "AI/ML"
+  },
+  {
+    "link": "https://github.com/Aryagarg23/Terminally-Addicted",
+    "title": "Terminally-Addicted",
+    "stack": "python, go, curses",
+    "description": "> Won 'Most Creative Hack' at HackOH/IO\n\n> Terminally-Addicted is a take on modern productivity that clutters the screen with too many distractions. Instead, this is a completely CLI based productivity app that has everything you need to get cracking with work in one place.\n\n> Terminally-Addicted connects with your Spotify, GitHub, ChatGPT and Todoist to provide you with all the tools necessary to be productive, and, as a plus it also supports online video playback within the terminal!\n\n> All operations are done through CLI commands!",
+    "screenshot": "/assets/terminally-addicted.webp",
+    "category": "General"
+  },
+  {
     "link": "https://github.com/KaaustaaubShankar/WhiteBox",
     "title": "Whitebox",
     "stack": "python, flask, reactjs, neo4j, llama, langchain, huggingface, docker, openai",
@@ -14,26 +47,8 @@
     "stack": "python, flask, langchain, reactjs, materialui, psql",
     "description":
     "> Won 2nd place overall at CEAS Summer Innovation Challenge \n\n> Platform is live with over 50 active users, deployed using supabase, render and cloudflare\n\n>RentRadar is a platform that helps bring accountability back to a dishonest rental market. Leveraging a strong renting community and honest crowdsourced information, we tell the truths about properties so landlords cannot rewrite the stories.",
-    "screenshot": "/assets/rentradar.png",
+    "screenshot": "/assets/rentradar.webp",
     "category": "Web Development"
-  },
-  {
-    "link": "https://github.com/Rai1975/SASEHackProj---UC",
-    "title": "MindLine",
-    "stack": "python, twilio, flask, langchain, reactjs, materialui, psql",
-    "description":
-        "> MindLine is a new take on journalling. Why have to open apps and type to say your thoughts out? Simply call the mindline number, speak your thoughts, and hang up.\n\n> MindLine creates a transcript of the phone call, does object recognition and emotion-object relations to give you patterns on how you feel about certain things and how those feelings developed over time.\n\n> Based on the insights from the transcripts, MindLine also identifies bad habits or feelings and suggests things on the home-screen to the user to help get over them.",
-    "screenshot": "/assets/mindline.jpg",
-    "category": "Web Development"
-  },
-  {
-    "link": "https://github.com/Aryagarg23/wb_hack_sf",
-    "title": "Gyrus",
-    "stack": "python, flask, electronjs, neo4j, crewai, langchain, huggingface, sentence-transformers",
-    "description":
-        "> Agent-based browser than helps you own your thoughts instead of cognitvely offloading.\n\n> Gyrus helps make your interactions with the web easier by using agents and intent-memory-mapping to pre-emptively figure out your intent in a query and direct you to the appropriate sources.\n\n> It uses an ensemble of crewai and langchain agents to orchestrate retrieving previous intent from memory and another suite of intent based fine-tuned agents.",
-    "screenshot": "/assets/gyrus.png",
-    "category": "AI/ML"
   },
   {
     "link": "https://github.com/KaaustaaubShankar/Memento",
@@ -43,14 +58,6 @@
 
     "screenshot": "/assets/memento_ss.webp",
     "category": "AI/ML"
-  },
-  {
-    "link": "https://github.com/Aryagarg23/Terminally-Addicted",
-    "title": "Terminally-Addicted",
-    "stack": "python, go, curses",
-    "description": "> Won 'Most Creative Hack' at HackOH/IO\n\n> Terminally-Addicted is a take on modern productivity that clutters the screen with too many distractions. Instead, this is a completely CLI based productivity app that has everything you need to get cracking with work in one place.\n\n> Terminally-Addicted connects with your Spotify, GitHub, ChatGPT and Todoist to provide you with all the tools necessary to be productive, and, as a plus it also supports online video playback within the terminal!\n\n> All operations are done through CLI commands!",
-    "screenshot": "/assets/terminally-addicted.webp",
-    "category": "General"
   },
   {
     "link": "https://github.com/Rai1975/SASEHackProject",
