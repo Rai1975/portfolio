@@ -678,6 +678,24 @@ html {
 
 /* expanded card reader: the modal panel is the glass, so strip the card's own */
 .gui-card-modal { padding: 28px clamp(18px, 4vw, 40px); }
+
+/* open/close animation for the expanded card (transform + opacity only) */
+.gui-card-modal-backdrop { animation: gui-fade-in 0.22s ease-out both; }
+.gui-card-modal-backdrop .gui-card-modal {
+  animation: gui-modal-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
+}
+.gui-card-modal-backdrop.closing { animation: gui-fade-out 0.18s ease-in both; }
+.gui-card-modal-backdrop.closing .gui-card-modal { animation: gui-modal-out 0.18s ease-in both; }
+@keyframes gui-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gui-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes gui-modal-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes gui-modal-out {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: translateY(10px) scale(0.96); }
+}
 .gui-card-modal .gui-card {
   flex: none;
   width: 100%;
@@ -753,4 +771,6 @@ html {
   .gui-caret, .gui-view-toggle .pulse { animation: none; }
   .gui-card { transition: none; }
   .gui-fade { transition: none; }
+  .gui-card-modal-backdrop,
+  .gui-card-modal-backdrop .gui-card-modal { animation: none; }
 }

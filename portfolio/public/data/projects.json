@@ -1,9 +1,9 @@
 [
   {
-    "link": "https://github.com/Rai1975/Randy-The-Otter",
+    "link": "https://randy-the-otter.vercel.app",
     "title": "Randy The Otter",
     "stack": "python, js, chrome mv3, aws strands, aws bedrock",
-    "description": "",
+    "description": "> Won Best Design in SASEHacks 2026 with over 250 participants and 60+ teams\n\n> Randy is your cute, and powerful job application companion. \n\n> Randy lives in your browser, watches over you as you apply for jobs, makes snarky comments, matches you with positions that are best for you, AND helps you stand out by generating custom resumes and cover letters",
     "screenshot": "/assets/randy.jpg",
     "category": "AI/ML"
   },
