@@ -1,9 +1,17 @@
 [
   {
+    "link": "https://github.com/Rai1975/Randy-The-Otter",
+    "title": "Randy The Otter",
+    "stack": "python, js, chrome mv3, aws strands, aws bedrock",
+    "description": "",
+    "screenshot": "/assets/randy.jpg",
+    "category": "AI/ML"
+  },
+  {
     "link": "https://github.com/Rai1975/MindLine",
     "title": "MindLine",
     "stack": "python, aws strands, aws bedrock, neo4j, psql",
-    "description":"> Won 2nd Place in CEAS Summer Innovation Challenge acquiring over $2,500 in funding.\n\n>MindLine is a novel take on journaling. What if your journal could talk back to you? Well, MindLine can.\n\n>MindLine has a unique pipeline, starting with an NLP creating a tree of objects and adjectives from your entries.\n\n>Then, an ensemble of ML models classifies sentiments and emotions assosicated with those objects, backed up by using adjectives and the NLP tree as the source.\n\n>Combining the outputs of the ML and NLP model, we have a PostgreSQL database of everything in your life that can be indexed by emotion and sentiment.\n\n>Finally, a set of agents periodically maintain a knowledge graph of you based on your journal entries. Allowing you to uncover patterns that occur organically without you even noticing, with prompts to reflect on.",
+    "description":"> Won 2nd Place in 2026 CEAS Summer Innovation Challenge acquiring over $2,500 in funding.\n\n>MindLine is a novel take on journaling. What if your journal could talk back to you? Well, MindLine can.\n\n>MindLine has a unique pipeline, starting with an NLP creating a tree of objects and adjectives from your entries.\n\n>Then, an ensemble of ML models classifies sentiments and emotions assosicated with those objects, backed up by using adjectives and the NLP tree as the source.\n\n>Combining the outputs of the ML and NLP model, we have a PostgreSQL database of everything in your life that can be indexed by emotion and sentiment.\n\n>Finally, a set of agents periodically maintain a knowledge graph of you based on your journal entries. Allowing you to uncover patterns that occur organically without you even noticing, with prompts to reflect on.",
     "screenshot": "/assets/mindline.webp",
     "category": "AI/ML"
   },
@@ -17,12 +25,13 @@
     "category": "AI/ML"
   },
   {
-    "link": "https://github.com/Rai1975/Randy-The-Otter",
-    "title": "Randy The Otter",
-    "stack": "python, js, chrome mv3, aws strands, aws bedrock",
-    "description": "",
-    "screenshot": "/assets/randy.jpg",
-    "category": "AI/ML"
+    "link": "https://app.rentscorehq.com",
+    "title": "Rent Radar / RentScore",
+    "stack": "python, flask, langchain, reactjs, materialui, psql",
+    "description":
+    "> RentRadar team now functions in strategic collaboration with RentScoreHQ. Together, we have collected over 1,000 reviews with over 200 active users. \n\n> Won 2nd place overall at 2025 CEAS Summer Innovation Challenge\n\n> RentRadar is a platform that helps bring accountability back to a dishonest rental market. Leveraging a strong renting community and honest crowdsourced information, we tell the truths about properties so landlords cannot rewrite the stories",
+    "screenshot": "/assets/rentradar.webp",
+    "category": "Web Development"
   },
   {
     "link": "https://github.com/Aryagarg23/Terminally-Addicted",
@@ -37,18 +46,9 @@
     "title": "Whitebox",
     "stack": "python, flask, reactjs, neo4j, llama, langchain, huggingface, docker, openai",
     "description":
-        "> First place winner of the Future of Data Hackathon at Midwestcon, with over 900 participants and 70+  teams.\n\n> Whitebox bridges the gap between AI and human reasoning by transforming credible texts, such as medical textbooks, into structured graphs. This transformation not only enhances the AI’s ability to understand and reason through complex material but also provides a level of explainability that traditional AI models often lack. By breaking the content down into interconnected nodes, Whitebox enables users to trace the AI’s thought process step by step, unlocking ethical applications in fields where transparency is critical.",
+        "> Implementation of GraphRAG before it was a thing (2024).\n\n> First place winner of the Future of Data Hackathon at Midwestcon, with over 900 participants and 70+  teams.\n\n> Whitebox bridges the gap between AI and human reasoning by transforming credible texts, such as medical textbooks, into structured graphs. This transformation not only enhances the AI’s ability to understand and reason through complex material but also provides a level of explainability that traditional AI models often lack. By breaking the content down into interconnected nodes, Whitebox enables users to trace the AI’s thought process step by step, unlocking ethical applications in fields where transparency is critical.",
     "screenshot": "/assets/whitebox_ss.webp",
     "category": "AI/ML"
-  },
-  {
-    "link": "https://www.rentradar.org",
-    "title": "Rent Radar",
-    "stack": "python, flask, langchain, reactjs, materialui, psql",
-    "description":
-    "> Won 2nd place overall at CEAS Summer Innovation Challenge \n\n> Platform is live with over 50 active users, deployed using supabase, render and cloudflare\n\n>RentRadar is a platform that helps bring accountability back to a dishonest rental market. Leveraging a strong renting community and honest crowdsourced information, we tell the truths about properties so landlords cannot rewrite the stories.",
-    "screenshot": "/assets/rentradar.webp",
-    "category": "Web Development"
   },
   {
     "link": "https://github.com/KaaustaaubShankar/Memento",
@@ -65,14 +65,6 @@
     "stack": "python, bert, openai, huggingface, nextjs, neo4j",
     "description": "> Hi-Five is a take on modern matchmaking apps that use only tags and metrics based on interests. Hi-Five creates a high-fidelity vector embedding based on a personality analysis test. This vector embedding is based on the OCEAN personality model, creating a 5-dimensional feature vector.\n\n> Using this personality feature vector and interests from the user, Hi-Five is able to create meaningful connections between people with similar interests and personalities.",
     "screenshot": "/assets/hifive.webp",
-    "category": "AI/ML"
-  },
-  {
-    "link": "https://github.com/Rai1975/NeuralMadness",
-    "title": "Neural Madness",
-    "stack": "python, transformers, numpy, pytorch, tensorflow",
-    "description": "> This is a repository with different types of Neural Networks and with notes that I have taken up as an effort to learn and understand machine learning better.\n\n> This repository has a hand-made neural network without using pyTorch and TensorFlow, as well as a hand-built transformer network.",
-    "screenshot": "/assets/neural_madness.webp",
     "category": "AI/ML"
   },
   {
