@@ -340,7 +340,7 @@ const staticCommands = {
   whoami: () => [
     { t: 'out', v: 'raihan rafeek' },
     { t: 'out', v: 'senior year cs @ university of cincinnati' },
-    { t: 'out', v: 'ex-product intern @ Benchmark Gensuite. 2x intern @ Idaho National Laboratory. NEXT innovation scholar.' },
+    { t: 'out', v: 'ex-product intern @ benchmark gensuite. 2x swe @ inl. next innovation scholar.' },
     { t: 'out', v: 'computing. programming. music. design.' },
   ],
   bio: () => [

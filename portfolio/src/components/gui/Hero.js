@@ -43,11 +43,10 @@ const Hero = () => {
           Raihan Rafeek
         </h1>
         <p style={{ color: 'var(--gui-green)', margin: '0 0 10px', fontSize: 15 }}>
-          senior cs @ university of cincinnati — ex-product intern @ Benchmark Gensuite · 2x @ INL · NEXT innovation scholar
+          senior cs @ university of cincinnati — ex-product intern @ benchmark gensuite · 2x swe @ inl · next innovation scholar
         </p>
         <p style={{ color: 'var(--gui-text)', fontSize: 14, lineHeight: 1.7, maxWidth: 640 }}>
-          I live at the intersection of cs, art and design. I like to build with purpose —
-          learn learn learn, build build build. Scroll for experience, projects and coursework,
+          I live at the intersection of cs, music and design. I like to build with purpose, with the human experience at the center. Scroll for experience, projects and coursework,
           or flip to the terminal if you speak bash.
         </p>
         <div className="gui-cta-row">
