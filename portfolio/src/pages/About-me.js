@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import {
+  loadPosts, loadPostBody, findPost, renderMarkdown, readingTime, formatDate, KINDS, kindOf,
+} from '../hooks/useBlog';
 
 const COMMAND_LIST = [
   'help', 'whoami', 'bio', 'skills', 'interests', 'projects',
   'contact', 'education', 'music', 'ls', 'date', 'clear',
   'uname -a', 'neofetch', 'fortune', 'sudo', 'echo', 'cat',
-  'pwd', 'cd', 'experience', 'coursework',
+  'pwd', 'cd', 'experience', 'coursework', 'blog',
 ];
 
 const COLORS = {
@@ -226,6 +230,76 @@ const Tag = ({ children }) => (
   </span>
 );
 
+// ─── Blog ─────────────────────────────────────────────────────────────────────
+
+const mono = { fontFamily: 'Consolas, monospace' };
+
+const blogLinkStyle = {
+  ...mono, background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+  color: COLORS.out, fontSize: 14, textDecoration: 'underline', textUnderlineOffset: 3,
+};
+
+const BlogList = ({ posts, filter, onOpen }) => (
+  <div style={{ ...mono, margin: '4px 0' }}>
+    <div style={{ color: COLORS.comment, fontSize: 13, marginBottom: 4 }}>
+      total {posts.length}{filter ? ` (${KINDS[filter].plural} only)` : ''}
+    </div>
+    {posts.map((p) => (
+      <div key={p.slug} style={{ fontSize: 14, lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>
+        <span style={{ color: '#888' }}>{p.date || '----------'}  </span>
+        <span style={{ color: KINDS[kindOf(p)].color }}>
+          {KINDS[kindOf(p)].short}{'  '}
+        </span>
+        <button
+          onClick={(e) => { e.stopPropagation(); onOpen(p.slug); }}
+          style={blogLinkStyle}
+          title={`blog ${p.slug}`}
+        >
+          {p.slug}.md
+        </button>
+        <span style={{ color: '#fff' }}>{'  '}{p.title}</span>
+      </div>
+    ))}
+    <div style={{ color: COLORS.comment, fontSize: 13, marginTop: 6 }}>
+      click a file, or run `blog &lt;slug&gt;` / `blog &lt;n&gt;` to read · {Object.values(KINDS).map((k) => `blog ${k.flag}`).join(' · ')}
+    </div>
+  </div>
+);
+
+const BlogPostView = ({ post, body }) => (
+  <div style={{
+    ...mono, border: '1px solid #333', borderRadius: 6, padding: '12px 14px',
+    margin: '4px 0', background: '#222', maxWidth: 820,
+  }}>
+    <div style={{ color: COLORS.path, fontSize: 16, fontWeight: 'bold' }}>{post.title}</div>
+    <div style={{ color: '#888', fontSize: 12, margin: '2px 0 6px' }}>
+      {KINDS[kindOf(post)].label} · {formatDate(post.date)}
+      {body ? ` · ${readingTime(body)} min read` : ''}
+      {post.venue ? ` · ${post.venue}` : ''}
+    </div>
+    {post.tags?.length > 0 && <div style={{ marginBottom: 6 }}>{post.tags.map((t) => <Tag key={t}>#{t}</Tag>)}</div>}
+    {post.authors && <div style={{ color: '#bbb', fontSize: 13 }}>authors: {post.authors}</div>}
+    {post.link && (
+      <a href={post.link} target="_blank" rel="noreferrer"
+        style={{ color: '#4ecdc4', fontSize: 13, display: 'block', marginTop: 4 }}>
+        {post.link}
+      </a>
+    )}
+    {body ? (
+      // Post markdown is authored by the site owner, so it's trusted.
+      <div className="gui-prose term-prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(body) }} />
+    ) : (
+      !post.link && <div style={{ color: COLORS.comment, fontSize: 13, marginTop: 8 }}>(this post is still being written)</div>
+    )}
+    <div style={{ color: COLORS.comment, fontSize: 12, marginTop: 10 }}>
+      -- end of file -- ·{' '}
+      <Link to={`/blog/${post.slug}`} style={{ color: '#4ecdc4' }} onClick={(e) => e.stopPropagation()}>
+        open in UI view
+      </Link>
+    </div>
+  </div>
+);
+
 // ─── Link rendering helper ────────────────────────────────────────────────────
 
 // Renders a line value that may contain HTML anchor tags (set via raw HTML lines)
@@ -248,6 +322,8 @@ const staticCommands = {
     { t: 'path', v: '  projects    → things I\'ve built' },
     { t: 'path', v: '  experience  → work & research experience' },
     { t: 'path', v: '  coursework  → relevant courses' },
+    { t: 'path', v: '  blog        → publications, articles & notes' },
+    { t: 'path', v: '  blog <n>    → read a post (number or slug)' },
     { t: 'path', v: '  contact     → how to reach me' },
     { t: 'path', v: '  education   → academic background' },
     { t: 'path', v: '  music       → current obsessions' },
@@ -264,7 +340,7 @@ const staticCommands = {
   whoami: () => [
     { t: 'out', v: 'raihan rafeek' },
     { t: 'out', v: 'senior year cs @ university of cincinnati' },
-    { t: 'out', v: 'ex-product intern @ Benchmark Gensuite. 2x intern @ Idaho National Laboratory. NEXT innovation scholar.' },
+    { t: 'out', v: 'ex-product intern @ benchmark gensuite. 2x swe @ inl. next innovation scholar.' },
     { t: 'out', v: 'computing. programming. music. design.' },
   ],
   bio: () => [
@@ -327,6 +403,7 @@ const staticCommands = {
     { t: 'out', v: 'interests/      music/          contact.txt' },
     { t: 'out', v: 'resume.pdf      .secrets        .bashrc' },
     { t: 'out', v: 'experience.json projects.json   coursework.json' },
+    { t: 'out', v: 'blog/' },
   ],
   date: () => [{ t: 'out', v: new Date().toString() }],
   'uname -a': () => [
@@ -428,6 +505,9 @@ const Terminal = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState(0);
   const [jsonData, setJsonData] = useState({ experience: null, projects: null, coursework: null });
+  const [posts, setPosts] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pendingRun = useRef(searchParams.get('run'));
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -446,6 +526,10 @@ const Terminal = () => {
     load('/data/experiences.json', 'experience');
     load('/data/projects.json', 'projects');
     load('/data/coursework.json', 'coursework');
+    loadPosts().then(setPosts).catch((e) => {
+      console.warn('Failed to load /data/blog.json:', e.message);
+      setPosts([]);
+    });
   }, []);
 
   useEffect(() => {
@@ -468,6 +552,37 @@ const Terminal = () => {
       setSelectedSuggestion(0);
     }
   }, [input]);
+
+  // Remember the blog view in the URL so the UI toggle can land on the same post.
+  const syncBlogParam = (slug) => {
+    setSearchParams({ run: slug ? `blog ${slug}` : 'blog' }, { replace: true });
+  };
+
+  const runBlog = (arg, promptLine) => {
+    if (posts === null) {
+      setLines(prev => [...prev, promptLine, { t: 'comment', v: 'loading blog.json... try again in a sec' }]);
+      return;
+    }
+    const filter = Object.keys(KINDS).find(k => KINDS[k].flag === arg);
+    if (!arg || filter) {
+      const list = filter ? posts.filter(p => kindOf(p) === filter) : posts;
+      setLines(prev => [...prev, promptLine, list.length
+        ? { t: 'blog-list', posts: list, filter }
+        : { t: 'comment', v: 'nothing here yet — check back soon.' }]);
+      syncBlogParam();
+      return;
+    }
+    const post = findPost(posts, arg);
+    if (!post) {
+      setLines(prev => [...prev, promptLine, { t: 'err', v: `blog: ${arg}: no such post (run \`blog\` to list)` }]);
+      return;
+    }
+    setLines(prev => [...prev, promptLine]);
+    syncBlogParam(post.slug);
+    loadPostBody(post.slug)
+      .catch(() => null)
+      .then(body => setLines(prev => [...prev, { t: 'blog-post', post, body }]));
+  };
 
   const runCommand = (raw) => {
     const cmd = raw.trim();
@@ -515,6 +630,19 @@ const Terminal = () => {
       return;
     }
 
+    if (lower === 'blog' || lower.startsWith('blog ')) {
+      runBlog(cmd.slice(4).trim(), promptLine);
+      return;
+    }
+    if (lower.startsWith('cat blog/')) {
+      runBlog(cmd.slice(9).trim(), promptLine);
+      return;
+    }
+    if (['ls blog', 'ls blog/', 'cd blog', 'cd blog/'].includes(lower)) {
+      runBlog('', promptLine);
+      return;
+    }
+
     let newLines = [promptLine];
 
     if (lower.startsWith('echo ')) {
@@ -546,6 +674,16 @@ const Terminal = () => {
 
     setLines(prev => [...prev, ...newLines]);
   };
+
+  // Replay a command handed over via /terminal?run=... once the posts load.
+  useEffect(() => {
+    if (pendingRun.current && posts !== null) {
+      const cmd = pendingRun.current;
+      pendingRun.current = null;
+      runCommand(cmd);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posts]);
 
   const handleKeyDown = (e) => {
     if (suggestions.length > 0) {
@@ -672,6 +810,20 @@ const Terminal = () => {
                 />
               );
             }
+          }
+
+          if (line.t === 'blog-list') {
+            return (
+              <BlogList
+                key={i}
+                posts={line.posts}
+                filter={line.filter}
+                onOpen={(slug) => runCommand(`blog ${slug}`)}
+              />
+            );
+          }
+          if (line.t === 'blog-post') {
+            return <div key={i} style={{ fontSize }}><BlogPostView post={line.post} body={line.body} /></div>;
           }
 
           // Prompt lines

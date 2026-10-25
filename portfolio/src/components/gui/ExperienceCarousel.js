@@ -1,9 +1,8 @@
 import React from 'react';
 import CarouselShell from './CarouselShell';
+import CardBody from './CardBody';
 
-const clean = (line) => line.replace(/^>\s?/, '');
-
-export const ExperienceGlassCard = ({ item }) => (
+export const ExperienceGlassCard = ({ item, expanded = false }) => (
   <article className="gui-card glass" aria-label={`${item.title} at ${item.organization}`}>
     <div className="gui-card-head">
       <div>
@@ -16,17 +15,12 @@ export const ExperienceGlassCard = ({ item }) => (
           src={item.logo}
           alt={`${item.organization} logo`}
           loading="lazy"
+          decoding="async"
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
       )}
     </div>
-    {item.description && (
-      <div className="gui-card-body">
-        {item.description.split('\n').filter((l) => l.trim()).map((line, i) => (
-          <div key={i}><span className="bullet">▸ </span>{clean(line.trim())}</div>
-        ))}
-      </div>
-    )}
+    <CardBody description={item.description} expanded={expanded} />
     {item.skills?.length > 0 && (
       <div className="gui-chip-row">
         {item.skills.map((s) => <span key={s} className="gui-chip cyan">{s}</span>)}
@@ -40,8 +34,10 @@ export const ExperienceGlassCard = ({ item }) => (
   </article>
 );
 
+const renderExperience = (item, i, expanded) => <ExperienceGlassCard item={item} expanded={expanded} />;
+
 const ExperienceCarousel = ({ items }) => (
-  <CarouselShell items={items} label="experiences" renderCard={(item) => <ExperienceGlassCard item={item} />} />
+  <CarouselShell items={items} label="experiences" renderCard={renderExperience} />
 );
 
 export default ExperienceCarousel;

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import CarouselShell from './CarouselShell';
+import CardBody from './CardBody';
 import ImageModal from './ImageModal';
 
-const clean = (line) => line.replace(/^>\s?/, '');
-
-export const CourseworkGlassCard = ({ item }) => {
+export const CourseworkGlassCard = ({ item, expanded = false }) => {
   const [enlarged, setEnlarged] = useState(false);
 
   return (
@@ -24,17 +23,12 @@ export const CourseworkGlassCard = ({ item }) => {
           alt={`${item.title} screenshot — click to enlarge`}
           title="Click to enlarge"
           loading="lazy"
+          decoding="async"
           onClick={(e) => { e.stopPropagation(); setEnlarged(true); }}
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
       )}
-      {item.description && (
-        <div className="gui-card-body">
-          {item.description.split('\n').filter((l) => l.trim()).map((line, i) => (
-            <div key={i}><span className="bullet">▸ </span>{clean(line.trim())}</div>
-          ))}
-        </div>
-      )}
+      <CardBody description={item.description} expanded={expanded} />
       {item.link && (
         <a className="gui-card-link" href={item.link} target="_blank" rel="noreferrer">view coursework ↗</a>
       )}
@@ -45,8 +39,10 @@ export const CourseworkGlassCard = ({ item }) => {
   );
 };
 
+const renderCoursework = (item, i, expanded) => <CourseworkGlassCard item={item} expanded={expanded} />;
+
 const CourseworkCarousel = ({ items }) => (
-  <CarouselShell items={items} label="coursework" renderCard={(item) => <CourseworkGlassCard item={item} />} />
+  <CarouselShell items={items} label="coursework" renderCard={renderCoursework} />
 );
 
 export default CourseworkCarousel;

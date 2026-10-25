@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
+import { blogTerminalPath } from '../hooks/useBlog';
 
 const ViewToggle = () => {
   const navigate = useNavigate();
@@ -12,7 +13,15 @@ const ViewToggle = () => {
   if (isMobile) return null;
 
   const flip = () => {
-    const next = isTerminal ? '/' : '/terminal';
+    let next = isTerminal ? '/' : '/terminal';
+    // Carry the blog context across: /blog/foo <-> `blog foo` in the terminal.
+    const blogMatch = location.pathname.match(/^\/blog(?:\/([^/]+))?\/?$/);
+    if (!isTerminal && blogMatch) next = blogTerminalPath(blogMatch[1]);
+    if (isTerminal) {
+      const run = new URLSearchParams(location.search).get('run') || '';
+      const runMatch = run.match(/^blog(?:\s+(\S+))?$/);
+      if (runMatch) next = runMatch[1] ? `/blog/${runMatch[1]}` : '/blog';
+    }
     try {
       localStorage.setItem('portfolio-view', isTerminal ? 'gui' : 'terminal');
     } catch {
