@@ -1,26 +1,18 @@
 [
   {
-    "slug": "hello-world",
-    "title": "hello, world",
-    "date": "2026-10-21",
-    "kind": "note",
-    "tags": ["meta"],
-    "summary": "what this space is for — publications, plus writeups on whatever i'm reading, building, or chewing on."
-  },
-  {
     "slug": "topology-paper",
     "title": "Topological Study of β-Sparsified d-Uniform Hypergraph-Based Simplicial Complexes",
     "date": "2026-04-01",
     "kind": "publication",
     "tags": ["data-mining", "data-analysis", "high-dimensional-data", "topology"],
-    "summary": "paper i co-authored about algorithmically extracting features from higher dimensional data using sparsified simplicial complexes"
+    "summary": "paper i co-authored - algorithmically extracting features from higher dimensional data using sparsified simplicial complexes"
   },
   {
-    "slug": "interaction",
-    "title": "Humans, Computers, and what now?",
+    "slug": "bottleneck-theory",
+    "title": "The Bottleneck Theory",
     "date": "2026-10-23",
     "kind": "article",
     "tags": ["thoughts", "reading", "hci", "experience design"],
-    "summary": "blah - coming soon"
+    "summary": "the evolution of the human computer interaction experience. what's next?"
   }
 ]
