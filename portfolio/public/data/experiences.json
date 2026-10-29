@@ -5,7 +5,7 @@
     "title": "Product Engineer Intern",
     "organization": "Benchmark Gensuite",
     "date": "Mar 2026 - Aug 2026",
-    "description": "> Restructured and optimized API endpoints to support agentic tool interactions, improving compatibility with AI agents while preserving JWT-based authentication\n\n> Designed and deployed a dynamically extensible agent architecture spanning 5+ product capabilities, enabling users to generate reports, manage tasks, and execute actions through a unified interface\n\n> Built an internal AI-powered reporting and task-management workflow, reducing user navigation from 4–5 pages to 1\n\n> Optimized agent orchestration and inference pipelines, reducing average response time by 75%"
+    "description": ">Worked on agentic AI architecture that is deemed as '5 next big things in workplace and productivity' by Fast Copmany\n\n> Restructured and optimized API endpoints to support agentic tool interactions, improving compatibility with AI agents while preserving JWT-based authentication\n\n> Designed and deployed a dynamically extensible agent architecture spanning 5+ product capabilities, enabling users to generate reports, manage tasks, and execute actions through a unified interface\n\n> Built an internal AI-powered reporting and task-management workflow, reducing user navigation from 4–5 pages to 1\n\n> Optimized agent orchestration and inference pipelines, reducing average response time by 75%"
   },
   {
     "logo": "/assets/NIS.png",
