@@ -1,5 +1,21 @@
 [
   {
+    "link": "https://github.com/Rai1975/byte",
+    "title": "Byte",
+    "stack": "python, ux, hci, mediapipe, opencv, numpy, pynput, uiautomation, Arduino Uno, presage smartspectra, faster-whisper, sherpa-onnx",
+    "description": "> Won First place at MakeUC 2026\n\n> Byte is a framework to interact with your computer without using a keyboard and mouse\n\n> Byte tracks your pupils to determine movmement of the cursor, and uses a sensor to register clicks as taps from your teeth\n\n> Alongside that, Byte also has a lightweight regex-tree based voice assistant using whisper to perform more complex commands through winapi and dictation\n\n",
+    "screenshot": "/assets/byte.png",
+    "category": "HCI"
+  },
+  {
+    "link": "https://github.com/ShawnJoshua03/Aero-SMART-Home",
+    "title": "Aero",
+    "stack": "electronjs, ui/ux, hci, human centered design",
+    "description": "> Won First place at Cincinnati Childrens UX Hackathon\n\n> The project redesigns the SMART@Home clinician view. It turns raw questionnaire rows into a quick answer to 'what changed, and what matters now?' before a visit\n\n> Fly gives a flashcard deck before the visit. Anomalies flags days unusual for that patient. Nest lets clinicians dig deeper.",
+    "screenshot": "/assets/aero.png",
+    "category": "UI/UX"
+  },
+  {
     "link": "https://randy-the-otter.vercel.app",
     "title": "Randy The Otter",
     "stack": "python, js, chrome mv3, aws strands, aws bedrock",
