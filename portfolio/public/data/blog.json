@@ -14,5 +14,13 @@
     "kind": "article",
     "tags": ["thoughts", "reading", "hci", "experience design"],
     "summary": "the evolution of the human computer interaction experience. what's next?"
+  },
+  {
+    "slug": "audio-visualizer",
+    "title": "How does this make my computer feel?",
+    "date": "2026-11-10",
+    "kind": "article",
+    "tags": ["project", "ml", "ux", "design", "art", "music"],
+    "summary": "A SOFM + FFT based audio visualizer"
   }
 ]
