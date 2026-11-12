@@ -1,5 +1,13 @@
 [
   {
+    "link": "https://sofm-dfft-ascii-visualizer-production.up.railway.app",
+    "title": "SOFM Based Audio Visualizer",
+    "stack": "python, docker, nginx, fft, sofm, ml",
+    "description": "> Artistic take on SOFM based audio visualizer\n\n> Uses a custom Self Organized Feature Map to organize different frequency bands of input sound into 24x24 feature map, then using fourier transform to map to grid\n\n> Brighter the pulse, stronger the model's neuron activation\n\n>Hosted using docker + nginx on railway\n\n> Read more about the inspo in my blog!",
+    "screenshot": "/assets/lets-go.gif",
+    "category": "ML"
+  },
+  {
     "link": "https://github.com/Rai1975/byte",
     "title": "Byte",
     "stack": "python, ux, hci, mediapipe, opencv, numpy, pynput, uiautomation, Arduino Uno, presage smartspectra, faster-whisper, sherpa-onnx",
